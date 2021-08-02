@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import Image from "next/image";
+import useWindowDimensions from "../../hooks/WindowDimensions";
 
 import { BUTTON } from "../../styles/button.js";
-import NavButton from "./NavButton";
+import NavButton from "./NavButtonDesktop";
+import DesktopNav from "./DesktopNav";
+import MobileNav from "./MobileNav";
 
 const NAV = styled.nav`
     position: fixed;
@@ -19,19 +22,11 @@ const NAV = styled.nav`
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
 `;
 
-const UL = styled.ul`
-    height: max-content;
-    display: flex;
-    list-style: none;
-    margin-left: auto;
-    margin-right: 2rem;
-`;
- 
 const LOGOWRAPPER = styled.div`
     position: relative;
     width: 15rem;
     height: auto;
-`
+`;
 
 const BLOGBUTTON = styled(BUTTON)`
     background-color: ${(props) => props.theme.colors.white};
@@ -39,32 +34,30 @@ const BLOGBUTTON = styled(BUTTON)`
     white-space: nowrap;
     padding: 1rem 2rem;
     border-left: 1px solid ${(props) => props.theme.colors.blackTrans75};
-`
+`;
 
 type Props = {};
 
-const NavList: String[] = ["home", "about", "team", "newsletter", "contact"];
+const NavItems : String[] = ["home", "about", "team", "newsletter", "contact"];
 
 const Nav: React.FC<Props> = () => {
+    const { width } = useWindowDimensions();
     return (
         <NAV>
             <LOGOWRAPPER>
-                <Image
-                    src="/images/logo/logo.svg"
-                    alt="logo"
-                    layout="fill"
-                />
+                <Image src="/images/logo/logo.svg" alt="logo" layout="fill" />
             </LOGOWRAPPER>
-            <UL>
-                {NavList.map((navItem: String) => {
-                    return (
-                        <NavButton key={NavList.indexOf(navItem)}>
-                            {navItem}
-                        </NavButton>
-                    );
-                })}
-            </UL>
-            <BLOGBUTTON>Visit the Blog</BLOGBUTTON>
+            { 
+                // Swaps nav to mobile nav for viewports with less the 600px of width.
+                width <= 600 ? 
+                    <MobileNav NavItems={NavItems}/> :
+                    <DesktopNav NavItems={NavItems}/>
+            }
+                        
+            { 
+                // Removes "Visit the Blog" button on viewports with less the 600 px of width.
+                width > 600 ? <BLOGBUTTON>Visit the Blog</BLOGBUTTON> : null 
+            }
         </NAV>
     );
 };

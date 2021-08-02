@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import media from "../../utils/MediaQueries"
 import { H1 } from "../../styles/typography";
 
 const HeroWrapper = styled.div`
@@ -23,15 +24,24 @@ const HomeH1 = styled(H1)`
     flex-direction: column;
     align-items: flex-end;
 
-    margin-right: 5rem;
+    margin-right: 10%;
     font-weight: 300;
 
     & > * {
         display: block;
         background-color: ${(props) => props.theme.colors.whiteTrans75};
         width: max-content;
-        padding: .5rem;
+        padding: .5rem 1.5rem;
     }
+    
+    ${media.width_450`
+        margin-right: 1rem;
+
+    `}
+
+    ${media.width_350`
+        margin-right: .5rem;
+    `}
 `;
 
 export interface HeroProps {}

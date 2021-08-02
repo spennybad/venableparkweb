@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import PageWrapper from "../components/wrappers/PageWrapper";
 import Hero from '../components/home/Hero';
-import Nav from "../components/nav/Nav";
 import Mission from "../components/home/Mission";
 
 const SiteWrapper = styled.div`
@@ -15,7 +14,6 @@ const SiteWrapper = styled.div`
 const Home: React.FC = () => {
     return (
         <SiteWrapper>
-            <Nav />
             <PageWrapper>
                 <Hero />
                 <Mission />
