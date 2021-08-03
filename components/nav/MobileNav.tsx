@@ -8,7 +8,7 @@ type Props = {
     NavItems: String[];
 };
 
-const NAVTOGGLEBUTTON = styled(BUTTON)< {isNavPanel: boolean } >`
+const NAVTOGGLEBUTTON = styled(BUTTON)`
     min-height: 4rem;
     min-width: 4rem;
     margin-left: auto;
