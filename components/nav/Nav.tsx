@@ -34,6 +34,7 @@ const BLOGBUTTON = styled(BUTTON)`
     white-space: nowrap;
     padding: 1rem 2rem;
     border-left: 1px solid ${(props) => props.theme.colors.blackTrans75};
+    font-size: ${(props) => props.theme.fontSize.p};
 `;
 
 type Props = {};
@@ -63,3 +64,22 @@ const Nav: React.FC<Props> = () => {
 };
 
 export default Nav;
+
+// const alive = true;
+// const result;
+
+// while (alive == true) {
+//   result = try_hard();
+//   if (dead == true) {
+//     alive = false;
+//   }
+// }
+
+// const try_hard = () => {
+//   return no_matter_how_hard_you_try(); 
+// }
+
+// void no_matter_how_hard_you_try() {
+//   const result = lose;
+//   return result;
+// }

@@ -8,11 +8,14 @@ type Props = {
 
 const UL = styled.ul`
     height: 100%;
+    min-height: 5rem;
     display: flex;
     list-style: none;
     margin-left: auto;
     align-self: center;
     margin-right: 2rem;
+    place-items: center;
+    gap: 2rem;
 `;
 
 const DesktopNav: React.FC<Props> = ({ NavItems }) => {

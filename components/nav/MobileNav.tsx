@@ -8,7 +8,7 @@ type Props = {
     NavItems: String[];
 };
 
-const NAVTOGGLEBUTTON = styled(BUTTON)`
+const NAVTOGGLEBUTTON = styled(BUTTON)<{ isNavPanel: boolean }>`
     min-height: 4rem;
     min-width: 4rem;
     margin-left: auto;
@@ -26,6 +26,14 @@ const NAVTOGGLEBUTTON = styled(BUTTON)`
         width: 100%;
         background-color: ${(props) => props.theme.colors.primary};
     }
+
+    ${({ isNavPanel }) =>
+        isNavPanel &&
+        css`
+            & div {
+                background-color: ${(props) => props.theme.colors.white};
+            }
+        `}
 `;
 
 const NAVPANEL = styled.div<{ isNavPanel: boolean }>`
@@ -38,34 +46,39 @@ const NAVPANEL = styled.div<{ isNavPanel: boolean }>`
     z-index: 0;
 
     ${({ isNavPanel }) =>
-        (isNavPanel && css`
-            transform: translateX(0%);
-        `)
-        ||
-        (!isNavPanel && css`
-            transform: translateX(100%);
-        `)
-    }
+        (isNavPanel &&
+            css`
+                transform: translateX(0%);
+            `) ||
+        (!isNavPanel &&
+            css`
+                transform: translateX(100%);
+          `)}
 `;
 
 const UL = styled.ul`
     list-style: none;
     display: grid;
     gap: 1rem;
-    justify-items: center;
-`
+    justify-items: left;
+`;
 
-function handleNavButtonClick(setIsNavPanel: (value: boolean) => void, isNavPanel: boolean): void {
+function handleNavButtonClick(
+    setIsNavPanel: (value: boolean) => void,
+    isNavPanel: boolean
+): void {
     setIsNavPanel(!isNavPanel);
     console.log(isNavPanel);
 }
-    
 
 const MobileNav: React.FC<Props> = ({ NavItems }) => {
     const [isNavPanel, setIsNavPanel] = useState(false);
     return (
         <>
-            <NAVTOGGLEBUTTON onClick={() => handleNavButtonClick(setIsNavPanel, isNavPanel)}>
+            <NAVTOGGLEBUTTON
+                isNavPanel={isNavPanel}
+                onClick={() => handleNavButtonClick(setIsNavPanel, isNavPanel)}
+            >
                 <div />
                 <div />
                 <div />
@@ -74,7 +87,7 @@ const MobileNav: React.FC<Props> = ({ NavItems }) => {
                 <UL>
                     {NavItems.map((navItem: String) => {
                         return (
-                            <NavButtonMobile key={NavItems.indexOf(navItem)} >
+                            <NavButtonMobile key={NavItems.indexOf(navItem)}>
                                 {navItem}
                             </NavButtonMobile>
                         );
@@ -83,6 +96,6 @@ const MobileNav: React.FC<Props> = ({ NavItems }) => {
             </NAVPANEL>
         </>
     );
-}
+};
 
 export default MobileNav;

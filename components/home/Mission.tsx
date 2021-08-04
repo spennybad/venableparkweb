@@ -11,7 +11,7 @@ const tileText: string[] = [
     "They should not be the recipient of commissions or any other incentives.",
     "They must be accountable to their clients alone.",
     "They must work exclusively under the agenda of the individual client.",
-    "They should not be accountable to 'sales targets'"
+    "They should not be accountable to 'sales targets'",
 ];
 
 const MISSIONWRAPPER = styled(CONTENTWRAPPER)`
@@ -25,14 +25,15 @@ const MISSIONWRAPPER = styled(CONTENTWRAPPER)`
     ${media.width_800`
         gap: 5rem;
     `}
-`
+`;
 
 const MISSIONSTATMENT = styled.p`
     font-size: ${(props) => props.theme.fontSize.h3};
     color: ${(props) => props.theme.colors.primary};
     justify-self: center;
     text-align: center;
-`
+    padding-block: min(10%, 10rem);
+`;
 
 const MISSIONCONTENT = styled.div`
     display: grid;
@@ -53,52 +54,52 @@ const MISSIONCONTENT = styled.div`
         `}
     }
 
-`
+    & p {
+      font-size: ${(props) => props.theme.fontSize.p};
+      justify-self: center;
+    }
+`;
 
 const MISSIONBODYTEXT = styled.p`
     font-size: ${(props) => props.theme.fontSize.h3};
     width: 80%;
     justify-self: center;
     text-align: center;
-`
+`;
 
 const LINEBREAK = styled.div`
     width: 80%;
-    height: .1rem;
+    height: 0.1rem;
     background-color: ${(props) => props.theme.colors.blackTrans75};
     justify-self: center;
-`
+`;
 
-type Props = {
+type Props = {};
 
-}
- 
 const Mission: React.FC<Props> = () => {
     return (
         <MISSIONWRAPPER>
             <MISSIONSTATMENT>
-                Absolute return strategies that outperform<br />with a fraction of the risk.
+                Absolute return strategies that outperform
+                <br />
+                with a fraction of the risk.
             </MISSIONSTATMENT>
             <LINEBREAK />
             <MISSIONCONTENT>
                 <H2>Our Mission</H2>
                 <MISSIONBODYTEXT>
-                    It is our experience that in order to render truly unbiased, client focused advice, your advisor needs to be a fiduciary;
+                    It is our experience that in order to render truly unbiased,
+                    client focused advice, your advisor needs to be a fiduciary;
                 </MISSIONBODYTEXT>
                 <ul>
-                    {
-                        tileText.map((text: string, index: number) => {
-                            return (
-                                <MissionTile key={index}>
-                                    {text}
-                                </MissionTile>
-                            )
-                        })
-                    }
+                    {tileText.map((text: string, index: number) => {
+                        return <MissionTile key={index}>{text}</MissionTile>;
+                    })}
                 </ul>
+                <p>At Venable Park, this is our calling.</p>
             </MISSIONCONTENT>
         </MISSIONWRAPPER>
     );
-}
- 
+};
+
 export default Mission;

@@ -10,6 +10,7 @@ const MISSIONTILE = styled.li`
     overflow: hidden;
     display: grid;
     place-items: center;
+    padding: 0rem 2rem;
 
     &::after {
         content: "";
@@ -27,7 +28,6 @@ const MISSIONTILE = styled.li`
     & p {
         z-index: 1;
         position: relative;
-        font-size: ${(props) => props.theme.fontSize.p};
         text-align: left;
         padding: 2rem;
     }
