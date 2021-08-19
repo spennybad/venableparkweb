@@ -1,10 +1,17 @@
 import type { AppProps /*, AppContext */ } from "next/app";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import GlobalStyle from "../theme/globalStyles";
 import theme from "../theme/theme";
-import Nav from "../components/nav/Nav";
-import Footer from "../components/footer/footer";
+import Nav from "../components/layout/nav/Nav";
+import Footer from "../components/layout/footer";
+
+const SITEWRAPPER = styled.div`
+    position: relative;
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+`;
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
@@ -12,7 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Nav />
-                <Component {...pageProps} />
+                <SITEWRAPPER>
+                    <Component {...pageProps} />
+                </SITEWRAPPER>
                 <Footer />
             </ThemeProvider>
         </>

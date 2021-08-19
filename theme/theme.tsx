@@ -17,12 +17,12 @@ const theme = {
         h1: "clamp(2.3rem, 4vw, 6.1rem)",
         h2: "clamp(2rem, 3vw, 4.8rem)",
         h3: "clamp(1.6rem, 2.5vw, 3.1rem)",
-        h4: "clamp(1.5rem, 1.6vw, 2rem)",
-        p: "clamp(1.4rem, 2vw, 2rem)"
+        h4: "clamp(1.9rem, 2.2vw, 2.3rem)",
+        p: "clamp(1.4rem, 1.8vw, 2rem)"
     },
 
     boxShadow: {
-        boxShadowDefault: ".2rem .2rem 1.5rem -.7rem rgba(0,0,0,0.75);"
+        boxShadowDefault: ".2rem .2rem 1rem .1rem rgba(0,0,0,0.50);"
     }
 }
 

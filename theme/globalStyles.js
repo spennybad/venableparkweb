@@ -18,8 +18,13 @@ const GlobalStyle = createGlobalStyle`
         font-size: 62.5%; // Makes it so 1rem is equivalent to 10px.
     }
 
-        /* width */
-        ::-webkit-scrollbar {
+    a:visited,
+    a:link {
+        color: inherit;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
         width: 5px;
         height: 70vh;
     }

@@ -1,9 +1,8 @@
-import NavButton from "./NavButtonDesktop";
 import styled from "styled-components";
-import NavButtonDesktop from "./NavButtonDesktop";
+import NavButton from "./NavButton";
 
 type Props = {
-    NavItems: String[];
+    NavItems: string[];
 };
 
 const UL = styled.ul`
@@ -21,11 +20,9 @@ const UL = styled.ul`
 const DesktopNav: React.FC<Props> = ({ NavItems }) => {
     return (
         <UL>
-            {NavItems.map((navItem: String) => {
+            {NavItems.map((navItem: string) => {
                 return (
-                    <NavButtonDesktop key={NavItems.indexOf(navItem)}>
-                        {navItem}
-                    </NavButtonDesktop>
+                  <NavButton key={NavItems.indexOf(navItem)} navItem={navItem} buttonType="desktop" handleCloseNavPanel={() => null}/>
                 );
             })}
         </UL>

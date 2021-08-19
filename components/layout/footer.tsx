@@ -8,7 +8,7 @@ const FOOTER = styled.footer`
     background-color: ${(props) => props.theme.colors.white};
     display: flex;
     justify-content: center;
-    border-top: solid 1px ${(props) => props.theme.colors.black}
+    border-top: solid 1px ${(props) => props.theme.colors.black};
 `;
 
 const LOGOWRAPPER = styled.div`

@@ -5,20 +5,14 @@ import PageWrapper from "../components/wrappers/PageWrapper";
 import Hero from '../components/home/Hero';
 import Mission from "../components/home/Mission";
 
-const SiteWrapper = styled.div`
-    height: 100%;
-    width: 100%;
-    position: relative;
-`
+
 
 const Home: React.FC = () => {
-    return (
-        <SiteWrapper>
-            <PageWrapper>
-                <Hero />
-                <Mission />
-            </PageWrapper>
-        </SiteWrapper>
+  return (
+      <>
+        <Hero />
+        <Mission />
+      </>
     )
 };
 

@@ -1,12 +1,8 @@
 import styled, { css } from "styled-components";
 import { useState } from "react";
 
-import NavButtonMobile from "./NavButtonMobile";
-import { BUTTON } from "../../styles/button";
-
-type Props = {
-    NavItems: String[];
-};
+import NavButton from "./NavButton";
+import { BUTTON } from "../../../styles/button";
 
 const NAVTOGGLEBUTTON = styled(BUTTON)<{ isNavPanel: boolean }>`
     min-height: 4rem;
@@ -53,13 +49,13 @@ const NAVPANEL = styled.div<{ isNavPanel: boolean }>`
         (!isNavPanel &&
             css`
                 transform: translateX(100%);
-          `)}
+            `)}
 `;
 
 const UL = styled.ul`
     list-style: none;
     display: grid;
-    gap: 1rem;
+    gap: 5rem;
     justify-items: left;
 `;
 
@@ -68,8 +64,11 @@ function handleNavButtonClick(
     isNavPanel: boolean
 ): void {
     setIsNavPanel(!isNavPanel);
-    console.log(isNavPanel);
 }
+
+type Props = {
+    NavItems: string[];
+};
 
 const MobileNav: React.FC<Props> = ({ NavItems }) => {
     const [isNavPanel, setIsNavPanel] = useState(false);
@@ -85,11 +84,14 @@ const MobileNav: React.FC<Props> = ({ NavItems }) => {
             </NAVTOGGLEBUTTON>
             <NAVPANEL isNavPanel={isNavPanel}>
                 <UL>
-                    {NavItems.map((navItem: String) => {
+                    {NavItems.map((navItem: string) => {
                         return (
-                            <NavButtonMobile key={NavItems.indexOf(navItem)}>
-                                {navItem}
-                            </NavButtonMobile>
+                            <NavButton
+                                key={NavItems.indexOf(navItem)}
+                                navItem={navItem}
+                                buttonType="mobile"
+                                handleCloseNavPanel={setIsNavPanel}
+                            />
                         );
                     })}
                 </UL>
