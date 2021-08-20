@@ -19,7 +19,7 @@ const NAV = styled.nav`
 
     display: flex;
 
-    z-index: 100;
+    z-index: 1000;
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
 `;
 

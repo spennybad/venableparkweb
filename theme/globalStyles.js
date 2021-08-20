@@ -22,6 +22,11 @@ const GlobalStyle = createGlobalStyle`
     a:link {
         color: inherit;
     }
+    
+    button {
+        appearance: none;
+        border: none;
+    }
 
     /* width */
     ::-webkit-scrollbar {

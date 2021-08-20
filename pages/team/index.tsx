@@ -11,7 +11,7 @@ import { useState } from "react";
 // COMPONENTS
 import { H2 } from "../../styles/typography";
 import TeamTile from "../../components/team/TeamTile";
-import Modal from "./Modal";
+import Modal from "../../components/team/Modal";
 
 const TEAMPAGEWRAPPER = styled.div`
     margin-top: min(4rem, 4%);
@@ -27,8 +27,7 @@ const STYLEDIMAGE = styled(Image)`
 
 const TEAMWRAPPER = styled.div`
     min-height: 90vh;
-    width: 100%;
-    padding: max(5%, 10rem) max(5%, 3rem);
+    padding: max(5%, 10rem) max(5%, 1rem);
 
     clip-path: polygon(0% 5%, 100% 0%, 100% 95%, 0% 100%);
     background-color: ${(props) => props.theme.colors.white};
@@ -109,7 +108,7 @@ const Team: React.FC<TeamProps> = ({ employeesData }) => {
     return (
         <TEAMPAGEWRAPPER>
 
-            {currentModal != null && <Modal handleTileClick={ handleTileClick }/>}
+            {currentModal != null && <Modal handleTileClick={handleTileClick} currentModal={ currentModal }/>}
 
             <STYLEDIMAGE
                 src="/images/2k-rotated-sean.webp"

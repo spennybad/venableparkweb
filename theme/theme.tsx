@@ -8,7 +8,8 @@ const theme = {
         
         // Transparent Colors
         whiteTrans75: "hsla(0, 0%, 100%, .75);",
-        blackTrans75: "hsla(0, 0%, 0%, .75);"
+        blackTrans75: "hsla(0, 0%, 0%, .75);",
+        blackTrans50: "hsla(0, 0%, 0%, .50);"
 
     },
     
