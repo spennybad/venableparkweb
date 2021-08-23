@@ -16,8 +16,8 @@ const SITEWRAPPER = styled.div`
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
-            <GlobalStyle />
             <ThemeProvider theme={theme}>
+            <GlobalStyle />
                 <Nav />
                 <SITEWRAPPER>
                     <Component {...pageProps} />

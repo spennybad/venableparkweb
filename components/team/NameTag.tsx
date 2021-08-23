@@ -12,8 +12,14 @@ const NAMETAG = styled.div<{ modal: boolean }>`
 
     & div {
         display: flex;
-        gap: 1rem !important;
+        gap: 0rem !important;
         white-space: nowrap;
+
+        ${({ modal }) =>
+            (modal && css`
+                gap: 1rem !important;
+            `)
+        }
 
         ${media.width_450`
             flex-direction: column;
@@ -21,9 +27,6 @@ const NAMETAG = styled.div<{ modal: boolean }>`
         `}
     }
     
-    &:nth-child(2) {
-    }
-
 `
 
 const NAME = styled.p`

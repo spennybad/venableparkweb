@@ -5,20 +5,21 @@ import NavButton from "./NavButton";
 import { BUTTON } from "../../../styles/button";
 
 const NAVTOGGLEBUTTON = styled(BUTTON)<{ isNavPanel: boolean }>`
-    min-height: 4rem;
-    min-width: 4rem;
+    height: 4rem;
+    width: 4rem;
     margin-left: auto;
+
     display: flex; // In loving memory of FrogmanOW <3
     flex-direction: column;
-    justify-content: space-around;
-    gap: 0.4rem;
-    padding: 1rem 0rem;
-    margin-right: 0.5rem;
+
+    place-content: center;
+    gap: .5rem;
     background-color: transparent;
     z-index: 1;
+    margin-right: 1rem;
 
     & div {
-        height: 100%;
+        height: 10%;
         width: 100%;
         background-color: ${(props) => props.theme.colors.primary};
     }

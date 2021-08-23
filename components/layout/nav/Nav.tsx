@@ -12,7 +12,7 @@ const NAV = styled.nav`
     right: 0;
 
     width: 100%;
-    height: 4%;
+    height: max-content;
     min-height: 4rem;
     
     background-color: ${(props) => props.theme.colors.white};
@@ -29,18 +29,19 @@ const LOGOWRAPPER = styled.div`
     height: auto;
 `;
 
-const BLOGBUTTON = styled(BUTTON)`
+const BLOGBUTTON = styled.a`
     background-color: ${(props) => props.theme.colors.white};
     color: ${(props) => props.theme.colors.primary};
     white-space: nowrap;
     padding: 1rem 2rem;
     border-left: 1px solid ${(props) => props.theme.colors.blackTrans75};
     font-size: ${(props) => props.theme.fontSize.p};
+    text-decoration: none;
 `;
 
 type Props = {};
 
-const NavItems: string[] = ["home", "about", "team", "newsletter", "contact", "testimonials"];
+const NavItems: string[] = ["home", "about", "fees", "team", "newsletter"];
 const NavSwitchingPoint: number = 1050;
 
 const Nav: React.FC<Props> = () => {
@@ -59,7 +60,9 @@ const Nav: React.FC<Props> = () => {
                  
             { 
                 // Removes "Visit the Blog" button on viewports with less the 600 px of width.
-                width > NavSwitchingPoint ? <BLOGBUTTON>Visit the Blog</BLOGBUTTON> : null 
+                width > NavSwitchingPoint ?
+                    <BLOGBUTTON href={"https://jugglingdynamite.com/"}>Visit the Blog</BLOGBUTTON> :
+                    null
             }
         </NAV>
     );

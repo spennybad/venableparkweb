@@ -23,6 +23,7 @@ const TEAMPAGEWRAPPER = styled.div`
 const STYLEDIMAGE = styled(Image)`
     object-fit: cover;
     position: absolute;
+    box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
 `;
 
 const TEAMWRAPPER = styled.div`
@@ -98,21 +99,24 @@ export interface TeamProps {
 
 const Team: React.FC<TeamProps> = ({ employeesData }) => {
     const { principles, employees } = parseEmployees(employeesData);
-    
+
     const [currentModal, setCurrentModal] = useState<Employee | null>(null);
 
     const handleTileClick = (employee: Employee | null): void => {
         setCurrentModal(employee);
-    }
+    };
 
     return (
         <TEAMPAGEWRAPPER>
-
-            {currentModal != null && <Modal handleTileClick={handleTileClick} currentModal={ currentModal }/>}
+            {currentModal != null && (
+                <Modal
+                    handleTileClick={handleTileClick}
+                    currentModal={currentModal}
+                />
+            )}
 
             <STYLEDIMAGE
                 src="/images/2k-rotated-sean.webp"
-                alt="Crashing waves on a shore."
                 sizes="100%"
                 layout="fill"
             />

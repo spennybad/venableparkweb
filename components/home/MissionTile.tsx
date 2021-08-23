@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const MISSIONTILE = styled.li`
     background-color: ${(props) => props.theme.colors.white};
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
-    aspect-ratio: 16 / 8;
+    aspect-ratio: 16 / 6;
     width: 100%;
     list-style: none;
     position: relative;
@@ -21,7 +21,7 @@ const MISSIONTILE = styled.li`
         width: 25%;
         background-color: ${(props) => props.theme.colors.accent};
         transform-origin: center;
-        transform: rotate(45deg) translate(75%);
+        transform: rotate(45deg) translate(90%);
         z-index: 0;
     }
 

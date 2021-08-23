@@ -4,15 +4,7 @@ import media from "../../utils/MediaQueries";
 import { H2 } from "../../styles/typography";
 import { CONTENTWRAPPER } from "../../styles/contentWrapper";
 import MissionTile from "./MissionTile";
-
-const tileText: string[] = [
-    "They should be paid one all inclusive annual fee, which is visible and fair.",
-    "Independent, trustworthy and held to the highest ethical standards.",
-    "They should not be the recipient of commissions or any other incentives.",
-    "They must be accountable to their clients alone.",
-    "They must work exclusively under the agenda of the individual client.",
-    "They should not be accountable to 'sales targets'",
-];
+import { LINEBREAK } from "../../styles/Linebreak";
 
 const MISSIONWRAPPER = styled(CONTENTWRAPPER)`
     height: 100%;
@@ -21,6 +13,7 @@ const MISSIONWRAPPER = styled(CONTENTWRAPPER)`
     display: grid;
     grid-auto-rows: auto;
     gap: 10rem;
+    padding-inline: 10%;
 
     ${media.width_800`
         gap: 5rem;
@@ -37,41 +30,14 @@ const MISSIONSTATMENT = styled.p`
 
 const MISSIONCONTENT = styled.div`
     display: grid;
-    gap: inherit;
+    gap: 5rem;
     width: 100%;
-
-    & ul {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 3rem;
-        place-items: center;
-        justify-self: center;
-        width: 70%;
-
-        ${media.width_800`
-            grid-template-columns: 1fr;
-            width: 90%;
-        `}
-    }
-
     & p {
-      font-size: ${(props) => props.theme.fontSize.p};
-      justify-self: center;
+        font-size: ${(props) => props.theme.fontSize.p};
+        justify-self: center;
+        padding-inline: 5vw;
+        text-align: center;
     }
-`;
-
-const MISSIONBODYTEXT = styled.p`
-    font-size: ${(props) => props.theme.fontSize.h3};
-    width: 80%;
-    justify-self: center;
-    text-align: center;
-`;
-
-const LINEBREAK = styled.div`
-    width: 80%;
-    height: 0.1rem;
-    background-color: ${(props) => props.theme.colors.blackTrans75};
-    justify-self: center;
 `;
 
 type Props = {};
@@ -87,17 +53,21 @@ const Mission: React.FC<Props> = () => {
             <LINEBREAK />
             <MISSIONCONTENT>
                 <H2>Our Mission</H2>
-                <MISSIONBODYTEXT>
+                <p>
                     It is our experience that in order to render truly unbiased,
-                    client focused advice, your advisor needs to be a fiduciary;
-                </MISSIONBODYTEXT>
-                <ul>
-                    {tileText.map((text: string, index: number) => {
-                        return <MissionTile key={index}>{text}</MissionTile>;
-                    })}
-                </ul>
-                <p>At Venable Park, this is our calling.</p>
+                    client focused advice, your advisor needs to be a fiduciary.
+                    They should be paid one all inclusive annual fee, which is
+                    visible and fair. They should not be the recipient of
+                    commissions or any other indirect financial incentives. They
+                    should not be accountable to &quot;sales targets&quot;, they should
+                    not be selling you any particular &quot;products&quot;. They must work
+                    exclusively under the agenda of the individual client whose
+                    trust they have been granted. They must be accountable to
+                    their clients alone. Your advisor must be independent,
+                    trustworthy and held to the highest ethical standards.
+                </p>
             </MISSIONCONTENT>
+            <LINEBREAK />
         </MISSIONWRAPPER>
     );
 };

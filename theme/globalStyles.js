@@ -49,6 +49,11 @@ const GlobalStyle = createGlobalStyle`
         background: #555; 
     }
 
+    // CAROUSEL ITEM STYLE
+    .carousel_item {
+        padding: 2rem 2rem 2rem 2rem;
+    }
+
 `
 
 export default GlobalStyle;
