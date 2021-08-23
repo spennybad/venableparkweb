@@ -65,7 +65,7 @@ const CarouselItem: React.FC<Props> = ({ data }) => {
                     - {data.initials}
                 </INITIALS>
                 <DATEJOINED>
-                    Date Joined: {data.year_joined}
+                    Joined: {data.year_joined}
                 </DATEJOINED>
             </CARDTAG>
         </CAROUSELITEM>

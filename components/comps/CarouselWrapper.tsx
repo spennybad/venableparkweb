@@ -30,7 +30,6 @@ const responsive = {
 
 export interface Props {
     data: Array<Testimonial>
-    deviceType: string
 }
  
 const CarouselWrapper: React.FC<Props> = ({ data }) => {
@@ -38,7 +37,6 @@ const CarouselWrapper: React.FC<Props> = ({ data }) => {
     return (
         <Carousel
             responsive={responsive}
-            draggable={false}
             itemClass="carousel_item"
             infinite={true}
             partialVisible={true}
