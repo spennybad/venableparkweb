@@ -1,7 +1,5 @@
 // UTILS
 import "react-multi-carousel/lib/styles.css";
-import styled from "styled-components";
-import media from "../../utils/MediaQueries";
 
 // COMPONENTS
 import Carousel from "react-multi-carousel";
@@ -9,6 +7,7 @@ import CarouselItem from "./CarouselItem"
 
 // TYPES
 import { Testimonial } from "../../types/Testimonial";
+
 
 const responsive = {
     desktop: {
@@ -40,6 +39,8 @@ const CarouselWrapper: React.FC<Props> = ({ data }) => {
             itemClass="carousel_item"
             infinite={true}
             partialVisible={true}
+            focusOnSelect={true}
+            arrows={false}
         >
             {data.map((record) => {
                 return (

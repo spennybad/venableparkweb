@@ -4,17 +4,20 @@ import styled from "styled-components";
 // COMPONENTS
 import { H2 } from "../../styles/typography";
 import CarouselWrapper from "../comps/CarouselWrapper";
+import { CONTENTWRAPPER } from "../../styles/contentWrapper";
+
 
 // TYPES
 import { Testimonial } from "../../types/Testimonial";
 
 const TESTIMONIALSWRAPPER = styled.div`
-   margin-bottom: 5rem;
+    margin-block: 10%;
+    display: grid;
+    gap: 5rem;
 `;
 
 const TESTIMONIALH2 = styled(H2)`
-    padding-inline: 10%;
-    margin-bottom: 5rem;
+    margin-left: 10%;
 `
 
 export interface Props {

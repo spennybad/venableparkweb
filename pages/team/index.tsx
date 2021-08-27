@@ -106,6 +106,8 @@ const Team: React.FC<TeamProps> = ({ employeesData }) => {
         setCurrentModal(employee);
     };
 
+    console.log(employeesData);
+
     return (
         <TEAMPAGEWRAPPER>
             {currentModal != null && (

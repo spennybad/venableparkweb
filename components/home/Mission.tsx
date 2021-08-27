@@ -3,8 +3,6 @@ import media from "../../utils/MediaQueries";
 
 import { H2 } from "../../styles/typography";
 import { CONTENTWRAPPER } from "../../styles/contentWrapper";
-import MissionTile from "./MissionTile";
-import { LINEBREAK } from "../../styles/Linebreak";
 
 const MISSIONWRAPPER = styled(CONTENTWRAPPER)`
     height: 100%;
@@ -13,19 +11,10 @@ const MISSIONWRAPPER = styled(CONTENTWRAPPER)`
     display: grid;
     grid-auto-rows: auto;
     gap: 10rem;
-    padding-inline: 10%;
 
     ${media.width_800`
         gap: 5rem;
     `}
-`;
-
-const MISSIONSTATMENT = styled.p`
-    font-size: ${(props) => props.theme.fontSize.h3};
-    color: ${(props) => props.theme.colors.primary};
-    justify-self: center;
-    text-align: center;
-    padding-block: min(10%, 10rem);
 `;
 
 const MISSIONCONTENT = styled.div`
@@ -45,12 +34,6 @@ type Props = {};
 const Mission: React.FC<Props> = () => {
     return (
         <MISSIONWRAPPER>
-            <MISSIONSTATMENT>
-                Absolute return strategies that outperform
-                <br />
-                with a fraction of the risk.
-            </MISSIONSTATMENT>
-            <LINEBREAK />
             <MISSIONCONTENT>
                 <H2>Our Mission</H2>
                 <p>
@@ -67,7 +50,6 @@ const Mission: React.FC<Props> = () => {
                     trustworthy and held to the highest ethical standards.
                 </p>
             </MISSIONCONTENT>
-            <LINEBREAK />
         </MISSIONWRAPPER>
     );
 };
