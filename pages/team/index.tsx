@@ -4,7 +4,6 @@ import { Employee } from "../../types/Employee";
 // UTILS
 import media from "../../utils/MediaQueries";
 import { client } from "../../api/sanity";
-import Image from "next/image";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -12,27 +11,11 @@ import { useState } from "react";
 import { H2 } from "../../styles/typography";
 import TeamTile from "../../components/team/TeamTile";
 import Modal from "../../components/team/Modal";
-
-const TEAMPAGEWRAPPER = styled.div`
-    margin-top: min(4rem, 4%);
-    display: grid;
-    align-content: center;
-    min-height: 100vh;
-`;
-
-const STYLEDIMAGE = styled(Image)`
-    object-fit: cover;
-    position: absolute;
-    box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
-`;
+import DefaultLayout from "../../components/layout/DefaultLayout";
 
 const TEAMWRAPPER = styled.div`
-    min-height: 90vh;
-    padding: max(5%, 10rem) max(5%, 1rem);
-
-    clip-path: polygon(0% 5%, 100% 0%, 100% 95%, 0% 100%);
-    background-color: ${(props) => props.theme.colors.white};
-    box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
+    height: 100%;
+    width: 100%;
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -109,46 +92,42 @@ const Team: React.FC<TeamProps> = ({ employeesData }) => {
     console.log(employeesData);
 
     return (
-        <TEAMPAGEWRAPPER>
+        <>
             {currentModal != null && (
                 <Modal
                     handleTileClick={handleTileClick}
                     currentModal={currentModal}
                 />
             )}
-
-            <STYLEDIMAGE
-                src="/images/2k-rotated-sean.webp"
-                sizes="100%"
-                layout="fill"
-            />
-            <TEAMWRAPPER>
-                <div>
-                    <H2>Our Principles:</H2>
-                    <TEAMLIST>
-                        {principles.map((employeeData) => (
-                            <TeamTile
-                                key={employeeData._id}
-                                employeeData={employeeData}
-                                handleTileClick={handleTileClick}
-                            />
-                        ))}
-                    </TEAMLIST>
-                </div>
-                <div>
-                    <H2>Our Team:</H2>
-                    <TEAMLIST>
-                        {employees.map((employeeData) => (
-                            <TeamTile
-                                key={employeeData._id}
-                                employeeData={employeeData}
-                                handleTileClick={handleTileClick}
-                            />
-                        ))}
-                    </TEAMLIST>
-                </div>
-            </TEAMWRAPPER>
-        </TEAMPAGEWRAPPER>
+            <DefaultLayout>
+                <TEAMWRAPPER>
+                    <div>
+                        <H2>Our Principles:</H2>
+                        <TEAMLIST>
+                            {principles.map((employeeData) => (
+                                <TeamTile
+                                    key={employeeData._id}
+                                    employeeData={employeeData}
+                                    handleTileClick={handleTileClick}
+                                />
+                            ))}
+                        </TEAMLIST>
+                    </div>
+                    <div>
+                        <H2>Our Team:</H2>
+                        <TEAMLIST>
+                            {employees.map((employeeData) => (
+                                <TeamTile
+                                    key={employeeData._id}
+                                    employeeData={employeeData}
+                                    handleTileClick={handleTileClick}
+                                />
+                            ))}
+                        </TEAMLIST>
+                    </div>
+                </TEAMWRAPPER>
+            </DefaultLayout>
+        </>
     );
 };
 

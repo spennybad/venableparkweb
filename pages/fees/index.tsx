@@ -5,28 +5,16 @@ import styled from "styled-components";
 import media from "../../utils/MediaQueries";
 
 // COMPS
-import { H2 } from '../../styles/typography';
+import { H2 } from "../../styles/typography";
+import DefaultLayout from "../../components/layout/DefaultLayout";
 
 // TYPES
 
-const FEESPAGEWRAPPER = styled.div`
-    margin-top: min(4rem, 4%);
-    display: grid;
-    align-content: center;
-    min-height: 100vh;
-`;
-
 const FEESWRAPPER = styled.div`
-    min-height: 90vh;
-    padding: max(5%, 10rem) max(5%, 1rem);
-
-    clip-path: polygon(0% 5%, 100% 0%, 100% 95%, 0% 100%);
-    background-color: ${(props) => props.theme.colors.white};
-    box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
-
+    height: 100%;
     display: grid;
     grid-template-rows: auto 1fr;
-`;
+`
 
 const FEESCONTENT = styled.div`
     display: grid;
@@ -122,12 +110,7 @@ const feeText: string[] = [
 
 const Home: React.FC<Props> = () => {
     return (
-        <FEESPAGEWRAPPER>
-            <STYLEDIMAGE
-                src="/images/2k-rotated-sean.webp"
-                sizes="100%"
-                layout="fill"
-            />
+        <DefaultLayout>
             <FEESWRAPPER>
                 <H2>Fees</H2>
                 <FEESCONTENT>
@@ -164,8 +147,8 @@ const Home: React.FC<Props> = () => {
                     </FEETEXT>
                 </FEESCONTENT>
             </FEESWRAPPER>
-        </FEESPAGEWRAPPER>
-    );
+        </DefaultLayout>
+    )
 };
 
 export default Home;
