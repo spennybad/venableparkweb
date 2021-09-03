@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Image from "next/image";
 
 const DEFAULTLAYOUT = styled.div`
-    margin-top: min(4rem, 4%);
     display: grid;
     align-content: center;
     min-height: 100vh;

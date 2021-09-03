@@ -14,7 +14,7 @@ import ExitButton from "../comps/ExitButton";
 const MODAL = styled.div`
     position: fixed;
     z-index: 100;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     background-color: ${(props) => props.theme.colors.blackTrans75};
     display: grid;
