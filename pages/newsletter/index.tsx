@@ -1,5 +1,5 @@
 // UTILS
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { client } from "../../api/sanity";
 import Image from "next/image";
@@ -25,15 +25,15 @@ const BACKGROUNDIMAGEWRAPPER = styled.div`
         inset: 0;
         background-color: ${(props) => props.theme.colors.blackTrans50};
     }
-`
+`;
 
 const NEWSLETTERPAGEWRAPPER = styled.div`
     width: 100%;
     min-height: 100vh;
     position: relative;
     display: grid;
+    align-items: center;
 `;
-
 
 const NEWSLETTERLIST = styled.ul`
     display: flex;
@@ -41,7 +41,6 @@ const NEWSLETTERLIST = styled.ul`
     list-style: none;
     justify-content: center;
     gap: 4rem;
-    margin: 3rem;
 `;
 
 const STYLEDIMAGE = styled(Image)`
@@ -50,21 +49,20 @@ const STYLEDIMAGE = styled(Image)`
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
 `;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const newsletters = await client.fetch(`
         *[_type == "newsletter"] {
             "date_published": date_published,
             "file": file.asset -> url,
             "title": title,
             "id": _id
-        } [0...10] | order(date_published desc)
+        }
     `);
 
     return {
         props: {
             newsletters,
         },
-        revalidate: 1,
     };
 }
 
@@ -72,8 +70,38 @@ export interface Props {
     newsletters: Array<Newsletter>;
 }
 
+function filterNewsletters(
+    newsletters: Array<Newsletter>,
+    searchFilters: SearchFilters
+): Array<Newsletter> {
+    return newsletters.filter((newsletter, index) => (Number(newsletter.date_published.split("-")[0]) == searchFilters.date) && index <= 9)
+}
+
 const Home: React.FC<Props> = ({ newsletters }) => {
-    const [searchFilters, setSearchFilters] = useState<null | SearchFilters>(null);
+    const [filteredNewsletters, setFilteredNewsletters] =
+        useState<Newsletter[]>(newsletters.slice(0,10));
+
+    const [searchFilters, setSearchFilters] = useState<SearchFilters>({
+        keyWord: null,
+        sortBy: "newest",
+        date: 2020,
+    });
+
+    // REDUNDENT STEP FOR FUTURE PROFFING
+    const updateSearchFilters = (newFilters: SearchFilters) => {
+        setSearchFilters(newFilters);
+    };
+
+    const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setFilteredNewsletters(filterNewsletters(newsletters, searchFilters));
+    };
+
+    // HERE FOR DEBUGGING PURPOSES
+    // useEffect(() => {
+    //     console.log(searchFilters);
+    // }, [searchFilters]);
+
     return (
         <>
             <BACKGROUNDIMAGEWRAPPER>
@@ -84,9 +112,13 @@ const Home: React.FC<Props> = ({ newsletters }) => {
                 />
             </BACKGROUNDIMAGEWRAPPER>
             <NEWSLETTERPAGEWRAPPER>
-                <SearchBar setSearchFilters={ setSearchFilters }/>
+                <SearchBar
+                    updateSearchFilters={updateSearchFilters}
+                    searchFilters={searchFilters}
+                    handleSearchSubmit={handleSearchSubmit}
+                />
                 <NEWSLETTERLIST>
-                    {newsletters.map((newsletter, index) => (
+                    {filteredNewsletters.map((newsletter, index) => (
                         <NewsletterTile
                             key={newsletter.id}
                             newsletter={newsletter}

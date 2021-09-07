@@ -1,5 +1,6 @@
 // UTILS
 import styled, { css } from "styled-components";
+import React, { useState } from "react";
 
 // PDF SPECIFIC IMPORTS
 import { Document, Page } from "react-pdf";
@@ -18,6 +19,8 @@ const NEWSLETTERTILE = styled.li<{ isMostRecent: boolean }>`
     background-color: ${(props) => props.theme.colors.white};
     position: relative;
     transition: transform .1s;
+
+    position: relative;
 
     &:hover {
         transform: scale(1.05);
@@ -51,17 +54,34 @@ const NEWSLETTERTILE = styled.li<{ isMostRecent: boolean }>`
     }
 `
 
+const NEWSLETTERTILETEMPLATE = styled.div`
+    width: 100%;
+    height:100%;
+    min-width: 300px;
+    min-height: 400px;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    background-color: ${(props) => props.theme.colors.white};
+`
+
 export interface Props {
     newsletter: Newsletter;
     isMostRecent: boolean;
 }
 
 const NewsletterTile: React.FC<Props> = ({ newsletter, isMostRecent }) => {
+
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    
     return (
         <NEWSLETTERTILE isMostRecent={isMostRecent}>
+            {!isLoaded && <NEWSLETTERTILETEMPLATE />}
             <button onClick={() => window.open(newsletter.file)}>
                 <Document
                     file={newsletter.file}
+                    onLoadSuccess={() => setIsLoaded(true)}
+                    loading={LoadingNewsletterTile}
                 >
                     <Page
                         pageNumber={ 1 }
@@ -72,5 +92,10 @@ const NewsletterTile: React.FC<Props> = ({ newsletter, isMostRecent }) => {
         </NEWSLETTERTILE>
     );
 };
+
+const LoadingNewsletterTile: React.ReactElement = (
+    <NEWSLETTERTILETEMPLATE>
+    </NEWSLETTERTILETEMPLATE>
+)
 
 export default NewsletterTile;

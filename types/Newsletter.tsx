@@ -1,5 +1,5 @@
 export interface Newsletter {
-  date_publised: string,
+  date_published: string,
   file: string,
   title: number,
   id: string
