@@ -12,7 +12,7 @@ import NameTag from "./NameTag";
 import ExitButton from "../comps/ExitButton";
 
 const MODAL = styled.div`
-    position: fixed;
+    position: absolute;
     z-index: 100;
     height: 100%;
     width: 100vw;

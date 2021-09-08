@@ -15,6 +15,8 @@ const BUTTON = styled.button`
     top: 0;
     right: 0;
     margin: 5%;
+
+    cursor: pointer;
 `
 
 export interface Props {

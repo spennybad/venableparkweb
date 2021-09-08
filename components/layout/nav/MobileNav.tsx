@@ -15,8 +15,8 @@ const NAVTOGGLEBUTTON = styled(BUTTON)<{ isNavPanel: boolean }>`
     place-content: center;
     gap: .5rem;
     background-color: transparent;
-    z-index: 1;
     margin-right: 1rem;
+    z-index: calc(1001);
 
     & div {
         height: 10%;
@@ -40,7 +40,7 @@ const NAVPANEL = styled.div<{ isNavPanel: boolean }>`
     background-color: ${(props) => props.theme.colors.blackTrans75};
     display: grid;
     place-items: center;
-    z-index: 0;
+    z-index: inherit;
 
     ${({ isNavPanel }) =>
         (isNavPanel &&

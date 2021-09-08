@@ -14,6 +14,7 @@ const TEAMTILE = styled.li`
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: 2rem;
+    cursor: pointer;
 `;
 
 export interface Props {
