@@ -8,9 +8,8 @@ import Footer from "../components/layout/footer";
 
 const SITEWRAPPER = styled.div`
     position: relative;
-    height: 100%;
-    width: 100%;
     min-height: 100vh;
+    width: 100%;
 `;
 
 export default function App({ Component, pageProps }: AppProps) {

@@ -38,7 +38,7 @@ const BLOGBUTTON = styled.a`
 
 type Props = {};
 
-const NavItems: string[] = ["home", "about", "fees", "team", "newsletter"];
+const NavItems: string[] = ["home", "about", "fees", "team", "newsletter", "contact"];
 const NavSwitchingPoint: number = 1050;
 
 const Nav: React.FC<Props> = () => {

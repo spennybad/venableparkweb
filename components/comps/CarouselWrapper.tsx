@@ -32,7 +32,6 @@ export interface Props {
 }
  
 const CarouselWrapper: React.FC<Props> = ({ data }) => {
-    console.log(data);
     return (
         <Carousel
             responsive={responsive}

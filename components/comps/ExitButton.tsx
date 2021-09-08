@@ -1,20 +1,22 @@
 // UTILS
 import styled from 'styled-components';
 import media from '../../utils/MediaQueries';
+import Image from 'next/image';
 
 // TYPES
 import { Employee } from '../../types/Employee';
 
 const BUTTON = styled.button`
-    height: 5rem;
-    width: 5rem;
-    border-radius: 100%;
-    background-color: ${(props) => props.theme.colors.primary};
+    height: 3rem;
+    width: 3rem;
+    appearance: none;
+    outline: none;
+    background-color: transparent;
 
     position: absolute;
     top: 0;
     right: 0;
-    margin: 5%;
+    margin: max(5rem, 5%);
 
     cursor: pointer;
 `
@@ -25,7 +27,13 @@ export interface Props {
  
 const ExitButton: React.FC<Props> = ( { handleTileClick} ) => {
     return (
-        <BUTTON onClick={ () => handleTileClick(null)}/>
+        <BUTTON onClick={() => handleTileClick(null)}>
+            <Image
+                layout="fill"
+                src="/images/svgs/x.svg"
+                alt="Exit Button"
+            />
+        </BUTTON>
     );
 }
  

@@ -53,6 +53,11 @@ const TEXTWRAPPER = styled.div`
 
 const DESCRIPTION = styled.p`
     font-size: ${(props) => props.theme.fontSize.p};
+    width: 90%;
+
+    ${media.width_650`
+        width: 100%;
+    `}
 `;
 
 export interface Props {

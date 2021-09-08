@@ -2,13 +2,6 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 
-// COMPONENTS
-import DatePicker, {
-    DayValue,
-    DayRange,
-    Day,
-} from "react-modern-calendar-datepicker";
-
 // TYPES
 import { SearchFilters } from "../../types/SearchFilters";
 
@@ -16,7 +9,7 @@ const SEARCHBAR = styled.form`
     height: 5rem;
     width: max-content;
     display: flex;
-    align-items: center;
+    align-self: center;
     margin: 1rem;
     color: ${(props) => props.theme.colors.white};
     gap: 3rem;

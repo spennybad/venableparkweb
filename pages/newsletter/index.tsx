@@ -1,6 +1,6 @@
 // UTILS
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { client } from "../../api/sanity";
 import Image from "next/image";
 
@@ -11,6 +11,16 @@ import { SearchFilters } from "../../types/SearchFilters";
 // COMPS
 import NewsletterTile from "../../components/newsletter/NewsletterTile";
 import SearchBar from "../../components/newsletter/SearchBar";
+
+const NEWSLETTERPAGEWRAPPER = styled.div`
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    margin-block: 3rem;
+    gap: 3rem;
+    grid-template-rows: auto 1fr;
+`;
 
 const BACKGROUNDIMAGEWRAPPER = styled.div`
     height: 100vh;
@@ -23,16 +33,8 @@ const BACKGROUNDIMAGEWRAPPER = styled.div`
         content: "";
         position: absolute;
         inset: 0;
-        background-color: ${(props) => props.theme.colors.blackTrans50};
+        background-color: ${(props) => props.theme.colors.blackTrans75};
     }
-`;
-
-const NEWSLETTERPAGEWRAPPER = styled.div`
-    width: 100%;
-    min-height: 100vh;
-    position: relative;
-    display: grid;
-    align-items: center;
 `;
 
 const NEWSLETTERLIST = styled.ul`
@@ -70,40 +72,60 @@ export interface Props {
     newsletters: Array<Newsletter>;
 }
 
+// USED TO FILTER OUT ALL NEWSLETTERS THAT DO NOT SET THE USER SET SEARCH CRITERIA.
 function filterNewsletters(
     newsletters: Array<Newsletter>,
     searchFilters: SearchFilters
 ): Array<Newsletter> {
-    return newsletters.filter((newsletter, index) => (Number(newsletter.date_published.split("-")[0]) == searchFilters.date) && index <= 9)
+    if (!searchFilters.date && !searchFilters.keyWord) {
+        return newsletters.splice(0, 10);
+    }
+    return newsletters.filter(
+        (newsletter) =>
+            Number(newsletter.date_published.split("-")[0]) ==
+            searchFilters.date
+    );
 }
 
 const Home: React.FC<Props> = ({ newsletters }) => {
-    const [filteredNewsletters, setFilteredNewsletters] =
-        useState<Newsletter[]>(newsletters.slice(0,10));
+    const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
 
+    // STATE OF CURRENTLY DISPLAYED NEWSLETTERS. INITIALLY 10 NEWSLETTERS DISPLAYED.
+    const [filteredNewsletters, setFilteredNewsletters] = useState<
+        Newsletter[]
+    >(newsletters.slice(0, 10));
+
+    // STATE OF CURRENTLY SET SEACH FILTERS.
     const [searchFilters, setSearchFilters] = useState<SearchFilters>({
         keyWord: null,
         sortBy: "newest",
         date: 2020,
     });
 
+    // UPDATED EACH TIME A NEWSLETTER IS SUCCESSFULLY LOADED.
+    const handleNewsletterLoad = (): void => {
+        setIsLoadedCount(isLoadedCount + 1);
+    };
+
     // REDUNDENT STEP FOR FUTURE PROFFING
-    const updateSearchFilters = (newFilters: SearchFilters) => {
+    const updateSearchFilters = (newFilters: SearchFilters): void => {
         setSearchFilters(newFilters);
     };
 
-    const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSearchSubmit = (
+        event: React.FormEvent<HTMLFormElement>
+    ): void => {
         event.preventDefault();
         setFilteredNewsletters(filterNewsletters(newsletters, searchFilters));
     };
 
     // HERE FOR DEBUGGING PURPOSES
-    // useEffect(() => {
-    //     console.log(searchFilters);
-    // }, [searchFilters]);
+    useEffect(() => {
+        console.log(isLoadedCount);
+    }, [isLoadedCount]);
 
     return (
-        <>
+        <NEWSLETTERPAGEWRAPPER>
             <BACKGROUNDIMAGEWRAPPER>
                 <STYLEDIMAGE
                     src="/images/2k-rotated-sean.webp"
@@ -111,23 +133,22 @@ const Home: React.FC<Props> = ({ newsletters }) => {
                     layout="fill"
                 />
             </BACKGROUNDIMAGEWRAPPER>
-            <NEWSLETTERPAGEWRAPPER>
-                <SearchBar
-                    updateSearchFilters={updateSearchFilters}
-                    searchFilters={searchFilters}
-                    handleSearchSubmit={handleSearchSubmit}
-                />
-                <NEWSLETTERLIST>
-                    {filteredNewsletters.map((newsletter, index) => (
-                        <NewsletterTile
-                            key={newsletter.id}
-                            newsletter={newsletter}
-                            isMostRecent={index == 0 ? true : false}
-                        />
-                    ))}
-                </NEWSLETTERLIST>
-            </NEWSLETTERPAGEWRAPPER>
-        </>
+            <SearchBar
+                updateSearchFilters={updateSearchFilters}
+                searchFilters={searchFilters}
+                handleSearchSubmit={handleSearchSubmit}
+            />
+            <NEWSLETTERLIST>
+                {filteredNewsletters.map((newsletter, index) => (
+                    <NewsletterTile
+                        key={newsletter.id}
+                        newsletter={newsletter}
+                        isMostRecent={index == 0 ? true : false}
+                        handleNewsletterLoad={handleNewsletterLoad}
+                    />
+                ))}
+            </NEWSLETTERLIST>
+        </NEWSLETTERPAGEWRAPPER>
     );
 };
 
