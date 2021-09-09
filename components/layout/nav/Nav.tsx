@@ -7,7 +7,8 @@ import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
 const NAV = styled.nav`
-
+    position: sticky;
+    top: 0;
     width: 100%;
     height: max-content;
     min-height: 4rem;

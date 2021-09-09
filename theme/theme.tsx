@@ -24,7 +24,7 @@ const theme = {
 
     boxShadow: {
         boxShadowDefault: ".2rem .2rem 1rem .1rem rgba(0,0,0,0.50);",
-        boxShadowLight: ".2rem .2rem 1rem .1rem rgba(0,0,0,0.25);"
+        boxShadowLight: ".2rem .2rem .5rem .1rem rgba(0,0,0,0.25);"
     }
 }
 
