@@ -10,6 +10,7 @@ const SEARCHBAR = styled.form`
     width: max-content;
     display: flex;
     align-self: center;
+    align-items: center;
     margin: 1rem;
     color: ${(props) => props.theme.colors.white};
     gap: 3rem;
@@ -25,8 +26,8 @@ const SEARCHBAR = styled.form`
     }
 
     & button[type="submit"] {
-        font-size: inherit;
         padding: 0.5rem;
+        height: max-content;
         background-color: transparent;
         border: 2px solid ${(props) => props.theme.colors.accent};
         appearance: none;

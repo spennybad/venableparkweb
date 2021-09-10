@@ -64,6 +64,7 @@ const Button = styled.button`
     justify-self: center;
     transition: all .2s;
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
+    border: solid 2px ${(props) => props.theme.colors.accent};
 
     &:hover {
         transform: scale(1.1);
