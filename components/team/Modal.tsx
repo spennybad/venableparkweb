@@ -10,6 +10,7 @@ import { Employee } from "../../types/Employee";
 import HeadshotWrapper from "./HeadshotWrapper";
 import NameTag from "./NameTag";
 import ExitButton from "../comps/ExitButton";
+import Image from "next/image";
 
 const MODAL = styled.div`
     position: absolute;
@@ -60,6 +61,11 @@ const DESCRIPTION = styled.p`
     `}
 `;
 
+const EMAIL = styled.div`
+    display: flex;
+
+`
+
 export interface Props {
     handleTileClick: (employee: Employee | null) => void;
     currentModal: Employee;
@@ -78,6 +84,8 @@ const Modal: React.FC<Props> = ({ handleTileClick, currentModal }) => {
         }
     };
 
+    console.log(currentModal);
+
     return (
         <MODAL onKeyPress={(event) => handleESCPress(event)}>
             <CONTENT>
@@ -89,8 +97,17 @@ const Modal: React.FC<Props> = ({ handleTileClick, currentModal }) => {
                 <TEXTWRAPPER>
                     <NameTag employeeData={currentModal} modal={true} />
                     <DESCRIPTION>
-                        {currentModal.employee.employee_desc}
+                        {currentModal.desc}
                     </DESCRIPTION>
+                    <EMAIL>
+                        <Image 
+                            src="/images/svgs/mail.svg"
+                            alt="temp"
+                            height="30"
+                            width="30"
+                        />
+                        <p>{currentModal.email}</p>
+                    </EMAIL> 
                 </TEXTWRAPPER>
             </CONTENT>
         </MODAL>

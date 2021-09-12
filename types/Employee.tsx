@@ -1,13 +1,11 @@
 export interface Employee {
-  employee: {
-      employee_desc: string;
-      employee_position: string;
-      name: string;
-      principle: boolean;
-      qualifications: Array<string>;
-      employee_photo?: string;
-      _type: string;
-  };
+  desc: string;
+  email: string;
+  isPrinciple: boolean;
+  name: string;
+  employee_position: string;
+  qualifications: Array<string>;
+  employee_photo?: string;
   _createdAt: string;
   _id: string;
   _rev: string;

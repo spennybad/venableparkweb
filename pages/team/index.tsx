@@ -47,7 +47,7 @@ const parseEmployees = (
     const principles: Employee[] = [];
 
     data.forEach((current: Employee) => {
-        if (current.employee.principle) {
+        if (current.isPrinciple) {
             principles.push(current);
         } else {
             employees.push(current);
@@ -59,13 +59,10 @@ const parseEmployees = (
 
 export async function getStaticProps() {
     const employeesData = await client.fetch(`
-        *[_type == "employees"]{
-            "employee": employee{
-                ...,
-                "employee_photo": employee_photo.asset -> url
-            },
-            ...
-        }  
+        *[_type == "employee"] {
+            ...,
+            "employee_photo": employee_photo.asset -> url
+        }       
     `);
 
     return {
@@ -88,6 +85,8 @@ const Team: React.FC<TeamProps> = ({ employeesData }) => {
     const handleTileClick = (employee: Employee | null): void => {
         setCurrentModal(employee);
     };
+
+    console.log(employeesData);
 
     return (
         <>

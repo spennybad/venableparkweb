@@ -32,13 +32,13 @@ export interface Props {
 const HeadshotWrapper: React.FC<Props> = ({ employeeData, dimension }) => {
     return (
         <HEADSHOTWRAPPER dimension={ dimension }>
-            {employeeData.employee.employee_photo ? (
+            {employeeData.employee_photo ? (
                 <Image
-                    src={employeeData.employee.employee_photo}
-                    alt={employeeData.employee.name}
+                    src={employeeData.employee_photo}
+                    alt={employeeData.name}
                     layout="fill"
                     objectFit="contain"
-                ></Image>
+                />
             ) : (
                 <PLACEHOLDER />
             )}

@@ -42,6 +42,7 @@ type Props = {
 };
 
 function getRoute(route: string): string {
+    route = route.replace(" ", "-");
     if (route == "home") {
         return "/";
     } else {

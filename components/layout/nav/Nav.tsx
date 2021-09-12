@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Image from "next/image";
 import useWindowDimensions from "../../../hooks/WindowDimensions";
 
-import { BUTTON } from "../../../styles/button.js";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
@@ -39,7 +38,8 @@ const BLOGBUTTON = styled.a`
 
 type Props = {};
 
-const NavItems: string[] = ["home", "about", "fees", "team", "newsletter", "contact"];
+// CHANGE NEWSLETTER TO LETTER ARCHIEVE
+const NavItems: string[] = ["home", "about", "fees", "team", "letter archieve", "contact"];
 const NavSwitchingPoint: number = 1050;
 
 const Nav: React.FC<Props> = () => {
@@ -59,7 +59,7 @@ const Nav: React.FC<Props> = () => {
             { 
                 // Removes "Visit the Blog" button on viewports with less the 600 px of width.
                 width > NavSwitchingPoint ?
-                    <BLOGBUTTON href={"https://jugglingdynamite.com/"}>Visit the Blog</BLOGBUTTON> :
+                    <BLOGBUTTON href={"https://jugglingdynamite.com/"}>Danielle's Blog</BLOGBUTTON> :
                     null
             }
         </NAV>

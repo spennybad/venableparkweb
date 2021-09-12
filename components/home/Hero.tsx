@@ -27,9 +27,11 @@ const HomeH1 = styled(H1)`
     margin-right: 10%;
     font-weight: 300;
 
+    color: ${(props) => props.theme.colors.white};
+
     & > * {
         display: block;
-        background-color: ${(props) => props.theme.colors.whiteTrans75};
+        /* background-color: ${(props) => props.theme.colors.whiteTrans75}; */
         width: max-content;
         padding: .5rem 1.5rem;
     }

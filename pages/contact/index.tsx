@@ -29,7 +29,6 @@ const Contact: React.FC<Props> = () => {
                 <H2>Contact Us</H2>
                 <CONTENTWRAPPER>
                     <MailForm />
-
                 </CONTENTWRAPPER>
         </DefaultLayout>
     );

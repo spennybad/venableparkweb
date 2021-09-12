@@ -48,7 +48,6 @@ const Home: React.FC<Props> = ({ testimonials }) => {
             <CONTENTWRAPPER><MISSIONSTATMENT>Absolute return strategies that outperform<br />with a fraction of the risk.</MISSIONSTATMENT></CONTENTWRAPPER>
             <LineBreak />
             <Mission />
-            <LineBreak />
             <Testimonials testimonials={ testimonials } />
         </>
     )

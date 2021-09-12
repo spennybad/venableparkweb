@@ -112,7 +112,7 @@ const Home: React.FC<Props> = () => {
     return (
         <DefaultLayout>
             <FEESWRAPPER>
-                <H2>Fees</H2>
+                <H2>Fees For Our Service</H2>
                 <FEESCONTENT>
                     <TABLE>
                         <tr>
@@ -133,7 +133,7 @@ const Home: React.FC<Props> = () => {
                         </tr>
                         <tr>
                             <td>1 Million</td>
-                            <td>0.1%</td>
+                            <td>1%</td>
                         </tr>
                         <tr>
                             <td colSpan={2}>**Minimum Asset Size $1,000,000</td>

@@ -46,7 +46,7 @@ export interface Props {
  
 const NameTag: React.FC<Props> = ({ employeeData, modal=false }) => {
 
-    const qualString: string = employeeData.employee.qualifications.reduce(
+    const qualString: string = employeeData.qualifications.reduce(
         (total, curr): string => {
             return (total += curr + " ");
         },
@@ -55,8 +55,8 @@ const NameTag: React.FC<Props> = ({ employeeData, modal=false }) => {
 
     return (
         <NAMETAG modal={modal}>
-            <div><NAME>{employeeData.employee.name}</NAME><QUALIFICATIONS>{qualString}</QUALIFICATIONS></div>
-            <p>{ employeeData.employee.employee_position }</p>
+            <div><NAME>{employeeData.name}</NAME><QUALIFICATIONS>{qualString}</QUALIFICATIONS></div>
+            <p>{ employeeData.employee_position }</p>
         </NAMETAG>
     );
 }
