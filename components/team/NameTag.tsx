@@ -54,9 +54,9 @@ const NameTag: React.FC<Props> = ({ employeeData, modal=false }) => {
     );
 
     return (
-        <NAMETAG modal={modal}>
-            <div><NAME>{employeeData.name}</NAME><QUALIFICATIONS>{qualString}</QUALIFICATIONS></div>
-            <p>{ employeeData.employee_position }</p>
+        <NAMETAG modal={ modal }>
+            <div><NAME>{ employeeData.name }</NAME><QUALIFICATIONS>{ qualString }</QUALIFICATIONS></div>
+            <p>{ employeeData.position }</p>
         </NAMETAG>
     );
 }

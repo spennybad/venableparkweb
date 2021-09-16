@@ -61,7 +61,7 @@ export async function getStaticProps() {
     const employeesData = await client.fetch(`
         *[_type == "employee"] {
             ...,
-            "employee_photo": employee_photo.asset -> url
+            "photo": image.asset -> url
         }       
     `);
 

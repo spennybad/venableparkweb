@@ -15,8 +15,8 @@ const theme = {
     
     fontSize: {
         // Default
-        h1: "clamp(2.3rem, 4vw, 6.1rem)",
-        h2: "clamp(2.3rem, 3vw, 4.8rem)",
+        h1: "clamp(3rem, 4vw, 4.8rem)",
+        h2: "clamp(2.3rem, 3vw, 4rem)",
         h3: "clamp(1.8rem, 2.5vw, 3.1rem)",
         h4: "clamp(1.6rem, 2.2vw, 2.5rem)",
         p: "clamp(1.4rem, 1.5vw, 2rem)"

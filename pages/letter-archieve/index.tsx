@@ -88,6 +88,8 @@ function filterNewsletters(
 }
 
 const Home: React.FC<Props> = ({ newsletters }) => {
+
+    console.log(newsletters);
     const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
 
     // STATE OF CURRENTLY DISPLAYED NEWSLETTERS. INITIALLY 10 NEWSLETTERS DISPLAYED.

@@ -5,10 +5,11 @@ const DEFAULTLAYOUT = styled.div`
     display: grid;
     align-content: center;
     min-height: 100vh;
-    position: relative;
 `
 
 const CONTENTWRAPPER = styled.div`
+    display: grid;
+    position: relative;
     min-height: 90vh;
     padding: max(5%, 10rem) max(5%, 1rem);
 

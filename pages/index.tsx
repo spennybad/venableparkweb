@@ -22,7 +22,7 @@ const MISSIONSTATMENT = styled.p`
 
 export async function getStaticProps() {
     const testimonials = await client.fetch(`
-        *[_type == "testimonials"] {
+        *[_type == "testimonial"] {
             "initials": initials,
             "text": text,
             "year_joined": year_joined,
@@ -42,6 +42,7 @@ export interface Props {
 }
 
 const Home: React.FC<Props> = ({ testimonials }) => {
+    console.log(testimonials);
     return (
         <>
             <Hero />

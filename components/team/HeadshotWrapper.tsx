@@ -32,9 +32,9 @@ export interface Props {
 const HeadshotWrapper: React.FC<Props> = ({ employeeData, dimension }) => {
     return (
         <HEADSHOTWRAPPER dimension={ dimension }>
-            {employeeData.employee_photo ? (
+            {employeeData.photo ? (
                 <Image
-                    src={employeeData.employee_photo}
+                    src={employeeData.photo}
                     alt={employeeData.name}
                     layout="fill"
                     objectFit="contain"

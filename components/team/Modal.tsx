@@ -61,9 +61,16 @@ const DESCRIPTION = styled.p`
     `}
 `;
 
-const EMAIL = styled.div`
+const EMAIL = styled.a`
     display: flex;
+    gap: 1rem;
+    align-items: center;
+    text-decoration: none;
 
+    & p {
+        font-size: ${(props) => props.theme.fontSize.p};
+        color: ${(props) => props.theme.colors.primary};
+    }
 `
 
 export interface Props {
@@ -84,8 +91,6 @@ const Modal: React.FC<Props> = ({ handleTileClick, currentModal }) => {
         }
     };
 
-    console.log(currentModal);
-
     return (
         <MODAL onKeyPress={(event) => handleESCPress(event)}>
             <CONTENT>
@@ -99,7 +104,8 @@ const Modal: React.FC<Props> = ({ handleTileClick, currentModal }) => {
                     <DESCRIPTION>
                         {currentModal.desc}
                     </DESCRIPTION>
-                    <EMAIL>
+       
+                    <EMAIL href={"mailto:" + currentModal.email}>
                         <Image 
                             src="/images/svgs/mail.svg"
                             alt="temp"

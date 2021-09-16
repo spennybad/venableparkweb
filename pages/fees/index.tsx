@@ -5,15 +5,16 @@ import styled from "styled-components";
 import media from "../../utils/MediaQueries";
 
 // COMPS
-import { H2 } from "../../styles/typography";
+import { H1 } from "../../styles/typography";
 import DefaultLayout from "../../components/layout/DefaultLayout";
 
 // TYPES
 
 const FEESWRAPPER = styled.div`
-    height: 100%;
+    position: relative;
     display: grid;
     grid-template-rows: auto 1fr;
+    height: 100%;
 `
 
 const FEESCONTENT = styled.div`
@@ -94,12 +95,6 @@ const DIVIDER = styled.div`
     `}
 `
 
-const STYLEDIMAGE = styled(Image)`
-    object-fit: cover;
-    position: absolute;
-    box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
-`;
-
 export interface Props { }
 
 const feeText: string[] = [
@@ -112,7 +107,7 @@ const Home: React.FC<Props> = () => {
     return (
         <DefaultLayout>
             <FEESWRAPPER>
-                <H2>Fees For Our Service</H2>
+                <H1>Fees For Our Service</H1>
                 <FEESCONTENT>
                     <TABLE>
                         <tr>
