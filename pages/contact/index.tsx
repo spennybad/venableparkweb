@@ -7,8 +7,7 @@ import media from "../../utils/MediaQueries";
 import DefaultLayout from "../../components/layout/DefaultLayout";
 import MailForm from "../../components/contact/MailForm";
 import { H2 } from "../../styles/typography";
-
-export interface Props {}
+import Map from "../../components/contact/Map";
 
 const CONTACTPAGEWRAPPER = styled.div`
     display: grid;
@@ -18,13 +17,26 @@ const CONTACTPAGEWRAPPER = styled.div`
 
 const CONTACTCONTENT = styled.div`
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr auto 1fr;
 
     ${media.width_900`
         grid-template-columns: 100%;
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-rows: 80vh auto 1fr;
     `}
 `
+
+const DIVIDER = styled.div`
+    height: 100%;
+    width: 1px;
+    background-color: ${(props) => props.theme.colors.blackTrans50};
+    justify-self: center;
+
+    ${media.width_700`
+        display: none;
+    `}
+`
+
+export interface Props {}
 
 const Contact: React.FC<Props> = () => {
     return (
@@ -33,6 +45,8 @@ const Contact: React.FC<Props> = () => {
                 <H2>Contact Us</H2>
                 <CONTACTCONTENT>
                     <MailForm />
+                    <DIVIDER />
+                    <Map />
                 </CONTACTCONTENT>
             </CONTACTPAGEWRAPPER>
         </DefaultLayout>

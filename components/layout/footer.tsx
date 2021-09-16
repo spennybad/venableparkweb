@@ -5,62 +5,72 @@ import media from "../../utils/MediaQueries";
 const FOOTER = styled.footer`
     position: relative;
 
-    height: 12rem;
+    height: 14rem;
     width: 100%;
 
     background-color: ${(props) => props.theme.colors.white};
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns: 1fr auto 1fr;
+
+    justify-content: center;
 
     font-size: ${(props) => props.theme.fontSize.p};
-    
-    align-items: center;
 
-    ${media.width_700`
-        grid-template-columns: 100%;
-        grid-template-rows: repeat(3, 1fr);
-        text-align: center;
-        gap: 2rem; 
-        margin-block: 1rem;
+    ${media.width_750`
+        grid-template-rows: auto 1fr 1fr;
+        grid-template-columns: auto;
+
+        height: auto;
+
+        padding-block: 3rem;
+        gap: 1rem;
+
+        & > * {
+            text-align: center !important;
+        }
+
+        & :nth-child(2) {
+            justify-self: center;
+        }
     `}
 `;
 
-const LOGOWRAPPER = styled.div`
-    position: relative;
-    height: 30%;
-    background-color: ${(props) => props.theme.colors.white};
-
-    ${media.width_700`
-        height: 3rem;
-        width: 10rem;
-        place-self: center;
-    `}
-`;
 
 const MAILINGADDRESS = styled.address`
     font-style: normal;
     place-self: center;
     
     & a {
-
+        text-decoration: none;
     }
+`
+
+const LOGOWRAPPER = styled.div`
+    position: relative;
+    width: 15rem;
 `
 
 const CONTACTNUMBERS = styled.div`
     place-self: center;
+    text-align: right;
+
+    & a {
+        text-decoration: none;
+    }
 `
 
 const Footer: React.FC = () => {
     return (
         <FOOTER>
-            <LOGOWRAPPER>
-                <Image src="/images/logo/logo.svg" alt="logo" layout="fill" />
-            </LOGOWRAPPER>
             <MAILINGADDRESS>
-                <a href="https://maps.google.com/maps?ll=44.3911341,-79.6898517&amp;z=16&amp;t=m&amp;hl=en-US&amp;gl=PT&amp;mapclient=embed&amp;daddr=33 Clapperton Street , Barrie  L4M 3E6, CA@44.3911341,-79.6898517" target="_blank">
+                <a rel="noreferrer" href="https://maps.google.com/maps?ll=44.3911341,-79.6898517&amp;z=16&amp;t=m&amp;hl=en-US&amp;gl=PT&amp;mapclient=embed&amp;daddr=33 Clapperton Street , Barrie  L4M 3E6, CA@44.3911341,-79.6898517" target="_blank">
                     33 Clapperton St.<br /> Barrie ON L4M 3E6
                 </a>
             </MAILINGADDRESS>
+            <LOGOWRAPPER>
+                <Image src="/images/logo/logo_solid.svg" alt="footer logo" layout="fill" />
+            </LOGOWRAPPER>
             <CONTACTNUMBERS>
                 <p>Telephone: <a href="tel:(705) 792-3991">(705) 792-3991</a></p>
                 <p>Toll Free: <a href="tel:(866) 792-3991">(866) 792-3991</a></p>

@@ -23,12 +23,28 @@ const CAROUSELITEM = styled.div`
         top: 0;
         left: 0;
 
-        height: 20%;
+        height: 10%;
         aspect-ratio: 1 / 1;
 
         margin: 2rem;
 
         clip-path: polygon(0 0, 100% 0, 100% 0%, 0 100%);
+    }
+
+    & ::after {
+        content: "";
+        background-color: ${(props) => props.theme.colors.accent};
+
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        height: 10%;
+        aspect-ratio: 1 / 1;
+
+        margin: 2rem;
+
+        clip-path: polygon(100% 0, 100% 0, 100% 100%, 0 100%);
     }
 `
 

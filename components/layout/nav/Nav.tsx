@@ -24,6 +24,7 @@ const LOGOWRAPPER = styled.div`
     position: relative;
     width: 15rem;
     height: auto;
+    margin: .3rem;
 `;
 
 const BLOGBUTTON = styled.a`
@@ -47,7 +48,7 @@ const Nav: React.FC<Props> = () => {
     return (
         <NAV>
             <LOGOWRAPPER>
-                <Image src="/images/logo/logo.svg" alt="logo" layout="fill" />
+                <Image src="/images/logo/logo_solid.svg" alt="logo" layout="fill" />
             </LOGOWRAPPER>
             { 
                 // Swaps nav to mobile nav for viewports with less the 600px of width.

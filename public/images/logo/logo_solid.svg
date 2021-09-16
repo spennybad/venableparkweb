@@ -1,0 +1,38 @@
+<svg id="Border" xmlns="http://www.w3.org/2000/svg" width="1200.066" height="257.566" viewBox="0 0 7958 1708">
+  <defs>
+    <style>
+      .cls-1, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-3, .cls-6 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-6 {
+        fill: #111;
+      }
+
+      .cls-2, .cls-3 {
+        stroke: #000;
+        stroke-width: 1px;
+      }
+    </style>
+  </defs>
+  <g id="BACKGROUND">
+    <path class="cls-1" d="M0,1H7958V1708H0V1Z"/>
+  </g>
+  <g id="EDGE">
+    <rect class="cls-2" x="7898" y="1" width="60" height="1707"/>
+    <rect id="Rectangle_1_copy_3" data-name="Rectangle 1 copy 3" class="cls-2" y="1" width="60" height="1707"/>
+    <path id="Rectangle_1_copy" data-name="Rectangle 1 copy" class="cls-3" d="M7958.02,1648v60H18.982v-60H7958.02Z"/>
+    <path id="Rectangle_1_copy_2" data-name="Rectangle 1 copy 2" class="cls-3" d="M7958,0V60H0V0H7958Z"/>
+  </g>
+  <rect class="cls-4" x="2773" y="60" width="2485" height="1589"/>
+  <rect class="cls-5" x="3293" y="852" width="222" height="550"/>
+  <rect class="cls-5" x="3891" y="261" width="221" height="1138"/>
+  <rect class="cls-5" x="4454" y="273" width="222" height="557"/>
+  <path class="cls-6" d="M5732,255.178V1408h272V1000H7220s287.92-7.113,285-403c-1.8-243.561-127.67-341.822-284.85-341.822H5732Z"/>
+  <path class="cls-1" d="M5998,445V810H7177s108.62-25.126,109-182.5S7252.24,444.44,7165,444,5998,445,5998,445Z"/>
+  <path class="cls-6" d="M331,255.178L1206,1407.9h429L2468,255.178H2134L1464,1210h-98L655,255.178H331Z"/>
+</svg>
