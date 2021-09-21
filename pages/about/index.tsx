@@ -60,6 +60,12 @@ const DIVIDER = styled.div`
 const ABOUTPDFWRAPPER = styled.div`
     place-self: center;
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
+
+    & button {
+        appearance: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
 `
 
 export interface Props {
@@ -78,12 +84,14 @@ const Home: React.FC<Props> = () => {
                     </ABOUTTEXT>
                     <DIVIDER />
                     <ABOUTPDFWRAPPER>
-                        <Document
-                            file="/pdfs/Venable Park Philosophy and Method.pdf"
-                            renderMode="canvas"
-                        >
-                            <Page pageNumber={1} width={300} />
-                        </Document>
+                        <button onClick={() => window.open("/pdfs/Venable Park Philosophy and Method.pdf")}>
+                            <Document
+                                file="/pdfs/Venable Park Philosophy and Method.pdf"
+                                renderMode="canvas"
+                            >
+                                <Page pageNumber={1} width={300} />
+                            </Document>
+                        </button>
                     </ABOUTPDFWRAPPER>
                 </ABOUTCONTENTWRAPPER>
             </ABOUTPAGEWRAPPER>

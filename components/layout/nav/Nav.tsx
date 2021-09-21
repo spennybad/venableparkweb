@@ -60,7 +60,7 @@ const Nav: React.FC<Props> = () => {
             { 
                 // Removes "Visit the Blog" button on viewports with less the 600 px of width.
                 width > NavSwitchingPoint ?
-                    <BLOGBUTTON href={"https://jugglingdynamite.com/"}>Danielle's Blog</BLOGBUTTON> :
+                    <BLOGBUTTON href={"https://jugglingdynamite.com/"}>Danielle&apos;s Blog</BLOGBUTTON> :
                     null
             }
         </NAV>

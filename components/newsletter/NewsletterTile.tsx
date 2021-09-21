@@ -1,6 +1,5 @@
 // UTILS
 import styled, { css } from "styled-components";
-import React, { useState, useEffect } from "react";
 
 // PDF SPECIFIC IMPORTS
 import { Document, Page } from "react-pdf";
@@ -11,8 +10,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 import { Newsletter } from "../../types/Newsletter";
 
 const NEWSLETTERTILE = styled.li<{ isMostRecent: boolean }>`
-    max-width: 300px;
-    max-height: 400px;
+    width: 300px;
+    height: 400px;
     overflow-y: hidden;
 
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
@@ -45,7 +44,7 @@ const NEWSLETTERTILE = styled.li<{ isMostRecent: boolean }>`
                 padding: 1rem;
                 margin: 1rem;
             }
-        `}
+    `}
 
     & button {
         appearance: none;
@@ -54,24 +53,13 @@ const NEWSLETTERTILE = styled.li<{ isMostRecent: boolean }>`
     }
 `;
 
-const NEWSLETTERTILETEMPLATE = styled.div`
-    width: 100%;
-    height: 100%;
-    min-width: 300px;
-    min-height: 400px;
-    position: absolute;
-    top: 0;
-    z-index: 100;
-    background-color: ${(props) => props.theme.colors.white};
-`;
-
 export interface Props {
     newsletter: Newsletter;
     isMostRecent: boolean;
     handleNewsletterLoad: () => void;
 }
 
-const NewsletterTile: React.FC<Props> = ({ newsletter, isMostRecent, handleNewsletterLoad }) => {
+const NewsletterTile: React.FC<Props> = ({ newsletter, isMostRecent, handleNewsletterLoad}) => {
 
     return (
         <NEWSLETTERTILE isMostRecent={isMostRecent}>
@@ -79,8 +67,6 @@ const NewsletterTile: React.FC<Props> = ({ newsletter, isMostRecent, handleNewsl
                 <Document
                     file={newsletter.file}
                     onLoadSuccess={() => handleNewsletterLoad()}
-                    loading={LoadingNewsletterTile}
-                    renderMode="canvas"
                 >
                     <Page pageNumber={1} width={300} />
                 </Document>
@@ -88,9 +74,5 @@ const NewsletterTile: React.FC<Props> = ({ newsletter, isMostRecent, handleNewsl
         </NEWSLETTERTILE>
     );
 };
-
-const LoadingNewsletterTile: React.ReactElement = (
-    <NEWSLETTERTILETEMPLATE></NEWSLETTERTILETEMPLATE>
-);
 
 export default NewsletterTile;

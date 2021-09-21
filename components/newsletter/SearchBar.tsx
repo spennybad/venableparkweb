@@ -13,22 +13,23 @@ const SEARCHBAR = styled.form`
     align-items: center;
     margin: 1rem;
     color: ${(props) => props.theme.colors.white};
-    gap: 3rem;
     padding-inline: 1rem;
     font-size: ${(props) => props.theme.fontSize.p};
 
     & fieldset {
         background-color: ${(props) => props.theme.colors.blackTrans50};
         display: flex;
+        place-items: center;
         gap: 1rem;
         border: none;
-        padding: 1rem;
+        height: 100%;
+        padding-inline: 2rem;
     }
 
     & button[type="submit"] {
         padding: 0.5rem;
-        height: max-content;
-        background-color: transparent;
+        height: 100%;
+        background-color: ${(props) => props.theme.colors.primary};
         border: 2px solid ${(props) => props.theme.colors.accent};
         appearance: none;
         color: ${(props) => props.theme.colors.white};
@@ -105,7 +106,7 @@ const SearchBar: React.FC<Props> = ({
 
     return (
         <SEARCHBAR onSubmit={(event) => handleSearchSubmit(event)}>
-            <fieldset>
+            {/* <fieldset>
                 <p>Sort By:</p>
                 <SORTBYRADIOBUTTON
                     type="radio"
@@ -124,10 +125,10 @@ const SearchBar: React.FC<Props> = ({
                     onChange={() => handleRadioChange("oldest")}
                 />
                 <label htmlFor="sort_by_oldest">Oldest</label>
-            </fieldset>
+            </fieldset> */}
             <fieldset>
                 <label htmlFor="year">Year:</label>
-                <YEARINPUT type="number" id="year" name="year" onChange={(event) => handleYearChange(Number(event.target.value))} />
+                <YEARINPUT type="number" id="year" name="year" onChange={(event) => handleYearChange(Number(event.target.value))} defaultValue={2021} />
             </fieldset>
             <button type="submit">Search</button>
         </SEARCHBAR>
