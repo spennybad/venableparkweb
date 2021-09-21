@@ -6,4 +6,4 @@
     - Change styling of contact form. 
 5. Add notice about delayed release of newsletters.
 6. Add twitter icons/links for both twitters.
-7. Host all static images on CloudFlare.  
+7. Host all static images on Cloudinary.  
