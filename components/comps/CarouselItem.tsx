@@ -9,6 +9,7 @@ const CAROUSELITEM = styled.div`
     width: 100%;
     height: 100%;
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
+    background-color: ${(props) => props.theme.colors.white};
 
     padding: clamp(3rem, 10%, 8rem);
 

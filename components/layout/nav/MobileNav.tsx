@@ -35,11 +35,13 @@ const NAVTOGGLEBUTTON = styled(BUTTON)<{ isNavPanel: boolean }>`
 
 const NAVPANEL = styled.div<{ isNavPanel: boolean }>`
     position: fixed;
+    inset: 0 0;
     height: 100%;
     width: 100%;
     background-color: ${(props) => props.theme.colors.blackTrans75};
     display: grid;
-    place-items: center;
+    align-items: center;
+    justify-items: center;
     z-index: inherit;
 
     ${({ isNavPanel }) =>
@@ -57,7 +59,8 @@ const UL = styled.ul`
     list-style: none;
     display: grid;
     gap: 5rem;
-    justify-items: left;
+    width: max-content;
+    justify-items: center;
 `;
 
 function handleNavButtonClick(
@@ -95,6 +98,12 @@ const MobileNav: React.FC<Props> = ({ NavItems }) => {
                             />
                         );
                     })}
+                    <NavButton
+                        key={"blog-button"}
+                        navItem={"Visit Danielle's Blog"}
+                        buttonType="mobile"
+                        handleCloseNavPanel={setIsNavPanel}
+                    />
                 </UL>
             </NAVPANEL>
         </>

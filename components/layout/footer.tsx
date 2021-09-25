@@ -17,6 +17,8 @@ const FOOTER = styled.footer`
 
     font-size: ${(props) => props.theme.fontSize.p};
 
+    box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
+
     ${media.width_750`
         grid-template-rows: auto 1fr 1fr;
         grid-template-columns: auto;
@@ -49,6 +51,10 @@ const MAILINGADDRESS = styled.address`
 const LOGOWRAPPER = styled.div`
     position: relative;
     width: 15rem;
+
+    ${media.width_700`
+        width: 13rem;
+    `}
 `
 
 const CONTACTNUMBERS = styled.div`

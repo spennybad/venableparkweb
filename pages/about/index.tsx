@@ -1,8 +1,8 @@
 // UTILS
-import React, { Fragment } from "react";
-import { client } from "../../api/sanity";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import media from "../../utils/MediaQueries"
+import useWindowDimensions from "../../hooks/WindowDimensions";
 
 // PDF SPECIFIC IMPORTS
 import { Document, Page } from "react-pdf";
@@ -28,9 +28,9 @@ const ABOUTCONTENTWRAPPER = styled.div`
     grid-template-columns: 1fr auto 1fr;
     gap: 3rem;
 
-    ${media.width_700`
+    ${media.width_900`
         grid-template-columns: 100%;
-        grid-template-rows: repeat(3, auto);
+        grid-template-rows: 1fr auto auto;
 
         & > * {
             margin: 3rem;
@@ -50,7 +50,7 @@ const DIVIDER = styled.div`
     background-color: ${(props) => props.theme.colors.blackTrans50};
     place-self: center;
 
-    ${media.width_700`
+    ${media.width_900`
         height: 1px;
         width: 80%;
         margin-block: 3rem;
@@ -68,11 +68,30 @@ const ABOUTPDFWRAPPER = styled.div`
     }
 `
 
+const getPDFWidth = (w: number): number => {
+    console.log(w);
+    if (w > 1200) {
+        return 400;
+    } else if (w < 1200 && w >= 500) {
+        return 300;
+    } else {
+        return 200;
+    }
+}
+
 export interface Props {
 
 }
 
 const Home: React.FC<Props> = () => {
+
+    const { width } = useWindowDimensions();
+    const [pdfWidth, setPdfWidth] = useState<number>(getPDFWidth(width));
+
+    useEffect(() => {
+        setPdfWidth(getPDFWidth(width));
+    }, [width])
+
     return (
         <DefaultLayout>
             <ABOUTPAGEWRAPPER>
@@ -89,7 +108,7 @@ const Home: React.FC<Props> = () => {
                                 file="/pdfs/Venable Park Philosophy and Method.pdf"
                                 renderMode="canvas"
                             >
-                                <Page pageNumber={1} width={300} />
+                                <Page pageNumber={1} width={ pdfWidth } />
                             </Document>
                         </button>
                     </ABOUTPDFWRAPPER>

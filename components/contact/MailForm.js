@@ -70,7 +70,7 @@ const Button = styled.button`
         transform: scale(1.1);
         background-color: ${(props) => props.theme.colors.green};
         color: ${(props) => props.theme.colors.black};
-        box-shadow: ${(props) => props.theme.boxShadow.boxShadowHeavy};
+        box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
 
         & span{
             display: inline-block;

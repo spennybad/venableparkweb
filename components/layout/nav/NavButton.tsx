@@ -10,7 +10,7 @@ const NAVBUTTON = styled.a <{ buttonType: string }>`
         (buttonType == "mobile" &&
             css`
                 margin-left: 1rem; // Temp
-                font-size: ${(props) => props.theme.fontSize.h1};
+                font-size: ${(props) => props.theme.fontSize.h3};
                 background-color: ${(props) => props.theme.colors.white};
                 padding: 1.5rem;
                 color: ${(props) => props.theme.colors.primary};

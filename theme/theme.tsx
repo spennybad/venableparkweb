@@ -9,13 +9,14 @@ const theme = {
         // Transparent Colors
         whiteTrans75: "hsla(0, 0%, 100%, .75)",
         blackTrans75: "hsla(0, 0%, 0%, .75)",
-        blackTrans50: "hsla(0, 0%, 0%, .50)"
+        blackTrans50: "hsla(0, 0%, 0%, .50)",
+        blackTrans25: "hsla(0, 0%, 0%, .25)"
 
     },
     
     fontSize: {
-        // Default
-        h1: "clamp(3rem, 4vw, 4.8rem)",
+        // Defaults
+        h1: "clamp(2.3rem, 4vw, 4.8rem)",
         h2: "clamp(2.3rem, 3vw, 4rem)",
         h3: "clamp(1.8rem, 2.5vw, 3.1rem)",
         h4: "clamp(1.6rem, 2.2vw, 2.5rem)",
@@ -23,8 +24,8 @@ const theme = {
     },
 
     boxShadow: {
-        boxShadowDefault: ".2rem .2rem 1rem .1rem rgba(0,0,0,0.50);",
-        boxShadowLight: ".2rem .2rem .5rem .1rem rgba(0,0,0,0.25);"
+        boxShadowDefault: ".1rem .1rem .5rem .1rem rgba(0,0,0,0.40);",
+        boxShadowLight: ".1rem .1rem .5rem .1rem rgba(0,0,0,0.25);"
     }
 }
 

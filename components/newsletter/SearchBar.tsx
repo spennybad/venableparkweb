@@ -1,6 +1,7 @@
 // UTILS
 import React, { Fragment } from "react";
 import styled from "styled-components";
+import media from "../../utils/MediaQueries";
 
 // TYPES
 import { SearchFilters } from "../../types/SearchFilters";
@@ -10,11 +11,15 @@ const SEARCHBAR = styled.form`
     width: max-content;
     display: flex;
     align-self: center;
-    align-items: center;
     margin: 1rem;
     color: ${(props) => props.theme.colors.white};
     padding-inline: 1rem;
     font-size: ${(props) => props.theme.fontSize.p};
+
+    ${media.width_400`
+        justify-content: center;
+        justify-self: center;
+    `}
 
     & fieldset {
         background-color: ${(props) => props.theme.colors.blackTrans50};

@@ -1,5 +1,6 @@
 // UTILS
 import styled from "styled-components";
+import Image from "next/image";
 
 // COMPONENTS
 import { H2 } from "../../styles/typography";
@@ -11,12 +12,34 @@ import { CONTENTWRAPPER } from "../../styles/contentWrapper";
 import { Testimonial } from "../../types/Testimonial";
 
 const TESTIMONIALSWRAPPER = styled.div`
-    margin-block: 10%;
     display: grid;
-    gap: 5rem;
+    gap: 2.5rem;
+    background-color: ${(props) => props.theme.colors.accent};
+    box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
+    padding-block: 5%;
+    position: relative;
 `;
 
+const STYLEDIMAGE = styled(Image)`
+    object-fit: cover;
+    position: absolute;
+    box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
+`;
+
+const BACKGROUNDIMAGEWARPPER = styled.div`
+        &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: ${(props) => props.theme.colors.blackTrans50};
+    }
+`
+
 const TESTIMONIALH2 = styled(H2)`
+    z-index: 1;
+    color: ${(props) => props.theme.colors.white};
     margin-left: 10%;
 `
 
@@ -27,6 +50,13 @@ export interface Props {
 const Testimonials: React.FC<Props> = ({ testimonials }) => {
     return (
         <TESTIMONIALSWRAPPER>
+            <BACKGROUNDIMAGEWARPPER>
+                <STYLEDIMAGE
+                    src="/images/2k-rotated-sean.webp"
+                    sizes="100%"
+                    layout="fill"
+                />
+            </BACKGROUNDIMAGEWARPPER>
             <TESTIMONIALH2>Testimonials</TESTIMONIALH2>
             <CarouselWrapper data={testimonials} />
         </TESTIMONIALSWRAPPER>

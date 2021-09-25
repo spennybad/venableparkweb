@@ -10,8 +10,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 import { Newsletter } from "../../types/Newsletter";
 
 const NEWSLETTERTILE = styled.li<{ isMostRecent: boolean }>`
-    width: 300px;
-    height: 400px;
+    width: 250px;
+    height: 350px;
     overflow-y: hidden;
 
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
@@ -68,7 +68,7 @@ const NewsletterTile: React.FC<Props> = ({ newsletter, isMostRecent, handleNewsl
                     file={newsletter.file}
                     onLoadSuccess={() => handleNewsletterLoad()}
                 >
-                    <Page pageNumber={1} width={300} />
+                    <Page pageNumber={1} width={250} />
                 </Document>
             </button>
         </NEWSLETTERTILE>

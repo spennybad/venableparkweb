@@ -23,7 +23,6 @@ const PLACEHOLDER = styled.div`
     background-color: orangered;
 `;
 
-
 export interface Props {
     employeeData: Employee,
     dimension: string
@@ -37,7 +36,7 @@ const HeadshotWrapper: React.FC<Props> = ({ employeeData, dimension }) => {
                     src={employeeData.photo}
                     alt={employeeData.name}
                     layout="fill"
-                    objectFit="contain"
+                    objectFit="cover"
                 />
             ) : (
                 <PLACEHOLDER />

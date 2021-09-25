@@ -19,6 +19,12 @@ const CONTACTCONTENT = styled.div`
     display: grid;
     grid-template-columns: 1fr auto 1fr;
 
+    & > :last-child {
+        ${media.width_900`
+            display: none;
+        `}
+    }
+
     ${media.width_900`
         grid-template-columns: 100%;
         grid-template-rows: 80vh auto 1fr;
@@ -31,7 +37,7 @@ const DIVIDER = styled.div`
     background-color: ${(props) => props.theme.colors.blackTrans50};
     justify-self: center;
 
-    ${media.width_700`
+    ${media.width_900`
         display: none;
     `}
 `

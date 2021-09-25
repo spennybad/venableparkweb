@@ -8,7 +8,6 @@ import GoogleMapReact from 'google-map-react';
 const MAPWRAPPER = styled.div`
     height: 80%;
     width: 80%;
-    background-color: orangered;
     place-self: center;
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
 
@@ -24,7 +23,7 @@ const MARKER = styled.div`
 
         border-radius: 100%;
 
-        background-color: orangered;
+        background-color: ${(props) => props.theme.colors.primary};
         
         transform: translate(-50%, -50%);
         transform-origin: bottom;
@@ -35,7 +34,7 @@ const MARKER = styled.div`
             height: 1.5rem;
             width: 1.5rem;
 
-            background-color: orangered;
+            background-color: ${(props) => props.theme.colors.primary};
             transform: translate(-50%, 75%) rotate(-45deg);
             position: absolute;
 
@@ -62,7 +61,7 @@ const Map = () => {
             lng: -79.689921
         },
         zoom: 15
-    };
+    }; 
 
     return (
         <MAPWRAPPER>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import useWindowDimensions from "../../../hooks/WindowDimensions";
+import media from "../../../utils/MediaQueries";
 
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
@@ -18,26 +19,33 @@ const NAV = styled.nav`
 
     z-index: 1000;
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
+    align-items: center;
+    padding-inline: 1rem;
 `;
 
 const LOGOWRAPPER = styled.div`
     position: relative;
     width: 15rem;
-    height: auto;
+    height: 5rem;
     margin: .3rem;
+
+    ${media.width_700`
+        width: 10rem;
+    `}
 `;
 
 const BLOGBUTTON = styled.a`
-    background-color: ${(props) => props.theme.colors.white};
-    color: ${(props) => props.theme.colors.primary};
     white-space: nowrap;
-    padding: 1rem 2rem;
-    border-left: 1px solid ${(props) => props.theme.colors.blackTrans75};
     font-size: ${(props) => props.theme.fontSize.p};
     text-decoration: none;
+    height: 100%;
+    padding-inline: 2rem;
+    border-left: solid 2px ${(props) => props.theme.colors.blackTrans50};
 `;
 
-type Props = {};
+type Props = {
+
+};
 
 // CHANGE NEWSLETTER TO LETTER ARCHIEVE
 const NavItems: string[] = ["home", "about", "fees", "team", "letter archieve", "contact"];
@@ -56,7 +64,7 @@ const Nav: React.FC<Props> = () => {
                     <MobileNav NavItems={NavItems}/> :
                     <DesktopNav NavItems={NavItems}/>
             }
-                 
+            
             { 
                 // Removes "Visit the Blog" button on viewports with less the 600 px of width.
                 width > NavSwitchingPoint ?

@@ -42,7 +42,6 @@ export interface Props {
 }
 
 const Home: React.FC<Props> = ({ testimonials }) => {
-    console.log(testimonials);
     return (
         <>
             <Hero />
