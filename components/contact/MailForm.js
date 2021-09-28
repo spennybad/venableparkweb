@@ -51,12 +51,18 @@ const StyledLabel = styled.label`
 
 const FormInput = styled.input`
     padding: 1rem;
+    
+    -webkit-appearance: none;
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
+    -webkit-box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
+    
 `
 
 const TextArea = styled.textarea`
     resize: none;
+    -webkit-appearance: none;
     box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
+    -webkit-box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
 `
 
 const Button = styled.button`
