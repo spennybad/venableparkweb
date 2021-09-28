@@ -74,8 +74,6 @@ const LOADINGNEWSLETTERLIST = styled.div`
     flex-wrap: wrap;
     position: absolute;
     top: 0;
-    height: 100%;
-    width: 100%;
     z-index: 2;
     gap: 4rem;
     justify-content: center;
