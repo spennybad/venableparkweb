@@ -4,7 +4,7 @@ import { useState } from "react";
 import NavButton from "./NavButton";
 import { BUTTON } from "../../../styles/button";
 
-const NAVTOGGLEBUTTON = styled(BUTTON)<{ isNavPanel: boolean }>`
+const NAVTOGGLEBUTTON = styled(BUTTON) <{ isNavPanel: boolean }>`
     height: 4rem;
     width: 4rem;
     margin-left: auto;
@@ -63,6 +63,22 @@ const UL = styled.ul`
     border-left: solid 3px ${(props) => props.theme.colors.primary};
 `;
 
+const BLOGBUTTON = styled.a`
+    margin-top: -1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-left: 1rem; // Temp
+    font-size: ${(props) => props.theme.fontSize.h3};
+    background-color: ${(props) => props.theme.colors.white};
+    padding: 1.5rem;
+    color: ${(props) => props.theme.colors.primary};
+    width: max-content;
+    transition: transform .2s;
+    & :hover {
+        transform: translateX(1rem);
+    }
+`
+
 function handleNavButtonClick(
     setIsNavPanel: (value: boolean) => void,
     isNavPanel: boolean
@@ -98,12 +114,11 @@ const MobileNav: React.FC<Props> = ({ NavItems }) => {
                             />
                         );
                     })}
-                    <NavButton
-                        key={"blog-button"}
-                        navItem={"Visit Danielle's Blog"}
-                        buttonType="mobile"
-                        handleCloseNavPanel={setIsNavPanel}
-                    />
+                    <BLOGBUTTON
+                        href={"https://jugglingdynamite.com/"}
+                    >
+                        Danielle&apos;s Blog
+                    </BLOGBUTTON>
                 </UL>
             </NAVPANEL>
         </>
