@@ -86,8 +86,6 @@ const Team: React.FC<TeamProps> = ({ employeesData }) => {
         setCurrentModal(employee);
     };
 
-    console.log(employeesData);
-
     return (
         <>
             {currentModal != null && (

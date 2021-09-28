@@ -69,7 +69,6 @@ const ABOUTPDFWRAPPER = styled.div`
 `
 
 const getPDFWidth = (w: number): number => {
-    console.log(w);
     if (w > 1200) {
         return 400;
     } else if (w < 1200 && w >= 500) {

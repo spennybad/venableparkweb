@@ -53,7 +53,7 @@ const Hero: React.FC<HeroProps> = () => {
     return (
         <HeroWrapper>
             <StyledImage
-                src="/images/2k-rotated-sean.webp"
+                src={"https://res.cloudinary.com/spencercv7-dev/image/upload/v1632858041/VenablePark/2k-rotated-sean_zlsg8z.webp"}
                 alt="Crashing waves on a shore."
                 sizes="100%"
                 layout="fill"

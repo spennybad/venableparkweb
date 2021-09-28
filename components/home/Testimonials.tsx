@@ -5,7 +5,6 @@ import Image from "next/image";
 // COMPONENTS
 import { H2 } from "../../styles/typography";
 import CarouselWrapper from "../comps/CarouselWrapper";
-import { CONTENTWRAPPER } from "../../styles/contentWrapper";
 
 
 // TYPES
@@ -52,7 +51,7 @@ const Testimonials: React.FC<Props> = ({ testimonials }) => {
         <TESTIMONIALSWRAPPER>
             <BACKGROUNDIMAGEWARPPER>
                 <STYLEDIMAGE
-                    src="/images/2k-rotated-sean.webp"
+                    src={"https://res.cloudinary.com/spencercv7-dev/image/upload/v1632858041/VenablePark/2k-rotated-sean_zlsg8z.webp"}
                     sizes="100%"
                     layout="fill"
                 />
