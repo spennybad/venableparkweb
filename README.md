@@ -1,7 +1,6 @@
 ## TODO:
-7. Add month tag to all newsletters.
-11. Complete Contact Page.
-    - Add Google Maps direction to office.
-    - Change styling of contact form. 
-14. Add notice about delayed release of newsletters.
-16. Add twitter icons/links for both twitters.  
+1. Add month tag to all newsletters.
+2. Add notice about delayed release of newsletters.
+3. Fix mobile and desktop nav to have same button source.
+4. Componenterize the divider that is used on all pages.
+5. Fix breakpoints on tablet devices.

@@ -97,7 +97,7 @@ const Team: React.FC<TeamProps> = ({ employeesData }) => {
             <DefaultLayout>
                 <TEAMWRAPPER>
                     <div>
-                        <H2>Our Principles:</H2>
+                        <H2>Our Principals:</H2>
                         <TEAMLIST>
                             {principles.map((employeeData) => (
                                 <TeamTile
