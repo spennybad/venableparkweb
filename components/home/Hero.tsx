@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import media from "../../utils/MediaQueries"
 import { H1 } from "../../styles/typography";
+import Socials from "../comps/Socials";
 
 const HeroWrapper = styled.div`
     height: 100vh;
@@ -57,6 +58,7 @@ const Hero: React.FC<HeroProps> = () => {
                 sizes="100%"
                 layout="fill"
             />
+            <Socials />
             <HomeH1><span>Venable Park Investment</span><span>Counsel Inc.</span></HomeH1>
         </HeroWrapper>
     );

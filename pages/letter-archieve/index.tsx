@@ -252,8 +252,8 @@ const breathAnimation = keyframes`
 `
 
 const NEWSLETTERTILETEMPLATE = styled.div`
-    height: 400px;
-    width: 300px;
+    height: 350px;
+    width: 250px;
     background-color: ${(props) => props.theme.colors.white};
     animation: ${breathAnimation} 2s infinite;
 `

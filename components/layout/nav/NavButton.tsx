@@ -15,6 +15,7 @@ const NAVBUTTON = styled.a <{ buttonType: string }>`
                 padding: 1.5rem;
                 color: ${(props) => props.theme.colors.primary};
                 transition: all 0.2s;
+                width: 100%;
 
                 &:hover {
                     transform: translateX(1rem);

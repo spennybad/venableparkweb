@@ -40,8 +40,7 @@ const NAVPANEL = styled.div<{ isNavPanel: boolean }>`
     width: 100%;
     background-color: ${(props) => props.theme.colors.blackTrans75};
     display: grid;
-    align-items: center;
-    justify-items: center;
+    place-items: center;
     z-index: inherit;
 
     ${({ isNavPanel }) =>

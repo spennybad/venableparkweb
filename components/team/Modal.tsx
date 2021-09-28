@@ -108,7 +108,7 @@ const Modal: React.FC<Props> = ({ handleTileClick, currentModal }) => {
                     <EMAIL href={"mailto:" + currentModal.email}>
                         <Image 
                             src="/images/svgs/mail.svg"
-                            alt="temp"
+                            alt="Mail"
                             height="30"
                             width="30"
                         />
