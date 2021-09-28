@@ -2,6 +2,13 @@ import styled, { css } from "styled-components";
 import { BUTTON } from "../../../styles/button.js";
 import Link from "next/link";
 
+const LI = styled.li`
+    transition: transform .2s;
+    & :hover {
+        transform: translateX(1rem);
+    }
+`
+
 const NAVBUTTON = styled.a <{ buttonType: string }>`
     text-transform: UPPERCASE;
     text-decoration: none;
@@ -53,11 +60,11 @@ function getRoute(route: string): string {
 
 const NavButton: React.FC<Props> = ({ navItem, buttonType, handleCloseNavPanel }) => {
     return (
-        <li>
+        <LI>
             <Link href={getRoute(navItem)} passHref>
                 <NAVBUTTON buttonType={buttonType} onClick={() => handleCloseNavPanel(false)}>{navItem}</NAVBUTTON>
             </Link>
-        </li>
+        </LI>
     );
 };
 

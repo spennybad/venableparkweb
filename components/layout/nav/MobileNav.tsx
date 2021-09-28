@@ -59,7 +59,8 @@ const UL = styled.ul`
     display: grid;
     gap: 5rem;
     width: max-content;
-    justify-items: center;
+    justify-items: left;
+    border-left: solid 3px ${(props) => props.theme.colors.primary};
 `;
 
 function handleNavButtonClick(
