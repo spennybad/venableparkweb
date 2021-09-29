@@ -37,7 +37,7 @@ const Socials: React.FC<Props> = () => {
     return (
         <SOCIALS>
             <li>
-                <a href={"https://twitter.com/kdaniellepark"}>
+                <a href={"https://twitter.com/kdaniellepark"} target="_blank" rel="noreferrer">
                     <Image
                         src={"/images/svgs/twitter-with-circle.svg"}
                         alt="Twitter Logo"
@@ -50,7 +50,7 @@ const Socials: React.FC<Props> = () => {
                 </a>
             </li>
             <li>
-                <a href={"https://twitter.com/CoryLVenable"}>
+                <a href={"https://twitter.com/CoryLVenable"} target="_blank" rel="noreferrer">
                     <Image
                         src={"/images/svgs/twitter-with-circle.svg"}
                         alt="Twitter Logo"

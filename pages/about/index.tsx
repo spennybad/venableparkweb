@@ -87,6 +87,8 @@ const Home: React.FC<Props> = () => {
     const { width } = useWindowDimensions();
     const [pdfWidth, setPdfWidth] = useState<number>(getPDFWidth(width));
 
+    const PDFDir = "/pdfs/Venable_Park_Philosophy_and_Method_2021_09_29.pdf"
+
     useEffect(() => {
         setPdfWidth(getPDFWidth(width));
     }, [width])
@@ -102,9 +104,9 @@ const Home: React.FC<Props> = () => {
                     </ABOUTTEXT>
                     <DIVIDER />
                     <ABOUTPDFWRAPPER>
-                        <button onClick={() => window.open("/pdfs/Venable Park Philosophy and Method.pdf")}>
+                        <button onClick={() => window.open(PDFDir)}>
                             <Document
-                                file="/pdfs/Venable Park Philosophy and Method.pdf"
+                                file={PDFDir}
                                 renderMode="canvas"
                             >
                                 <Page pageNumber={1} width={ pdfWidth } />

@@ -116,6 +116,8 @@ const MobileNav: React.FC<Props> = ({ NavItems }) => {
                     })}
                     <BLOGBUTTON
                         href={"https://jugglingdynamite.com/"}
+                        target="_blank"
+                        rel="noreferrer"
                     >
                         Danielle&apos;s Blog
                     </BLOGBUTTON>
