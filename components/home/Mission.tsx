@@ -37,9 +37,17 @@ const Mission: React.FC<Props> = () => {
             <MISSIONCONTENT>
                 <H2>Our Mission</H2>
                 <p>
-                    At Venable Park, we have developed a disciplined, unbiased set of rules regarding adding, removing, or leaving capital invested in a particular asset class or market. We have created these rules to reduce the persuasion and noise of subjective factors such as opinion, groupthink, fear, and greed.  Our primary focus is on minimizing volatility and the risk of loss.  We have learned that if we can do this well, capital has the best odds of serving the needs and goals of its owners.
-                    <br />
-                    Our service includes a full financial review and retirement projection, updated as needed to reflect changing needs and life circumstances.
+                    It is our experience that in order to render truly unbiased,
+                    client focused advice, your advisor needs to be a fiduciary.
+                    They should be paid one all inclusive annual fee, which is
+                    visible and fair. They should not be the recipient of
+                    commissions or any other indirect financial incentives. They
+                    should not be accountable to &quot;sales targets&quot;, they should
+                    not be selling you any particular &quot;products&quot;. They must work
+                    exclusively under the agenda of the individual client whose
+                    trust they have been granted. They must be accountable to
+                    their clients alone. Your advisor must be independent,
+                    trustworthy and held to the highest ethical standards.
                 </p>
             </MISSIONCONTENT>
         </MISSIONWRAPPER>

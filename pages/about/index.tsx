@@ -26,7 +26,6 @@ const ABOUTPAGEWRAPPER = styled.div`
 const ABOUTCONTENTWRAPPER = styled.div`
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    gap: 3rem;
 
     ${media.width_900`
         grid-template-columns: 100%;
@@ -42,6 +41,7 @@ const ABOUTTEXT = styled.p`
     font-size: ${(props) => props.theme.fontSize.p};
     place-self: center;
     width: 80%;
+    align-self: center;
 `
 
 const DIVIDER = styled.div`
@@ -99,8 +99,10 @@ const Home: React.FC<Props> = () => {
                 <H1>About</H1>
                 <ABOUTCONTENTWRAPPER>
                     <ABOUTTEXT>
-                        At Venable Park, we have developed a disciplined, unbiased set of rules regarding adding, removing or leaving capital invested in a particular asset class or market.
-                        We have created these rules to reduce the persuasion and noise of subjective market factors such as individual opinion, fear and greed.  We have learned that if we focus on controlling the downside, the upside will take care of itself.  We seek to capture the bulk of up-cycle gains while avoiding the majority of down-cycle losses.
+                        At Venable Park, we have developed a disciplined, unbiased set of rules regarding adding, removing, or leaving capital invested in a particular asset class or market. We have created these rules to reduce the persuasion and noise of subjective factors such as opinion, groupthink, fear, and greed.  Our primary focus is on minimizing volatility and the risk of loss.  We have learned that if we can do this well, capital has the best odds of serving the needs and goals of its owners.
+                        <br />
+                        <br />
+                        Our service includes a full financial review and retirement projection, updated as needed to reflect changing needs and life circumstances.
                     </ABOUTTEXT>
                     <DIVIDER />
                     <ABOUTPDFWRAPPER>
