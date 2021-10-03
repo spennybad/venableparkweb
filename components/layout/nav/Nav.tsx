@@ -48,7 +48,7 @@ type Props = {
 };
 
 // CHANGE NEWSLETTER TO LETTER ARCHIEVE
-const NavItems: string[] = ["home", "about", "fees", "team", "letter archieve", "contact"];
+const NavItems: string[] = ["home", "about", "fees", "team", "letter archive", "contact"];
 const NavSwitchingPoint: number = 1050;
 
 const Nav: React.FC<Props> = () => {
