@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
             <CONTACTNUMBERS>
                 <p>Telephone: <a href="tel:(705) 792-3991">(705) 792-3991</a></p>
                 <p>Toll Free: <a href="tel:(866) 792-3991">(866) 792-3991</a></p>
-                <p>Fax: <a href="fax:(705) 792-3992">(866) 792-3991</a></p>
+                <p>Fax: <a href="fax:(705) 792-3992">(866) 792-3992</a></p>
             </CONTACTNUMBERS>
         </FOOTER>
     );
