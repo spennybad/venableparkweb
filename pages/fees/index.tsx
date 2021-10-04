@@ -56,29 +56,24 @@ const FEETEXT = styled.ul`
 const TABLE = styled.table`
     width: 80%;
     height: 80%;
-    
-    & > tr th {
-        text-align: start;
-        text-decoration: underline;
-        font-size: ${(props) => props.theme.fontSize.p};
-        white-space: nowrap;
-    }
 
-    & > tr td {
+    & thead + tbody > tr > * {
         padding: 1rem;
     }
-
-    & > tr > :last-child {
-        text-align: center;
-
-        &:not(th){
-            color: ${(props) => props.theme.colors.primary};
+    
+    & thead tr th {
+        & :first-child {
+                text-align: start;
         }
     }
 
-    & > :last-child > td {
-        font-size: calc(${(props) => props.theme.fontSize.p} - .25rem);
-        text-align: start;
+    & tbody > tr td :last-child {
+            text-align: center;
+            color: ${(props) => props.theme.colors.primary};
+    }
+
+    & tbody tr :last-child {
+        font-size: calc(${(props) => props.theme.fontSize.p} - .2rem);
     }
 
 `
@@ -110,29 +105,33 @@ const Home: React.FC<Props> = () => {
                 <H1>Fees For Our Service</H1>
                 <FEESCONTENT>
                     <TABLE>
-                        <tr>
-                            <th>Asset Size</th>
-                            <th>Anual Fee</th>
-                        </tr>
-                        <tr>
-                            <td>10 Million +</td>
-                            <td>0.50%</td>
-                        </tr>
-                        <tr>
-                            <td>5 Million - 9,999,999</td>
-                            <td>0.65%</td>
-                        </tr>
-                        <tr>
-                            <td>2 Million - 4,999,999</td>
-                            <td>0.75%</td>
-                        </tr>
-                        <tr>
-                            <td>1 Million</td>
-                            <td>1%</td>
-                        </tr>
-                        <tr>
-                            <td colSpan={2}>**Minimum Asset Size $1,000,000</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Asset Size</th>
+                                <th>Anual Fee</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10 Million +</td>
+                                <td>0.50%</td>
+                            </tr>
+                            <tr>
+                                <td>5 Million - 9,999,999</td>
+                                <td>0.65%</td>
+                            </tr>
+                            <tr>
+                                <td>2 Million - 4,999,999</td>
+                                <td>0.75%</td>
+                            </tr>
+                            <tr>
+                                <td>1 Million</td>
+                                <td>1%</td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2}>**Minimum Asset Size $1,000,000</td>
+                            </tr>
+                        </tbody>
                     </TABLE>
                     <DIVIDER />
                     <FEETEXT>

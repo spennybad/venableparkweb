@@ -1,7 +1,7 @@
 // UTILS
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import media from "../../utils/MediaQueries"
+import media from "../../utils/MediaQueries";
 import useWindowDimensions from "../../hooks/WindowDimensions";
 
 // PDF SPECIFIC IMPORTS
@@ -11,7 +11,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 // COMPS
 import DefaultLayout from "../../components/layout/DefaultLayout";
-import { H1 } from "../../styles/typography";
+import { H1, H2 } from "../../styles/typography";
+import LineBreak from "../../components/comps/LineBreak";
 
 // TYPES
 
@@ -24,37 +25,48 @@ const ABOUTPAGEWRAPPER = styled.div`
 `
 
 const ABOUTCONTENTWRAPPER = styled.div`
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
+    flex-flow: column;
+    gap: 8rem;
 
-    ${media.width_900`
-        grid-template-columns: 100%;
-        grid-template-rows: 1fr auto auto;
-
-        & > * {
-            margin: 3rem;
+    @media (max-width: 700px) {
+        & > :nth-child(3) > :first-child{
+            order: 1;
         }
-    `}
+    }
+
 `
 
-const ABOUTTEXT = styled.p`
+const ABOUTH2 = styled(H2)`
+    color: ${(props) => props.theme.colors.accent};
+`
+
+const ABOUTTILE = styled.div<{order: number}>`
+    display: grid;
+    gap: 5vw;
+    grid-template-columns: ${props => props.order == 1 ? "1fr auto" : "auto 1fr"};
+    justify-content: right;
+    align-items: center;    
+    max-width: 130rem;
+    place-self: center;
+
+    @media (max-width: 700px) {
+        grid-template-rows: ${props => props.order == 1 ? "1fr auto" : "auto 1fr"};
+        grid-template-columns: 100%;
+    }
+
+`
+
+const ABOUTTILETEXT = styled.div`
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
     font-size: ${(props) => props.theme.fontSize.p};
-    place-self: center;
-    width: 80%;
-    align-self: center;
-`
 
-const DIVIDER = styled.div`
-    height: 100%;
-    width: 1px;
-    background-color: ${(props) => props.theme.colors.blackTrans50};
-    place-self: center;
+    & div p {
+        place-self: center;
+    }
 
-    ${media.width_900`
-        height: 1px;
-        width: 80%;
-        margin-block: 3rem;
-    `}
 `
 
 const ABOUTPDFWRAPPER = styled.div`
@@ -70,9 +82,7 @@ const ABOUTPDFWRAPPER = styled.div`
 
 const getPDFWidth = (w: number): number => {
     if (w > 1200) {
-        return 400;
-    } else if (w < 1200 && w >= 500) {
-        return 300;
+        return 250;
     } else {
         return 200;
     }
@@ -98,23 +108,46 @@ const Home: React.FC<Props> = () => {
             <ABOUTPAGEWRAPPER>
                 <H1>About</H1>
                 <ABOUTCONTENTWRAPPER>
-                    <ABOUTTEXT>
-                        At Venable Park, we have developed a disciplined, unbiased set of rules regarding adding, removing, or leaving capital invested in a particular asset class or market. We have created these rules to reduce the persuasion and noise of subjective factors such as opinion, groupthink, fear, and greed.  Our primary focus is on minimizing volatility and the risk of loss.  We have learned that if we can do this well, capital has the best odds of serving the needs and goals of its owners.
-                        <br />
-                        <br />
-                        Our service includes a full financial review and retirement projection, updated as needed to reflect changing needs and life circumstances.
-                    </ABOUTTEXT>
-                    <DIVIDER />
-                    <ABOUTPDFWRAPPER>
-                        <button onClick={() => window.open(PDFDir)}>
-                            <Document
-                                file={PDFDir}
-                                renderMode="canvas"
-                            >
-                                <Page pageNumber={1} width={ pdfWidth } />
-                            </Document>
-                        </button>
-                    </ABOUTPDFWRAPPER>
+                    <ABOUTTILE order={1}>
+                        <ABOUTTILETEXT>
+                            <ABOUTH2>Methods and Philosophy</ABOUTH2>
+                            <p>
+                                At Venable Park, we have developed a disciplined, unbiased set of rules regarding adding, removing, or leaving capital invested in a particular asset class or market. We have created these rules to reduce the persuasion and noise of subjective factors such as opinion, groupthink, fear, and greed.  Our primary focus is on minimizing volatility and the risk of loss.  We have learned that if we can do this well, capital has the best odds of serving the needs and goals of its owners.
+                                <br />
+                                <br />
+                                Our service includes a full financial review and retirement projection, updated as needed to reflect changing needs and life circumstances.
+                            </p>
+                        </ABOUTTILETEXT>
+                        <ABOUTPDFWRAPPER>
+                            <button onClick={() => window.open(PDFDir)}>
+                                <Document
+                                    file={PDFDir}
+                                    renderMode="canvas"
+                                >
+                                    <Page pageNumber={1} width={ pdfWidth } />
+                                </Document>
+                            </button>
+                        </ABOUTPDFWRAPPER>
+                    </ABOUTTILE>
+                    <LineBreak />
+                    <ABOUTTILE order={2}>
+                        <ABOUTPDFWRAPPER>
+                            <button onClick={() => window.open(PDFDir)}>
+                                <Document
+                                    file={PDFDir}
+                                    renderMode="canvas"
+                                >
+                                    <Page pageNumber={1} width={ pdfWidth } />
+                                </Document>
+                            </button>
+                        </ABOUTPDFWRAPPER>
+                        <ABOUTTILETEXT>
+                            <ABOUTH2>Results</ABOUTH2>
+                            <p>
+                                The cumulative compound returns of our Venable Park Absolute Return Strategy (net of fees) vs. both Long Always and Absolute Return Benchmarks (before fees) for a 60% fixed income, 40% equity, $1,000,000+ portfolio, is updated annually and charted here.
+                            </p>
+                        </ABOUTTILETEXT>
+                    </ABOUTTILE>
                 </ABOUTCONTENTWRAPPER>
             </ABOUTPAGEWRAPPER>
         </DefaultLayout>
