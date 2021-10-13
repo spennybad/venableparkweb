@@ -6,6 +6,8 @@ const DEFAULTLAYOUT = styled.div`
     display: grid;
     align-content: center;
     min-height: 100vh;
+    background-image: url("https://res.cloudinary.com/spencercv7-dev/image/upload/v1632858041/VenablePark/2k-rotated-sean_zlsg8z.webp");
+    background-repeat: repeat-y;
 `
 
 const CONTENTWRAPPER = styled.div`
@@ -24,12 +26,6 @@ const CONTENTWRAPPER = styled.div`
     `}
 `;
 
-const STYLEDIMAGE = styled(Image)`
-    object-fit: cover;
-    position: absolute;
-    box-shadow: ${(props) => props.theme.boxShadow.boxShadowDefault};
-`;
-
 export interface Props {
 
 }
@@ -37,11 +33,6 @@ export interface Props {
 const DefaultLayout: React.FC<Props> = ({ children }) => {
     return (
         <DEFAULTLAYOUT>
-            <STYLEDIMAGE
-                src={"https://res.cloudinary.com/spencercv7-dev/image/upload/v1632858041/VenablePark/2k-rotated-sean_zlsg8z.webp"}
-                sizes="100%"
-                layout="fill"
-            />
             <CONTENTWRAPPER>
                 { children }
             </CONTENTWRAPPER>

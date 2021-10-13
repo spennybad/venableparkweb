@@ -26,7 +26,7 @@ const STYLEDIMAGE = styled(Image)`
 `;
 
 const BACKGROUNDIMAGEWARPPER = styled.div`
-        &::after {
+    &::after {
         content: "";
         position: absolute;
         top: 0;

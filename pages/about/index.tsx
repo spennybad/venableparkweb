@@ -6,6 +6,7 @@ import media from "../../utils/MediaQueries";
 import DefaultLayout from "../../components/layout/DefaultLayout";
 import { H1, H2 } from "../../styles/typography";
 import LineBreak from "../../components/comps/LineBreak";
+import Image from "next/image";
 
 // TYPES
 
@@ -15,11 +16,13 @@ const ABOUTPAGEWRAPPER = styled.div`
 
     display: grid;
     grid-template-rows: auto 1fr;
+    margin-block: 5vw;
 `
 
 const ABOUTCONTENTWRAPPER = styled.div`
     display: flex;
     flex-flow: column;
+    width: 100%;
 
     & > * {
         margin-top: 6rem;
@@ -33,8 +36,8 @@ const ABOUTH2 = styled(H2)`
 const ABOUTTILE = styled.div`
     display: grid;
     gap: 5vw;
-    justify-content: right;
-    align-items: center;    
+
+    width: 100%;
     max-width: 130rem;
     place-self: center;
 `
@@ -67,6 +70,7 @@ const READMOREBUTTON = styled.a`
     justify-self: right;
     transition: all .2s;
     margin-top: -1.5rem;
+    margin-right: 5rem;
     text-decoration: none;
 
     &:hover {
@@ -75,7 +79,19 @@ const READMOREBUTTON = styled.a`
 
     ${media.width_600`
         justify-self: center;
+        margin-right: 0;
     `}
+`
+
+const EMOTIONALCHART = styled.div`
+    position: relative;
+    aspect-ratio: 16 / 9;
+    width: 70vw;
+    place-self: center;
+`
+
+const STYLEDIMAGE = styled(Image)`
+    position: absolute;
 `
 
 export interface Props {
@@ -119,8 +135,37 @@ const Home: React.FC<Props> = () => {
                                 >
                                     here
                                 </a>.
+                                <br />
+                                <br />
+                                Read about Absolute Return Benchmarks&nbsp;
+                                <a 
+                                    href={"/pdfs/A Word of Benchmarks.pdf"}
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                >
+                                    here
+                                </a>.
                             </p>
                         </ABOUTTILETEXT>
+                    </ABOUTTILE>
+                    <LineBreak />
+                    <ABOUTTILE>
+                        <ABOUTTILETEXT>
+                            <ABOUTH2>The Emotional Cycle</ABOUTH2>
+                        </ABOUTTILETEXT>
+                        <EMOTIONALCHART>
+                            <a 
+                                href={"/images/Investor-behaviour-chart.png"}
+                                target="_blank" 
+                                rel="noreferrer"
+                            >
+                                <STYLEDIMAGE
+                                    src={"/images/Investor-behaviour-chart.png"}
+                                    layout={"fill"}
+                                    alt="Investors Emotional Cycle Chart."
+                                />
+                            </a>
+                        </EMOTIONALCHART>
                     </ABOUTTILE>
                 </ABOUTCONTENTWRAPPER>
             </ABOUTPAGEWRAPPER>
