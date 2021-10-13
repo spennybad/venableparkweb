@@ -92,6 +92,8 @@ const EMOTIONALCHART = styled.div`
 
 const STYLEDIMAGE = styled(Image)`
     position: absolute;
+    top: 0;
+    right: 0;
 `
 
 export interface Props {
