@@ -155,8 +155,10 @@ const Home: React.FC<Props> = () => {
                             <EMOTIONALCHART>
                                 <Image
                                     src={"/images/Investor-behaviour-chart.png"}
-                                    layout={"fill"}
+                                    layout={"responsive"}
                                     alt="Investors Emotional Cycle Chart."
+                                    width={16}
+                                    height={9}
                                 />
                             </EMOTIONALCHART>
                         </a>
