@@ -87,10 +87,12 @@ const EMOTIONALCHART = styled.div`
     position: relative;
     aspect-ratio: 16 / 9;
     width: 70vw;
+    height: auto;
     place-self: center;
 `
 
 const STYLEDIMAGE = styled(Image)`
+    object-fit: cover;
     position: absolute;
     top: 0;
     right: 0;
