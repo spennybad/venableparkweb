@@ -146,7 +146,7 @@ const Home: React.FC<Props> = () => {
                     <LineBreak />
                     <ABOUTTILE>
                         <ABOUTTILETEXT>
-                            <ABOUTH2>The Investor's Emotional Cycle</ABOUTH2>
+                            <ABOUTH2>The Investor&apos;s Emotional Cycle</ABOUTH2>
                         </ABOUTTILETEXT>
                         <a 
                             href={"/images/Investor-behaviour-chart.png"}
