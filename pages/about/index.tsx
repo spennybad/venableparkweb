@@ -8,8 +8,6 @@ import { H1, H2 } from "../../styles/typography";
 import LineBreak from "../../components/comps/LineBreak";
 import Image from "next/image";
 
-// TYPES
-
 const ABOUTPAGEWRAPPER = styled.div`
     position: relative;
     width: 100%;
@@ -52,6 +50,7 @@ const ABOUTTILETEXT = styled.div`
         color: ${(props) => props.theme.colors.primary};
         transition: all .2s;
         display: inline-block;
+
         &:hover {
             transform: scale(1.05);
         }
@@ -85,17 +84,8 @@ const READMOREBUTTON = styled.a`
 
 const EMOTIONALCHART = styled.div`
     position: relative;
-    aspect-ratio: 16 / 9;
-    width: 70vw;
-    height: auto;
-    place-self: center;
-`
-
-const STYLEDIMAGE = styled(Image)`
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    right: 0;
+    width: 100%;
+    aspect-ratio: 16/9;
 `
 
 export interface Props {
@@ -157,19 +147,19 @@ const Home: React.FC<Props> = () => {
                         <ABOUTTILETEXT>
                             <ABOUTH2>The Emotional Cycle</ABOUTH2>
                         </ABOUTTILETEXT>
-                        <EMOTIONALCHART>
-                            <a 
-                                href={"/images/Investor-behaviour-chart.png"}
-                                target="_blank" 
-                                rel="noreferrer"
+                        <a 
+                            href={"/images/Investor-behaviour-chart.png"}
+                            target="_blank" 
+                            rel="noreferrer"
                             >
-                                <STYLEDIMAGE
+                            <EMOTIONALCHART>
+                                <Image
                                     src={"/images/Investor-behaviour-chart.png"}
                                     layout={"fill"}
                                     alt="Investors Emotional Cycle Chart."
                                 />
-                            </a>
-                        </EMOTIONALCHART>
+                            </EMOTIONALCHART>
+                        </a>
                     </ABOUTTILE>
                 </ABOUTCONTENTWRAPPER>
             </ABOUTPAGEWRAPPER>
