@@ -79,6 +79,7 @@ const READMOREBUTTON = styled.a`
     ${media.width_600`
         justify-self: center;
         margin-right: 0;
+        margin-top: 1.5rem;
     `}
 `
 
@@ -145,7 +146,7 @@ const Home: React.FC<Props> = () => {
                     <LineBreak />
                     <ABOUTTILE>
                         <ABOUTTILETEXT>
-                            <ABOUTH2>The Emotional Cycle</ABOUTH2>
+                            <ABOUTH2>The Investor's Emotional Cycle</ABOUTH2>
                         </ABOUTTILETEXT>
                         <a 
                             href={"/images/Investor-behaviour-chart.png"}
