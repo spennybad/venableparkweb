@@ -12,7 +12,7 @@ export const LINEBREAK = styled.div`
 
     & > div {
         height: 100%;
-        width: 80%;
+        width: 90%;
         background-color: ${(props) => props.theme.colors.blackTrans75};
     }
 `;

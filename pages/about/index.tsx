@@ -1,13 +1,6 @@
 // UTILS
-import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import media from "../../utils/MediaQueries";
-import useWindowDimensions from "../../hooks/WindowDimensions";
-
-// PDF SPECIFIC IMPORTS
-import { Document, Page } from "react-pdf";
-import { pdfjs } from "react-pdf";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 // COMPS
 import DefaultLayout from "../../components/layout/DefaultLayout";
@@ -27,88 +20,75 @@ const ABOUTPAGEWRAPPER = styled.div`
 const ABOUTCONTENTWRAPPER = styled.div`
     display: flex;
     flex-flow: column;
-    gap: 8rem;
 
-    @media (max-width: 700px) {
-        & > :nth-child(3) > :first-child{
-            order: 1;
-        }
+    & > * {
+        margin-top: 6rem;
     }
-
 `
 
 const ABOUTH2 = styled(H2)`
     color: ${(props) => props.theme.colors.accent};
 `
 
-const ABOUTTILE = styled.div<{order: number}>`
+const ABOUTTILE = styled.div`
     display: grid;
     gap: 5vw;
-    grid-template-columns: ${props => props.order == 1 ? "1fr auto" : "auto 1fr"};
     justify-content: right;
     align-items: center;    
     max-width: 130rem;
     place-self: center;
-
-    @media (max-width: 700px) {
-        grid-template-rows: ${props => props.order == 1 ? "1fr auto" : "auto 1fr"};
-        grid-template-columns: 100%;
-    }
-
 `
 
 const ABOUTTILETEXT = styled.div`
     display: flex;
     flex-flow: column;
-    gap: 1rem;
+    gap: 3rem;
     font-size: ${(props) => props.theme.fontSize.p};
 
-    & div p {
-        place-self: center;
+    & p a {
+        color: ${(props) => props.theme.colors.primary};
+        transition: all .2s;
+        display: inline-block;
+        &:hover {
+            transform: scale(1.05);
+        }
     }
 
 `
 
-const ABOUTPDFWRAPPER = styled.div`
-    place-self: center;
-    box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
+const READMOREBUTTON = styled.a`
+    cursor: pointer;
+    width: max-content;
+    padding: 1rem;
+    color: ${(props) => props.theme.colors.primary};
+    border: 2px solid ${(props) => props.theme.colors.primary};
+    font-size: ${(props) => props.theme.fontSize.p};
+    background-color: ${(props) => props.theme.colors.white};
+    justify-self: right;
+    transition: all .2s;
+    margin-top: -1.5rem;
+    text-decoration: none;
 
-    & button {
-        appearance: none;
-        background-color: transparent;
-        cursor: pointer;
+    &:hover {
+        transform: scale(1.05);
     }
+
+    ${media.width_600`
+        justify-self: center;
+    `}
 `
-
-const getPDFWidth = (w: number): number => {
-    if (w > 1200) {
-        return 250;
-    } else {
-        return 200;
-    }
-}
 
 export interface Props {
 
 }
 
 const Home: React.FC<Props> = () => {
-
-    const { width } = useWindowDimensions();
-    const [pdfWidth, setPdfWidth] = useState<number>(getPDFWidth(width));
-
-    const PDFDir = "/pdfs/Venable_Park_Philosophy_and_Method_2021_09_29.pdf"
-
-    useEffect(() => {
-        setPdfWidth(getPDFWidth(width));
-    }, [width])
-
     return (
         <DefaultLayout>
             <ABOUTPAGEWRAPPER>
                 <H1>About</H1>
                 <ABOUTCONTENTWRAPPER>
-                    <ABOUTTILE order={1}>
+                    <ABOUTTILE>
                         <ABOUTTILETEXT>
                             <ABOUTH2>Methods and Philosophy</ABOUTH2>
                             <p>
@@ -118,33 +98,27 @@ const Home: React.FC<Props> = () => {
                                 Our service includes a full financial review and retirement projection, updated as needed to reflect changing needs and life circumstances.
                             </p>
                         </ABOUTTILETEXT>
-                        <ABOUTPDFWRAPPER>
-                            <button onClick={() => window.open(PDFDir)}>
-                                <Document
-                                    file={PDFDir}
-                                    renderMode="canvas"
-                                >
-                                    <Page pageNumber={1} width={ pdfWidth } />
-                                </Document>
-                            </button>
-                        </ABOUTPDFWRAPPER>
+                        <READMOREBUTTON 
+                            href={"/pdfs/Venable_Park_Philosophy_and_Method_2021_09_29.pdf"} 
+                            target="_blank" 
+                            rel="noreferrer"
+                        >
+                            Read More...
+                        </READMOREBUTTON>
                     </ABOUTTILE>
                     <LineBreak />
-                    <ABOUTTILE order={2}>
-                        <ABOUTPDFWRAPPER>
-                            <button onClick={() => window.open(PDFDir)}>
-                                <Document
-                                    file={PDFDir}
-                                    renderMode="canvas"
-                                >
-                                    <Page pageNumber={1} width={ pdfWidth } />
-                                </Document>
-                            </button>
-                        </ABOUTPDFWRAPPER>
+                    <ABOUTTILE>
                         <ABOUTTILETEXT>
                             <ABOUTH2>Results</ABOUTH2>
                             <p>
-                                The cumulative compound returns of our Venable Park Absolute Return Strategy (net of fees) vs. both Long Always and Absolute Return Benchmarks (before fees) for a 60% fixed income, 40% equity, $1,000,000+ portfolio, is updated annually and charted here.
+                                The cumulative compound returns of our Venable Park Absolute Return Strategy (net of fees) vs. both Long Always and Absolute Return Benchmarks (before fees) for a 60% fixed income, 40% equity, $1,000,000+ portfolio, is updated annually and charted&nbsp;
+                                <a 
+                                    href={"/pdfs/Results_Chart.pdf"}
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                >
+                                    here
+                                </a>.
                             </p>
                         </ABOUTTILETEXT>
                     </ABOUTTILE>

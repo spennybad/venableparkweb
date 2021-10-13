@@ -2,5 +2,10 @@
     "editor.fontFamily": "\"Dank Mono\", Menlo, \"DejaVu Sans Mono\",  Consolas, \"Lucida Console\", monospace",
     "terminal.integrated.fontFamily": "\"FiraCode Nerd Font\", Menlo, \"DejaVu Sans Mono\",  Consolas, \"Lucida Console\", monospace",
     "editor.fontWeight": 300,
-    "editor.fontSize": 16
+    "editor.fontSize": 16,
+    "diffEditor.wordWrap": "on",
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 100,
+    "editor.snippetSuggestions": "top",
+    "editor.suggest.snippetsPreventQuickSuggestions": false
 }
