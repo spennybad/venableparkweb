@@ -68,7 +68,9 @@ const NavButton: React.FC<Props> = ({ navItem, buttonType, handleCloseNavPanel }
     return (
         <LI buttonType={buttonType}>
             <Link href={getRoute(navItem)} passHref>
-                <NAVBUTTON buttonType={buttonType} onClick={() => handleCloseNavPanel(false)}>{navItem}</NAVBUTTON>
+                <NAVBUTTON buttonType={buttonType} onClick={() => handleCloseNavPanel(false)}>      
+                    {navItem}
+                </NAVBUTTON>
             </Link>
         </LI>
     );

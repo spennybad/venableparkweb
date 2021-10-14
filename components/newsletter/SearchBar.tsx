@@ -133,7 +133,13 @@ const SearchBar: React.FC<Props> = ({
             </fieldset> */}
             <fieldset>
                 <label htmlFor="year">Year:</label>
-                <YEARINPUT type="number" id="year" name="year" onChange={(event) => handleYearChange(Number(event.target.value))} defaultValue={2021} />
+                <YEARINPUT 
+                    type="number" 
+                    id="year" 
+                    name="year" 
+                    onChange={(event) => handleYearChange(Number(event.target.value))}
+                    placeholder={"'yyyy'"}
+                />
             </fieldset>
             <button type="submit">Search</button>
         </SEARCHBAR>

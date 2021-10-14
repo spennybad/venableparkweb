@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import useWindowDimensions from "../../../hooks/WindowDimensions";
 import media from "../../../utils/MediaQueries";
+import Link from "next/link"
 
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
@@ -23,7 +24,7 @@ const NAV = styled.nav`
     padding-inline: 1rem;
 `;
 
-const LOGOWRAPPER = styled.div`
+const LOGOWRAPPER = styled.a`
     position: relative;
     width: 15rem;
     height: 5rem;
@@ -48,16 +49,21 @@ type Props = {
 };
 
 // CHANGE NEWSLETTER TO LETTER ARCHIEVE
-const NavItems: string[] = ["home", "about", "fees", "team", "letter archive", "contact"];
+const NavItems: string[] = ["home", "about", "fees", "team", "letter archive", "contact us"];
 const NavSwitchingPoint: number = 1050;
 
 const Nav: React.FC<Props> = () => {
     const { width } = useWindowDimensions();
     return (
         <NAV>
-            <LOGOWRAPPER>
-                <Image src="/images/logo/logo_solid.svg" alt="logo" layout="fill" />
-            </LOGOWRAPPER>
+            <Link
+                href={"/"}
+                passHref
+            >
+                <LOGOWRAPPER>
+                    <Image src="/images/logo/logo_solid.svg" alt="logo" layout="fill" />
+                </LOGOWRAPPER>
+            </Link>
             { 
                 // Swaps nav to mobile nav for viewports with less the 600px of width.
                 width <= NavSwitchingPoint ? 

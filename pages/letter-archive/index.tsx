@@ -122,16 +122,14 @@ function filterNewsletters(
 ): Array<Newsletter> {
 
     if (!searchFilters.date && !searchFilters.keyWord) {
-        return newsletters.slice(0, 10);
+        return newsletters.slice(0, 12);
     }
 
-    const filtered = newsletters.filter(
+    return newsletters.filter(
         (newsletter) =>
             Number(newsletter.date_published.split("-")[0]) ==
             searchFilters.date
     );
-
-    return filtered;
 }
 
 

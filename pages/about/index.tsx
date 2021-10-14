@@ -36,7 +36,7 @@ const ABOUTTILE = styled.div`
     gap: 5vw;
 
     width: 100%;
-    max-width: 130rem;
+    max-width: 100%;
     place-self: center;
 `
 
@@ -56,37 +56,17 @@ const ABOUTTILETEXT = styled.div`
         }
     }
 
-`
-
-const READMOREBUTTON = styled.a`
-    cursor: pointer;
-    width: max-content;
-    padding: 1rem;
-    color: ${(props) => props.theme.colors.primary};
-    border: 2px solid ${(props) => props.theme.colors.primary};
-    font-size: ${(props) => props.theme.fontSize.p};
-    background-color: ${(props) => props.theme.colors.white};
-    justify-self: right;
-    transition: all .2s;
-    margin-top: -1.5rem;
-    margin-right: 5rem;
-    text-decoration: none;
-
-    &:hover {
-        transform: scale(1.05);
+    & a {
+        margin-top: -3rem;
     }
 
-    ${media.width_600`
-        justify-self: center;
-        margin-right: 0;
-        margin-top: 1.5rem;
-    `}
 `
 
-const EMOTIONALCHART = styled.div`
+const EMOTIONALCHART = styled.a`
     position: relative;
-    width: 100%;
+    width: 60%;
     aspect-ratio: 16/9;
+    justify-self: center;
 `
 
 export interface Props {
@@ -101,23 +81,26 @@ const Home: React.FC<Props> = () => {
                 <ABOUTCONTENTWRAPPER>
                     <ABOUTTILE>
                         <ABOUTTILETEXT>
-                            <ABOUTH2>Methods and Philosophy</ABOUTH2>
+                            <ABOUTH2>Philosophy and Method</ABOUTH2>
                             <p>
                                 At Venable Park, we have developed a disciplined, unbiased set of rules regarding adding, removing, or leaving capital invested in a particular asset class or market. We have created these rules to reduce the persuasion and noise of subjective factors such as opinion, groupthink, fear, and greed.  Our primary focus is on minimizing volatility and the risk of loss.  We have learned that if we can do this well, capital has the best odds of serving the needs and goals of its owners.
                                 <br />
                                 <br />
-                                Our service includes a full financial review and retirement projection, updated as needed to reflect changing needs and life circumstances.
+                                Our service includes a full financial review and retirement projection, updated as needed to reflect changing needs and life circumstances. 
+                                <br />
+                                <br />
+                                You can read more about our philosophy and method&nbsp;
+                                <a 
+                                    href={"/pdfs/Venable_Park_Philosophy_and_Method_2021_09_29.pdf"} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                >
+                                    here
+                                </a>
+                                .
                             </p>
                         </ABOUTTILETEXT>
-                        <READMOREBUTTON 
-                            href={"/pdfs/Venable_Park_Philosophy_and_Method_2021_09_29.pdf"} 
-                            target="_blank" 
-                            rel="noreferrer"
-                        >
-                            Read More...
-                        </READMOREBUTTON>
                     </ABOUTTILE>
-                    <LineBreak />
                     <ABOUTTILE>
                         <ABOUTTILETEXT>
                             <ABOUTH2>Results</ABOUTH2>
@@ -132,7 +115,7 @@ const Home: React.FC<Props> = () => {
                                 </a>.
                                 <br />
                                 <br />
-                                Read about Absolute Return Benchmarks&nbsp;
+                                Read more about portfolio performance and benchmarks&nbsp;
                                 <a 
                                     href={"/pdfs/A Word of Benchmarks.pdf"}
                                     target="_blank" 
@@ -143,17 +126,15 @@ const Home: React.FC<Props> = () => {
                             </p>
                         </ABOUTTILETEXT>
                     </ABOUTTILE>
-                    <LineBreak />
                     <ABOUTTILE>
                         <ABOUTTILETEXT>
-                            <ABOUTH2>The Investor&apos;s Emotional Cycle</ABOUTH2>
+                            <ABOUTH2>Emotional Cycle of Investing</ABOUTH2>
                         </ABOUTTILETEXT>
-                        <a 
+                        <EMOTIONALCHART 
                             href={"/images/Investor-behaviour-chart.png"}
                             target="_blank" 
                             rel="noreferrer"
                             >
-                            <EMOTIONALCHART>
                                 <Image
                                     src={"/images/Investor-behaviour-chart.png"}
                                     layout={"responsive"}
@@ -161,8 +142,7 @@ const Home: React.FC<Props> = () => {
                                     width={16}
                                     height={9}
                                 />
-                            </EMOTIONALCHART>
-                        </a>
+                        </EMOTIONALCHART>
                     </ABOUTTILE>
                 </ABOUTCONTENTWRAPPER>
             </ABOUTPAGEWRAPPER>
