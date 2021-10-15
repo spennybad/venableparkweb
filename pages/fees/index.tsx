@@ -108,7 +108,7 @@ const Home: React.FC<Props> = () => {
                         <thead>
                             <tr>
                                 <th>Asset Size</th>
-                                <th>Anual Fee</th>
+                                <th>Annual Fee</th>
                             </tr>
                         </thead>
                         <tbody>
