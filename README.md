@@ -1,4 +1,4 @@
-# Venable Park Investment Council Inc. Website 📈
+# Venable Park Investment Counsel Inc. Website 📈
 
 **Table of Contents**
 - [Intro](#Hello!)
@@ -8,7 +8,7 @@
 - [Possible Improvements](#possible-improvements)
 
 ## Hello!
-This website was a freelance project I took on for Venable Park Investment Council. The project has multiple dynamic components managed by Sanity (CMS).
+This website was a freelance project I took on for Venable Park Investment Counsel. The project has multiple dynamic components managed by Sanity (CMS).
 
 _It is important to note the site is currently version one of two. Due to time constraints certain things were forgone to ensure a timely release of the site. Within 2 months the next major version will be released which will address the 'Possible Improvements' listed below._
 
