@@ -29,7 +29,7 @@ The site's most challenging component was the newsletter archive. The client upl
 The archive features search by date (yyyy); however, I have implemented the ability for search by keywords and sort by age. This functionality still requires polishing and will be released in the next patch of the site.
 
 ## Possible Improvements
-- The About pages design was heavily influenced by the client and should be re-worked to more effectively display the required information (Coming in the next patch).
+- The "About" pages design was heavily influenced by the client and should be re-worked to more effectively display the required information (Coming in the next patch).
 - Animations to improve user-experience (Coming in the next patch).
 - Better API for data fetching from Sanity (Coming in the next patch).
 - Improved accessiblity (Coming in the next patch).
