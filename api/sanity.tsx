@@ -24,6 +24,21 @@ export async function getMostRecentNewsletter(): Promise<{mostRecentNewsletter: 
     };
 }
 
+export async function getOldestNewsletter(): Promise<{oldestNewsletter: Newsletter}> {
+    const newsletter = await client.fetch(`
+        *[_type == "newsletter"] {
+            "date_published": date_published,
+            "file": file.asset -> url,
+            "title": title,
+            "id": _id
+        } | order(date_published asc) [0]
+    `);
+    
+    return {
+        oldestNewsletter: newsletter
+    };
+}
+
 export async function getNewslettersOfYear(date: string): Promise<
     {newsletters: Newsletter[]}
 > {

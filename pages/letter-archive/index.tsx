@@ -1,7 +1,7 @@
 // UTILS
 import React, { useState, useEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
-import { client, getMostRecentNewsletter, getNewslettersOfYear } from "../../api/sanity";
+import { client, getMostRecentNewsletter, getNewslettersOfYear, getOldestNewsletter } from "../../api/sanity";
 import Image from "next/image";
 
 // TYPES
@@ -90,26 +90,33 @@ const ERROR = styled.p`
 export async function getStaticProps() {
 
     const mostRecent = await getMostRecentNewsletter();
+    const oldest = await getOldestNewsletter();
 
     const newsletters = await getNewslettersOfYear((mostRecent).mostRecentNewsletter.date_published);
     return {
         props: {
             newsletters: newsletters.newsletters,
-            newestNewsletterDate: mostRecent.mostRecentNewsletter.date_published
+            newestNewsletterDate: mostRecent.mostRecentNewsletter.date_published,
+            oldestNewsletterDate: oldest.oldestNewsletter.date_published
         },
     };
 }
 
 export interface Props {
     newsletters: Array<Newsletter>,
-    newestNewsletterDate: string
+    newestNewsletterDate: string,
+    oldestNewsletterDate: string
 }
 
-const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate }) => {
+const getYear = (date: string): string => {
+    return date.split("-")[0];
+}
+
+const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate, oldestNewsletterDate }) => {
 
     const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
     const [isListLoaded, setIsListLoaded] = useState<boolean>(false);
-    const [currentlyLoadedYear, setCurrentlyLoadedYear] = useState<string>(newestNewsletterDate.split("-")[0]);
+    const [currentlyLoadedYear, setCurrentlyLoadedYear] = useState<string>(getYear(newestNewsletterDate));
     const [currentNewsletters, setCurrentNewsletters] = useState<
         Newsletter[]
     >(newsletters);
@@ -125,13 +132,25 @@ const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate }) => {
     ): void => {
         event.preventDefault();
         if (value !== currentlyLoadedYear) {
-            setIsLoadedCount(0);
-            setIsListLoaded(false);
-            getNewslettersOfYear(`${String(value)}-01-01`).then(res => {
-                setCurrentNewsletters(res.newsletters);
-            })
-            setCurrentlyLoadedYear(value);
-        }    
+            if ((Number(value) >= Number(getYear(oldestNewsletterDate))) &&
+                (Number(value) <= Number(getYear(newestNewsletterDate)))) {
+                setIsLoadedCount(0);
+                setIsListLoaded(false);
+                getNewslettersOfYear(`${value}-01-01`).then(res => {
+                    if (res.newsletters.length === 0) {
+                        setIsListLoaded(true);
+                    } else {
+                        setCurrentNewsletters(res.newsletters);
+                        setCurrentlyLoadedYear(value);
+                    }
+                })
+            } else {
+                setCurrentlyLoadedYear(value);
+                setCurrentNewsletters([]);
+                setIsLoadedCount(0);
+                setIsListLoaded(true);
+            }
+        }   
     };
 
     // MANAGES THE HIDING OF LOADING SCREEN FOR NEWSLETTERS
@@ -151,7 +170,7 @@ const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate }) => {
                 />
             </BACKGROUNDIMAGEWRAPPER>
             <SearchBar
-                defaultValue={newestNewsletterDate.split("-")[0]}
+                defaultValue={getYear(newestNewsletterDate)}
                 handleSearchSubmit={handleSearchSubmit}
             />
             <LISTWRAPPER>
