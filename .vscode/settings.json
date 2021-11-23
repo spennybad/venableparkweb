@@ -10,5 +10,8 @@
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "cSpell.words": [
         "Venable"
+    ],
+    "cSpell.enableFiletypes": [
+        "!typescriptreact"
     ]
 }
