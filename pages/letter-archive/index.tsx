@@ -1,17 +1,15 @@
 // UTILS
 import React, { useState, useEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
-import { client } from "../../api/sanity";
+import { client, getMostRecentNewsletter, getNewslettersOfYear } from "../../api/sanity";
 import Image from "next/image";
 
 // TYPES
 import { Newsletter } from "../../types/Newsletter";
-import { SearchFilters } from "../../types/SearchFilters";
 
 // COMPS
 import NewsletterTile from "../../components/newsletter/NewsletterTile";
 import SearchBar from "../../components/newsletter/SearchBar";
-import { H2 } from "../../styles/typography";
 
 const NEWSLETTERPAGEWRAPPER = styled.div`
     width: 100%;
@@ -74,9 +72,12 @@ const LOADINGNEWSLETTERLIST = styled.div`
     flex-wrap: wrap;
     position: absolute;
     top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 2;
     gap: 4rem;
     justify-content: center;
+    width: 100%;
 `
 
 const ERROR = styled.p`
@@ -87,105 +88,55 @@ const ERROR = styled.p`
 `
 
 export async function getStaticProps() {
-    const newsletters = await client.fetch(`
-        *[_type == "newsletter"] {
-            "date_published": date_published,
-            "file": file.asset -> url,
-            "title": title,
-            "id": _id
-        } | order(date_published desc)
-    `);
 
+    const mostRecent = await getMostRecentNewsletter();
+
+    const newsletters = await getNewslettersOfYear((mostRecent).mostRecentNewsletter.date_published);
     return {
         props: {
-            newsletters,
+            newsletters: newsletters.newsletters,
+            newestNewsletterDate: mostRecent.mostRecentNewsletter.date_published
         },
     };
 }
 
-function getIntersection(a: any[], b: any[]): any[] {
-    let overlap: any[] = [];
-    for (const itemA of a) {
-        for (const itemB of b) {
-            if (itemA == itemB) {
-                overlap.push(itemA);
-            }
-        }
-    }
-    return overlap;
-}
-
-// USED TO FILTER OUT ALL NEWSLETTERS THAT DO NOT SET THE USER SET SEARCH CRITERIA.
-function filterNewsletters(
-    newsletters: Array<Newsletter>,
-    searchFilters: SearchFilters
-): Array<Newsletter> {
-
-    if (!searchFilters.date && !searchFilters.keyWord) {
-        return newsletters.slice(0, 12);
-    }
-
-    return newsletters.filter(
-        (newsletter) =>
-            Number(newsletter.date_published.split("-")[0]) ==
-            searchFilters.date
-    );
-}
-
-
-function splitDate(date: string, character: string): string[] {
-    return date.split(character);
-}
-
 export interface Props {
-    newsletters: Array<Newsletter>;
+    newsletters: Array<Newsletter>,
+    newestNewsletterDate: string
 }
 
-const Home: React.FC<Props> = ({ newsletters }) => {
+const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate }) => {
 
     const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
     const [isListLoaded, setIsListLoaded] = useState<boolean>(false);
-
-    const mostRecent = newsletters[0].date_published;
-
-    // STATE OF CURRENTLY DISPLAYED NEWSLETTERS. INITIALLY 10 NEWSLETTERS DISPLAYED.
-    const [filteredNewsletters, setFilteredNewsletters] = useState<
+    const [mostRecentDate, setMostRecentDate] = useState<string>(newestNewsletterDate);
+    const [currentNewsletters, setCurrentNewsletters] = useState<
         Newsletter[]
-    >(newsletters.slice(0, 12));
-
-    // STATE OF CURRENTLY SET SEACH FILTERS.
-    const [searchFilters, setSearchFilters] = useState<SearchFilters>({
-        keyWord: null,
-        sortBy: "newest",
-        date: 2021,
-    });
+    >(newsletters);
 
     // UPDATED EACH TIME A NEWSLETTER IS SUCCESSFULLY LOADED.
     const handleNewsletterLoad = (): void => {
         setIsLoadedCount(isLoadedCount + 1);
     };
 
-    // REDUNDENT STEP FOR FUTURE PROFFING
-    const updateSearchFilters = (newFilters: SearchFilters): void => {
-        setSearchFilters(newFilters);
-    };
-
     const handleSearchSubmit = (
-        event: React.FormEvent<HTMLFormElement>
+        event: React.FormEvent<HTMLFormElement>,
+        value: string
     ): void => {
         event.preventDefault();
-        let newFilteredNewsletters = filterNewsletters(newsletters, searchFilters);
-        setIsLoadedCount(getIntersection(newFilteredNewsletters, filteredNewsletters).length);
+        setIsLoadedCount(0);
         setIsListLoaded(false);
-        setFilteredNewsletters(newFilteredNewsletters);
+        getNewslettersOfYear(`${String(value)}-01-01`).then(res => {
+            setCurrentNewsletters(res.newsletters);
+        })
     };
 
     // MANAGES THE HIDING OF LOADING SCREEN FOR NEWSLETTERS
     useEffect(() => {
-        if (isLoadedCount == filteredNewsletters.length) {
+        if (isLoadedCount == currentNewsletters.length) {
             setIsListLoaded(true);
         }
-    }, [isLoadedCount, filteredNewsletters]);
+    }, [isLoadedCount, currentNewsletters]);
 
     return (
         <NEWSLETTERPAGEWRAPPER>
@@ -197,30 +148,29 @@ const Home: React.FC<Props> = ({ newsletters }) => {
                 />
             </BACKGROUNDIMAGEWRAPPER>
             <SearchBar
-                updateSearchFilters={updateSearchFilters}
-                searchFilters={searchFilters}
+                defaultValue={mostRecentDate}
                 handleSearchSubmit={handleSearchSubmit}
             />
             <LISTWRAPPER>
                 {!isListLoaded &&
                     <LOADINGNEWSLETTERLIST>
-                        {filteredNewsletters.map(( newsletter, index ) => (
+                        {currentNewsletters.map(( newsletter, index ) => (
                             <LoadingNewsletterTile key={index} />
                         ))}
                     </LOADINGNEWSLETTERLIST>
                 }
                 <NEWSLETTERLIST isListLoaded={isListLoaded}>
                     {
-                        filteredNewsletters.length == 0 ?
+                        currentNewsletters.length == 0 ?
                             <ERROR>
                                 Unable to find any newsletters that match your seach...
                             </ERROR>   
                         :
-                        filteredNewsletters.map((newsletter, index) => (
+                        currentNewsletters.map((newsletter, index) => (
                             <NewsletterTile
                                 key={newsletter.id}
                                 newsletter={newsletter}
-                                isMostRecent={mostRecent == newsletter.date_published ? true : false}
+                                isMostRecent={mostRecentDate == newsletter.date_published ? true : false}
                                 handleNewsletterLoad={handleNewsletterLoad}
                             />
                         ))
@@ -257,6 +207,5 @@ const NEWSLETTERTILETEMPLATE = styled.div`
 const LoadingNewsletterTile: React.FC<{}> = () => {
     return <NEWSLETTERTILETEMPLATE />
 };
-
 
 export default Home;

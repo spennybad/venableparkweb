@@ -1,10 +1,8 @@
 // UTILS
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "styled-components";
 import media from "../../utils/MediaQueries";
-
-// TYPES
-import { SearchFilters } from "../../types/SearchFilters";
+import { useState } from 'react';
 
 const SEARCHBAR = styled.form`
     height: 5rem;
@@ -43,17 +41,6 @@ const SEARCHBAR = styled.form`
     }
 `;
 
-const SORTBYRADIOBUTTON = styled.input`
-    display: none;
-
-    & :checked + label {
-        border-bottom: solid 3px ${(props) => props.theme.colors.accent};
-    }
-
-    & + label {
-        cursor: pointer;
-    }
-`;
 
 const YEARINPUT = styled.input`
     border: none;
@@ -82,63 +69,27 @@ const YEARINPUT = styled.input`
 `;
 
 export interface Props {
-    updateSearchFilters: (newSearchFilters: SearchFilters) => void;
-    searchFilters: SearchFilters;
-    handleSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+    defaultValue: string;
+    handleSearchSubmit: (event: React.FormEvent<HTMLFormElement>, value: string) => void;
 }
 
 const SearchBar: React.FC<Props> = ({
-    updateSearchFilters,
-    searchFilters,
-    handleSearchSubmit,
+    defaultValue,
+    handleSearchSubmit
 }) => {
 
-    const handleRadioChange = (state: string) => {
-        updateSearchFilters({
-            keyWord: searchFilters.keyWord,
-            sortBy: state,
-            date: searchFilters.date,
-        });
-    };
-
-    const handleYearChange = (state: number) => {
-        updateSearchFilters({
-            keyWord: searchFilters.keyWord,
-            sortBy: searchFilters.sortBy,
-            date: state,
-        });
-    };
-
+    const [currentYearValue, setCurrentYearValue] = useState<string>(defaultValue);
+    
     return (
-        <SEARCHBAR onSubmit={(event) => handleSearchSubmit(event)}>
-            {/* <fieldset>
-                <p>Sort By:</p>
-                <SORTBYRADIOBUTTON
-                    type="radio"
-                    id="sort_by_newest"
-                    name="sort_by"
-                    value="newest"
-                    defaultChecked
-                    onChange={() => handleRadioChange("newest")}
-                />
-                <label htmlFor="sort_by_newest">Newest</label>
-                <SORTBYRADIOBUTTON
-                    type="radio"
-                    id="sort_by_oldest"
-                    name="sort_by"
-                    value="oldest"
-                    onChange={() => handleRadioChange("oldest")}
-                />
-                <label htmlFor="sort_by_oldest">Oldest</label>
-            </fieldset> */}
+        <SEARCHBAR onSubmit={(event) => handleSearchSubmit(event, currentYearValue)}>
             <fieldset>
                 <label htmlFor="year">Year:</label>
                 <YEARINPUT 
-                    type="number" 
+                    type="string" 
                     id="year" 
                     name="year" 
-                    onChange={(event) => handleYearChange(Number(event.target.value))}
-                    placeholder={"'yyyy'"}
+                    defaultValue={defaultValue.split("-")[0]}
+                    onChange={e => setCurrentYearValue(e.target.value)}
                 />
             </fieldset>
             <button type="submit">Search</button>
