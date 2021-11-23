@@ -88,7 +88,7 @@ const SearchBar: React.FC<Props> = ({
                     type="string" 
                     id="year" 
                     name="year" 
-                    defaultValue={defaultValue.split("-")[0]}
+                    defaultValue={defaultValue}
                     onChange={e => setCurrentYearValue(e.target.value)}
                 />
             </fieldset>

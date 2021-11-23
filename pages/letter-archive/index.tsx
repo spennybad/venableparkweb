@@ -109,7 +109,7 @@ const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate }) => {
 
     const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
     const [isListLoaded, setIsListLoaded] = useState<boolean>(false);
-    const [mostRecentDate, setMostRecentDate] = useState<string>(newestNewsletterDate);
+    const [currentlyLoadedYear, setCurrentlyLoadedYear] = useState<string>(newestNewsletterDate.split("-")[0]);
     const [currentNewsletters, setCurrentNewsletters] = useState<
         Newsletter[]
     >(newsletters);
@@ -124,11 +124,14 @@ const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate }) => {
         value: string
     ): void => {
         event.preventDefault();
-        setIsLoadedCount(0);
-        setIsListLoaded(false);
-        getNewslettersOfYear(`${String(value)}-01-01`).then(res => {
-            setCurrentNewsletters(res.newsletters);
-        })
+        if (value !== currentlyLoadedYear) {
+            setIsLoadedCount(0);
+            setIsListLoaded(false);
+            getNewslettersOfYear(`${String(value)}-01-01`).then(res => {
+                setCurrentNewsletters(res.newsletters);
+            })
+            setCurrentlyLoadedYear(value);
+        }    
     };
 
     // MANAGES THE HIDING OF LOADING SCREEN FOR NEWSLETTERS
@@ -148,7 +151,7 @@ const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate }) => {
                 />
             </BACKGROUNDIMAGEWRAPPER>
             <SearchBar
-                defaultValue={mostRecentDate}
+                defaultValue={newestNewsletterDate.split("-")[0]}
                 handleSearchSubmit={handleSearchSubmit}
             />
             <LISTWRAPPER>
@@ -170,7 +173,7 @@ const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate }) => {
                             <NewsletterTile
                                 key={newsletter.id}
                                 newsletter={newsletter}
-                                isMostRecent={mostRecentDate == newsletter.date_published ? true : false}
+                                isMostRecent={newestNewsletterDate == newsletter.date_published ? true : false}
                                 handleNewsletterLoad={handleNewsletterLoad}
                             />
                         ))
