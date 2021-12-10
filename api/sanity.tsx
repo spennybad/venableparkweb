@@ -1,4 +1,5 @@
 import { Newsletter } from "../types/Newsletter";
+import { AboutPagePDFS } from "../types/AboutPDFS";
 
 const sanityClient = require('@sanity/client');
 
@@ -6,7 +7,7 @@ export const client = sanityClient({
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECTID,
     dataset: 'production',
     apiVersion: '2021-08-10', // use current UTC date - see "specifying API version"!
-    useCdn: true, // `false` if you want to ensure fresh data
+    useCdn: false, // `false` if you want to ensure fresh data
 });
 
 export async function getMostRecentNewsletter(): Promise<{mostRecentNewsletter: Newsletter}> {
@@ -72,4 +73,30 @@ const addOneYear = (date: string): string => {
 
 const floorDate = (date: string): string => {
     return `${Number(date.split("-")[0])}-01-01`
+}
+
+export async function getAboutPDFS(): Promise<{
+	aboutPagePDFS: AboutPagePDFS;
+}> {
+	let aboutPagePDFS = await client.fetch(`
+        *[_type == "about"] {
+            "performance_benchmark_pdf": performance_benchmarks_pdf.asset -> url,
+            "philosophy_methods_pdf": philosophy_methods_pdf.asset -> url,
+            "results_pdf": results_pdf.asset -> url,
+        }
+    `);
+
+	return aboutPagePDFS[0];
+}
+
+export async function getFeesPDF(): Promise<{
+	feesPDF: string;
+}> {
+	let feesPDF = await client.fetch(`
+        *[_type == "fees"] {
+            "fees_pdf": fees_pdf.asset -> url
+        }
+    `);
+
+	return feesPDF[0].fees_pdf;
 }
