@@ -24,7 +24,7 @@ Click [here](https://www.venablepark.com/) to visit the site!
 To run it locally, clone the repository, run "npm install" within the cloned directory, and lastly call "npm run dev" to deploy the development server. By default it should be live on http://localhost:3000/.
 
 ## Challenges
-The site's most challenging component was the newsletter archive. The client uploads the newsletters in PDF format to the hosted CMS. Then I render the first page as a thumbnail for the archive page. 
+The site's most challenging component was the newsletter archive. The client uploads the newsletters in PDF format to the hosted CMS. Then I render the first page of the newsletter as a thumbnail for the archive page. 
 
 The archive features search by date (yyyy); however, I have implemented the ability for search by keywords and sort by age. This functionality still requires polishing and will be released in the next patch of the site.
 
