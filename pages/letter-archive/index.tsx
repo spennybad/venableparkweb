@@ -90,7 +90,6 @@ const ERROR = styled.p`
 export async function getStaticProps() {
 
     const years: string[] = await getNewsletterYears();
-
     const newsletters = await getNewslettersOfYear(years[0]);
 
     return {
@@ -106,59 +105,54 @@ export interface Props {
 	newsletterYears: Array<string>;
 }
 
-const getYear = (date: string): string => {
-    return date.split("-")[0];
-}
-
 const Home: React.FC<Props> = ({ newsletters, newsletterYears }) => {
 
-    const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
-    const [isListLoaded, setIsListLoaded] = useState<boolean>(false);
-    const [currentlyLoadedYear, setCurrentlyLoadedYear] = useState<string>(
+	const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
+	const [isListLoaded, setIsListLoaded] = useState<boolean>(false);
+	const [currentlyLoadedYear, setCurrentlyLoadedYear] = useState<string>(
 		newsletterYears[0]
 	);
-    const [currentNewsletters, setCurrentNewsletters] = useState<
-        Newsletter[]
-    >(newsletters);
+	const [currentNewsletters, setCurrentNewsletters] =
+		useState<Newsletter[]>(newsletters);
 
-    // UPDATED EACH TIME A NEWSLETTER IS SUCCESSFULLY LOADED.
-    const handleNewsletterLoad = (): void => {
-        setIsLoadedCount(isLoadedCount + 1);
-    };
+	// UPDATED EACH TIME A NEWSLETTER IS SUCCESSFULLY LOADED.
+	const handleNewsletterLoad = (): void => {
+		setIsLoadedCount(isLoadedCount + 1);
+	};
 
-    const handleSearchSubmit = (
-        value: string
-    ): void => {
+	const handleSearchSubmit = (value: string): void => {
         if (value !== currentlyLoadedYear) {
-            if ((Number(value) >= Number(newsletterYears.at(-1))) &&
-                (Number(value) <= Number(newsletterYears.at(0)))) {
-                setIsLoadedCount(0);
-                setIsListLoaded(false);
-                getNewslettersOfYear(`${value}-01-01`).then(res => {
-                    if (res.newsletters.length === 0) {
-                        setIsListLoaded(true);
-                    } else {
-                        setCurrentNewsletters(res.newsletters);
-                        setCurrentlyLoadedYear(value);
-                    }
-                })
-            } else {
-                setCurrentlyLoadedYear(value);
-                setCurrentNewsletters([]);
-                setIsLoadedCount(0);
-                setIsListLoaded(true);
-            }
-        }   
-    };
+            if (
+                Number(value) >= Number(newsletterYears.at(-1)) &&
+				Number(value) <= Number(newsletterYears[0])
+                ) {
+				setIsLoadedCount(0);
+				setIsListLoaded(false);
+				getNewslettersOfYear(value).then((res) => {
+					if (res.newsletters.length === 0) {
+						setIsListLoaded(true);
+					} else {
+						setCurrentNewsletters(res.newsletters);
+						setCurrentlyLoadedYear(value);
+					}
+				});
+			} else {
+				setCurrentlyLoadedYear(value);
+				setCurrentNewsletters([]);
+				setIsLoadedCount(0);
+				setIsListLoaded(true);
+			}
+		}
+	};
 
-    // MANAGES THE HIDING OF LOADING SCREEN FOR NEWSLETTERS
-    useEffect(() => {
-        if (isLoadedCount == currentNewsletters.length) {
-            setIsListLoaded(true);
-        }
-    }, [isLoadedCount, currentNewsletters]);
+	// MANAGES THE HIDING OF LOADING SCREEN FOR NEWSLETTERS
+	useEffect(() => {
+		if (isLoadedCount == currentNewsletters.length) {
+			setIsListLoaded(true);
+		}
+	}, [isLoadedCount, currentNewsletters]);
 
-    return (
+	return (
 		<NEWSLETTERPAGEWRAPPER>
 			<BACKGROUNDIMAGEWRAPPER>
 				<STYLEDIMAGE

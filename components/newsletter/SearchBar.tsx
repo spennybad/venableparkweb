@@ -57,8 +57,6 @@ const SearchBar: React.FC<Props> = ({
     newsletterYears,
     handleSearchSubmit
 }) => {
-
-    const [currentYearValue, setCurrentYearValue] = useState<string>(newsletterYears[0]);
     
     return (
 		<SEARCHBAR>
@@ -72,7 +70,7 @@ const SearchBar: React.FC<Props> = ({
 				>
 					{
                         newsletterYears.map(year => (
-                            <option>{year}</option>
+                            <option key={year}>{year}</option>
                         ))
                     }
 				</YEARINPUT>

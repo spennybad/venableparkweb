@@ -28,7 +28,7 @@ export async function getNewsletterYears(): Promise<(string[])> {
 export async function getNewslettersOfYear(date: string): Promise<
     {newsletters: Newsletter[]}
 > {
-
+    
     const flooredDate: string = floorDate(date);
     const maxDate: string = addOneYear(date);
 
@@ -51,13 +51,12 @@ export async function getNewslettersOfYear(date: string): Promise<
 }
 
 const addOneYear = (date: string): string => {
-    const yearStringArray: string[] = date.split("-");
-    const yearNumberPlusOne: number = Number(yearStringArray[0]) + 1;
-    return `${String(yearNumberPlusOne)}-${yearStringArray[1]}-${yearStringArray[2]}`;
+    const yearNumberPlusOne: number = Number(date) + 1;
+    return `${String(yearNumberPlusOne)}-01-01`;
 }
 
 const floorDate = (date: string): string => {
-    return `${Number(date.split("-")[0])}-01-01`
+    return `${Number(date)}-01-01`
 }
 
 export async function getAboutPDFS(): Promise<{
