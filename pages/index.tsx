@@ -1,6 +1,6 @@
 // UTILS
 import React, { Fragment } from "react";
-import { client } from "../api/sanity";
+import { getTestimonials } from "../api/sanity";
 import styled from "styled-components";
 
 // COMPONENTS
@@ -21,14 +21,8 @@ const MISSIONSTATMENT = styled.p`
 `;
 
 export async function getStaticProps() {
-    const testimonials = await client.fetch(`
-        *[_type == "testimonial"] {
-            "initials": initials,
-            "text": text,
-            "year_joined": year_joined,
-            "id": _id
-        }
-    `);
+    const testimonials = await getTestimonials();
+    
     return {
         props: {
             testimonials,

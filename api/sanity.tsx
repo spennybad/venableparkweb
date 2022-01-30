@@ -10,34 +10,19 @@ export const client = sanityClient({
     useCdn: false, // `false` if you want to ensure fresh data
 });
 
-export async function getMostRecentNewsletter(): Promise<{mostRecentNewsletter: Newsletter}> {
-    const newsletter = await client.fetch(`
+export async function getNewsletterYears(): Promise<(string[])> {
+    const years: string[] = await client.fetch(`
         *[_type == "newsletter"] {
             "date_published": date_published,
             "file": file.asset -> url,
             "title": title,
             "id": _id
-        } | order(date_published desc) [0]
-    `);
+        } | order(date_published desc)
+    `).then((newsletters: Newsletter[]) => {
+        return newsletters.map(newsletter => newsletter.date_published.split("-")[0])
+    });
     
-    return {
-        mostRecentNewsletter: newsletter
-    };
-}
-
-export async function getOldestNewsletter(): Promise<{oldestNewsletter: Newsletter}> {
-    const newsletter = await client.fetch(`
-        *[_type == "newsletter"] {
-            "date_published": date_published,
-            "file": file.asset -> url,
-            "title": title,
-            "id": _id
-        } | order(date_published asc) [0]
-    `);
-    
-    return {
-        oldestNewsletter: newsletter
-    };
+    return [...new Set(years)];
 }
 
 export async function getNewslettersOfYear(date: string): Promise<
@@ -99,4 +84,17 @@ export async function getFeesPDF(): Promise<{
     `);
 
 	return feesPDF[0].fees_pdf;
+}
+
+
+
+export async function getTestimonials(): Promise<{}> {
+    return await client.fetch(`
+        *[_type == "testimonial"] {
+            "initials": initials,
+            "text": text,
+            "year_joined": year_joined,
+            "id": _id
+        }
+    `)
 }
