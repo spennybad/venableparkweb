@@ -29,7 +29,6 @@ export interface Props {
 }
 
 const HeadshotWrapper: React.FC<Props> = ({ employeeData, dimension }) => {
-    console.log(employeeData.photo);
     return (
         <HEADSHOTWRAPPER dimension={ dimension }>
             {employeeData.photo ? (

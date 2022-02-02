@@ -90,7 +90,6 @@ export interface Props {
 
 const Home: React.FC<Props> = ({ aboutPDFS }) => {
 	const {performance_benchmark_pdf, philosophy_methods_pdf, results_pdf} = aboutPDFS;
-	console.log(performance_benchmark_pdf);
 
 	return (
 		<DefaultLayout>

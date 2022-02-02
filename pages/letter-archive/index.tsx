@@ -105,11 +105,6 @@ export interface Props {
 	newsletterYears: Array<string>;
 }
 
-const testGetNewsletter = async (id: string) => {
-	const newsletter = await getNewsletterFromID(id);
-	return newsletter[0].file;
-}
-
 const Home: React.FC<Props> = ({ newsletters, newsletterYears }) => {
 
 	const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
@@ -156,8 +151,6 @@ const Home: React.FC<Props> = ({ newsletters, newsletterYears }) => {
 			setIsListLoaded(true);
 		}
 	}, [isLoadedCount, currentNewsletters]);
-
-	testGetNewsletter(newsletters[0].id).then(res => {console.log(res)});
 
 	return (
 		<NEWSLETTERPAGEWRAPPER>
