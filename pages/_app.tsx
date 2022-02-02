@@ -18,11 +18,11 @@ export default function App({ Component, pageProps }: AppProps) {
 		<>
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
-				{!(Component.name === "NewsletterPage") && <Nav />}
+				<Nav />
 				<SITEWRAPPER>
 					<Component {...pageProps} />
 				</SITEWRAPPER>
-				{!(Component.name === "NewsletterPage") && <Footer />}
+				<Footer />
 			</ThemeProvider>
 		</>
 	);
