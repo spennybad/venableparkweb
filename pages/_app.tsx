@@ -15,15 +15,15 @@ const SITEWRAPPER = styled.div`
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
-        <>
-            <ThemeProvider theme={theme}>
-            <GlobalStyle />
-                <Nav />
-                <SITEWRAPPER>
-                    <Component {...pageProps} />
-                </SITEWRAPPER>
-                <Footer />
-            </ThemeProvider>
-        </>
-    );
+		<>
+			<ThemeProvider theme={theme}>
+				<GlobalStyle />
+				{!(Component.name === "NewsletterPage") && <Nav />}
+				<SITEWRAPPER>
+					<Component {...pageProps} />
+				</SITEWRAPPER>
+				{!(Component.name === "NewsletterPage") && <Footer />}
+			</ThemeProvider>
+		</>
+	);
 }

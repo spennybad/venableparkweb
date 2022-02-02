@@ -39,7 +39,7 @@ const NAVBUTTON = styled.a <{ buttonType: string }>`
                 background-color: ${(props) => props.theme.colors.white};
                 font-size: ${(props) => props.theme.fontSize.p};
                 white-space: nowrap;
-                transition: transform 0.2s;
+                transition: all .2s;
 
                 &:hover {
                     transform: scale(1.1);

@@ -10,14 +10,8 @@ import { Worker, Viewer } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
-const Page = styled.section`
-	height: 100%;
-	width: 100%;
-	position: relative;
-`
-
 const PDFWRAPPER = styled.div`
-
+	height: 100vh;
 `
 
 export const getStaticPaths = async () => {
@@ -53,20 +47,18 @@ export interface Props {
 }
 
 const NewsletterPage: React.FC<Props> = ({ url }) => {
-	const defaultLayoutPluginInstance = defaultLayoutPlugin({
-
-	});
+	const defaultLayoutPluginInstance = defaultLayoutPlugin();
 	return (
-		<Page>
-			<Worker workerUrl="https://unpkg.com/pdfjs-dist@2.3.200/build/pdf.worker.min.js">
-				<PDFWRAPPER>
-					<Viewer
-						fileUrl={url}
-						plugins={[defaultLayoutPluginInstance]}
-					/>
-				</PDFWRAPPER>
-			</Worker>
-		</Page>
+		<Worker workerUrl="https://unpkg.com/pdfjs-dist@2.3.200/build/pdf.worker.min.js">
+			<PDFWRAPPER>
+				<Viewer
+					fileUrl={url}
+					plugins={[defaultLayoutPluginInstance]}
+					defaultScale={1}
+					theme={"dark"}
+				/>
+			</PDFWRAPPER>
+		</Worker>
 	);
 };
 

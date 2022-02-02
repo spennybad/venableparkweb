@@ -63,15 +63,15 @@ export interface Props {
 const NewsletterTile: React.FC<Props> = ({ newsletter, isMostRecent, handleNewsletterLoad}) => {
     return (
 		<NEWSLETTERTILE isMostRecent={isMostRecent}>
-			<Link
-				href={`/letter-archive/pdf/${newsletter.id}`}
-			>
-				<Document
-					file={newsletter.file}
-					onLoadSuccess={() => handleNewsletterLoad()}
-				>
-					<Page pageNumber={1} width={250} />
-				</Document>
+			<Link href={`/letter-archive/pdf/${newsletter.id}`}>
+				<a target="_blank">
+					<Document
+						file={newsletter.file}
+						onLoadSuccess={() => handleNewsletterLoad()}
+					>
+						<Page pageNumber={1} width={250} />
+					</Document>
+				</a>
 			</Link>
 		</NEWSLETTERTILE>
 	);
