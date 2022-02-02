@@ -10,6 +10,27 @@ export const client = sanityClient({
     useCdn: false, // `false` if you want to ensure fresh data
 });
 
+export async function getNewsletterFromID(id: string): Promise<Newsletter[]> {
+    return await client.fetch(`
+        *[
+            _type == "newsletter" &&
+            _id == "${id}"
+        ] {
+          "file": file.asset -> url
+        }
+    `);
+}
+
+export async function getNewsletters(): Promise<Newsletter[]> {
+     return await client.fetch(`
+        *[_type == "newsletter"] {
+          "file": file.asset -> url,
+          title,
+          "id": _id
+        }
+    `);
+}
+
 export async function getNewsletterYears(): Promise<(string[])> {
     const years: string[] = await client.fetch(`
         *[_type == "newsletter"] {
@@ -31,7 +52,6 @@ export async function getNewslettersOfYear(date: string): Promise<
     
     const flooredDate: string = floorDate(date);
     const maxDate: string = addOneYear(date);
-
     const newsletters = await client.fetch(`
         *[
             _type == "newsletter" &&

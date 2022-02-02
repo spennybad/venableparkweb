@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+import Link from 'next/link';
 
 // TYPES
 import { Newsletter } from "../../types/Newsletter";
@@ -60,19 +61,20 @@ export interface Props {
 }
 
 const NewsletterTile: React.FC<Props> = ({ newsletter, isMostRecent, handleNewsletterLoad}) => {
-
     return (
-        <NEWSLETTERTILE isMostRecent={isMostRecent}>
-            <button onClick={() => window.open(newsletter.file)}>
-                <Document
-                    file={newsletter.file}
-                    onLoadSuccess={() => handleNewsletterLoad()}
-                >
-                    <Page pageNumber={1} width={250} />
-                </Document>
-            </button>
-        </NEWSLETTERTILE>
-    );
+		<NEWSLETTERTILE isMostRecent={isMostRecent}>
+			<Link
+				href={`/letter-archive/pdf/${newsletter.id}`}
+			>
+				<Document
+					file={newsletter.file}
+					onLoadSuccess={() => handleNewsletterLoad()}
+				>
+					<Page pageNumber={1} width={250} />
+				</Document>
+			</Link>
+		</NEWSLETTERTILE>
+	);
 };
 
 export default NewsletterTile;
