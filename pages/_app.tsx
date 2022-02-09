@@ -26,8 +26,6 @@ export default function App({ Component, pageProps }: AppProps) {
 			pageview(url);
 		};
 
-		console.log("HERE")
-
 		router.events.on("routeChangeComplete", handleRouteChange);
 
 		return () => {
