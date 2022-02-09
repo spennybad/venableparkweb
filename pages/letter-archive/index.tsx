@@ -1,7 +1,7 @@
 // UTILS
 import React, { useState, useEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
-import { client, getMostRecentNewsletter, getNewslettersOfYear, getOldestNewsletter } from "../../api/sanity";
+import { getNewsletterYears, getNewslettersOfYear, getNewsletterFromID } from "../../api/sanity";
 import Image from "next/image";
 
 // TYPES
@@ -89,119 +89,117 @@ const ERROR = styled.p`
 
 export async function getStaticProps() {
 
-    const mostRecent = await getMostRecentNewsletter();
-    const oldest = await getOldestNewsletter();
+    const years: string[] = await getNewsletterYears();
+    const newsletters = await getNewslettersOfYear(years[0]);
 
-    const newsletters = await getNewslettersOfYear((mostRecent).mostRecentNewsletter.date_published);
     return {
         props: {
             newsletters: newsletters.newsletters,
-            newestNewsletterDate: mostRecent.mostRecentNewsletter.date_published,
-            oldestNewsletterDate: oldest.oldestNewsletter.date_published
+            newsletterYears: years
         },
     };
 }
 
 export interface Props {
-    newsletters: Array<Newsletter>,
-    newestNewsletterDate: string,
-    oldestNewsletterDate: string
+	newsletters: Array<Newsletter>;
+	newsletterYears: Array<string>;
 }
 
-const getYear = (date: string): string => {
-    return date.split("-")[0];
-}
+const Home: React.FC<Props> = ({ newsletters, newsletterYears }) => {
 
-const Home: React.FC<Props> = ({ newsletters, newestNewsletterDate, oldestNewsletterDate }) => {
+	const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
+	const [isListLoaded, setIsListLoaded] = useState<boolean>(false);
+	const [currentlyLoadedYear, setCurrentlyLoadedYear] = useState<string>(
+		newsletterYears[0]
+	);
+	const [currentNewsletters, setCurrentNewsletters] =
+		useState<Newsletter[]>(newsletters);
 
-    const [isLoadedCount, setIsLoadedCount] = useState<number>(0);
-    const [isListLoaded, setIsListLoaded] = useState<boolean>(false);
-    const [currentlyLoadedYear, setCurrentlyLoadedYear] = useState<string>(getYear(newestNewsletterDate));
-    const [currentNewsletters, setCurrentNewsletters] = useState<
-        Newsletter[]
-    >(newsletters);
+	// UPDATED EACH TIME A NEWSLETTER IS SUCCESSFULLY LOADED.
+	const handleNewsletterLoad = (): void => {
+		setIsLoadedCount(isLoadedCount + 1);
+	};
 
-    // UPDATED EACH TIME A NEWSLETTER IS SUCCESSFULLY LOADED.
-    const handleNewsletterLoad = (): void => {
-        setIsLoadedCount(isLoadedCount + 1);
-    };
-
-    const handleSearchSubmit = (
-        event: React.FormEvent<HTMLFormElement>,
-        value: string
-    ): void => {
-        event.preventDefault();
+	const handleSearchSubmit = (value: string): void => {
         if (value !== currentlyLoadedYear) {
-            if ((Number(value) >= Number(getYear(oldestNewsletterDate))) &&
-                (Number(value) <= Number(getYear(newestNewsletterDate)))) {
-                setIsLoadedCount(0);
-                setIsListLoaded(false);
-                getNewslettersOfYear(`${value}-01-01`).then(res => {
-                    if (res.newsletters.length === 0) {
-                        setIsListLoaded(true);
-                    } else {
-                        setCurrentNewsletters(res.newsletters);
-                        setCurrentlyLoadedYear(value);
-                    }
-                })
-            } else {
-                setCurrentlyLoadedYear(value);
-                setCurrentNewsletters([]);
-                setIsLoadedCount(0);
-                setIsListLoaded(true);
-            }
-        }   
-    };
+            if (
+                Number(value) >= Number(newsletterYears.at(-1)) &&
+				Number(value) <= Number(newsletterYears[0])
+                ) {
+				setIsLoadedCount(0);
+				setIsListLoaded(false);
+				getNewslettersOfYear(value).then((res) => {
+					if (res.newsletters.length === 0) {
+						setIsListLoaded(true);
+					} else {
+						setCurrentNewsletters(res.newsletters);
+						setCurrentlyLoadedYear(value);
+					}
+				});
+			} else {
+				setCurrentlyLoadedYear(value);
+				setCurrentNewsletters([]);
+				setIsLoadedCount(0);
+				setIsListLoaded(true);
+			}
+		}
+	};
 
-    // MANAGES THE HIDING OF LOADING SCREEN FOR NEWSLETTERS
-    useEffect(() => {
-        if (isLoadedCount == currentNewsletters.length) {
-            setIsListLoaded(true);
-        }
-    }, [isLoadedCount, currentNewsletters]);
+	// MANAGES THE HIDING OF LOADING SCREEN FOR NEWSLETTERS
+	useEffect(() => {
+		if (isLoadedCount == currentNewsletters.length) {
+			setIsListLoaded(true);
+		}
+	}, [isLoadedCount, currentNewsletters]);
 
-    return (
-        <NEWSLETTERPAGEWRAPPER>
-            <BACKGROUNDIMAGEWRAPPER>
-                <STYLEDIMAGE
-                    src={"https://res.cloudinary.com/spencercv7-dev/image/upload/v1632858041/VenablePark/2k-rotated-sean_zlsg8z.webp"}
-                    sizes="100%"
-                    layout="fill"
-                />
-            </BACKGROUNDIMAGEWRAPPER>
-            <SearchBar
-                defaultValue={getYear(newestNewsletterDate)}
-                handleSearchSubmit={handleSearchSubmit}
-            />
-            <LISTWRAPPER>
-                {!isListLoaded &&
-                    <LOADINGNEWSLETTERLIST>
-                        {currentNewsletters.map(( newsletter, index ) => (
-                            <LoadingNewsletterTile key={index} />
-                        ))}
-                    </LOADINGNEWSLETTERLIST>
-                }
-                <NEWSLETTERLIST isListLoaded={isListLoaded}>
-                    {
-                        currentNewsletters.length == 0 ?
-                            <ERROR>
-                                Unable to find any newsletters that match your seach...
-                            </ERROR>   
-                        :
-                        currentNewsletters.map((newsletter, index) => (
-                            <NewsletterTile
-                                key={newsletter.id}
-                                newsletter={newsletter}
-                                isMostRecent={newestNewsletterDate == newsletter.date_published ? true : false}
-                                handleNewsletterLoad={handleNewsletterLoad}
-                            />
-                        ))
-                    }
-                </NEWSLETTERLIST>
-            </LISTWRAPPER>
-
-        </NEWSLETTERPAGEWRAPPER>
-    );
+	return (
+		<NEWSLETTERPAGEWRAPPER>
+			<BACKGROUNDIMAGEWRAPPER>
+				<STYLEDIMAGE
+					src={
+						"https://res.cloudinary.com/spencercv7-dev/image/upload/v1632858041/VenablePark/2k-rotated-sean_zlsg8z.webp"
+					}
+					sizes="100%"
+					layout="fill"
+				/>
+			</BACKGROUNDIMAGEWRAPPER>
+			<SearchBar
+				newsletterYears={newsletterYears}
+				handleSearchSubmit={handleSearchSubmit}
+			/>
+			<LISTWRAPPER>
+				{!isListLoaded && (
+					<LOADINGNEWSLETTERLIST>
+						{currentNewsletters.map((newsletter, index) => (
+							<LoadingNewsletterTile key={index} />
+						))}
+					</LOADINGNEWSLETTERLIST>
+				)}
+				<NEWSLETTERLIST isListLoaded={isListLoaded}>
+					{currentNewsletters.length == 0 ? (
+						<ERROR>
+							Unable to find any newsletters that match your
+							seach...
+						</ERROR>
+					) : (
+						currentNewsletters.map((newsletter, index) => (
+							<NewsletterTile
+								key={newsletter.id}
+								newsletter={newsletter}
+								isMostRecent={
+									newsletterYears[0] ==
+									newsletter.date_published
+										? true
+										: false
+								}
+								handleNewsletterLoad={handleNewsletterLoad}
+							/>
+						))
+					)}
+				</NEWSLETTERLIST>
+			</LISTWRAPPER>
+		</NEWSLETTERPAGEWRAPPER>
+	);
 };
 
 

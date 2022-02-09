@@ -33,7 +33,7 @@ const HeadshotWrapper: React.FC<Props> = ({ employeeData, dimension }) => {
         <HEADSHOTWRAPPER dimension={ dimension }>
             {employeeData.photo ? (
                 <Image
-                    src={employeeData.photo}
+                    src={`${employeeData.photo}?h=350`}
                     alt={employeeData.name}
                     layout="fill"
                     objectFit="cover"

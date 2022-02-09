@@ -15,6 +15,7 @@ const CAROUSELITEM = styled.div`
 
     display: grid;
     align-items: center;
+    cursor: pointer;
 
     & ::before {
         content: "";

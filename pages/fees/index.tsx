@@ -1,6 +1,5 @@
 // UTILS
 import React, { Fragment } from "react";
-import Image from "next/image";
 import styled from "styled-components";
 import media from "../../utils/MediaQueries";
 import { getFeesPDF } from "../../api/sanity";

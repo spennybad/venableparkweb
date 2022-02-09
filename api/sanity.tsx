@@ -10,43 +10,48 @@ export const client = sanityClient({
     useCdn: false, // `false` if you want to ensure fresh data
 });
 
-export async function getMostRecentNewsletter(): Promise<{mostRecentNewsletter: Newsletter}> {
-    const newsletter = await client.fetch(`
-        *[_type == "newsletter"] {
-            "date_published": date_published,
-            "file": file.asset -> url,
-            "title": title,
-            "id": _id
-        } | order(date_published desc) [0]
+export async function getNewsletterFromID(id: string): Promise<Newsletter[]> {
+    return await client.fetch(`
+        *[
+            _type == "newsletter" &&
+            _id == "${id}"
+        ] {
+          "file": file.asset -> url
+        }
     `);
-    
-    return {
-        mostRecentNewsletter: newsletter
-    };
 }
 
-export async function getOldestNewsletter(): Promise<{oldestNewsletter: Newsletter}> {
-    const newsletter = await client.fetch(`
+export async function getNewsletters(): Promise<Newsletter[]> {
+     return await client.fetch(`
+        *[_type == "newsletter"] {
+          "file": file.asset -> url,
+          title,
+          "id": _id
+        }
+    `);
+}
+
+export async function getNewsletterYears(): Promise<(string[])> {
+    const years: string[] = await client.fetch(`
         *[_type == "newsletter"] {
             "date_published": date_published,
             "file": file.asset -> url,
             "title": title,
             "id": _id
-        } | order(date_published asc) [0]
-    `);
+        } | order(date_published desc)
+    `).then((newsletters: Newsletter[]) => {
+        return newsletters.map(newsletter => newsletter.date_published.split("-")[0])
+    });
     
-    return {
-        oldestNewsletter: newsletter
-    };
+    return [...new Set(years)];
 }
 
 export async function getNewslettersOfYear(date: string): Promise<
     {newsletters: Newsletter[]}
 > {
-
+    
     const flooredDate: string = floorDate(date);
     const maxDate: string = addOneYear(date);
-
     const newsletters = await client.fetch(`
         *[
             _type == "newsletter" &&
@@ -66,13 +71,12 @@ export async function getNewslettersOfYear(date: string): Promise<
 }
 
 const addOneYear = (date: string): string => {
-    const yearStringArray: string[] = date.split("-");
-    const yearNumberPlusOne: number = Number(yearStringArray[0]) + 1;
-    return `${String(yearNumberPlusOne)}-${yearStringArray[1]}-${yearStringArray[2]}`;
+    const yearNumberPlusOne: number = Number(date) + 1;
+    return `${String(yearNumberPlusOne)}-01-01`;
 }
 
 const floorDate = (date: string): string => {
-    return `${Number(date.split("-")[0])}-01-01`
+    return `${Number(date)}-01-01`
 }
 
 export async function getAboutPDFS(): Promise<{
@@ -99,4 +103,17 @@ export async function getFeesPDF(): Promise<{
     `);
 
 	return feesPDF[0].fees_pdf;
+}
+
+
+
+export async function getTestimonials(): Promise<{}> {
+    return await client.fetch(`
+        *[_type == "testimonial"] {
+            "initials": initials,
+            "text": text,
+            "year_joined": year_joined,
+            "id": _id
+        }
+    `)
 }

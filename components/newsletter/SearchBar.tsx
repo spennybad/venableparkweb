@@ -42,59 +42,41 @@ const SEARCHBAR = styled.form`
 `;
 
 
-const YEARINPUT = styled.input`
-    border: none;
-    appearance: none;
-    background-color: transparent;
-    color: ${(props) => props.theme.colors.white};
-    width: 10rem;
-    font-size: ${(props) => props.theme.fontSize.p};
-    border-bottom: solid 2px ${(props) => props.theme.colors.white};
-    text-align: center;
+const YEARINPUT = styled.select`
 
-    &:focus {
-        border: none;
-        appearance: none;
-        outline: none;
-        border-bottom: solid 2px ${(props) => props.theme.colors.accent};
-    }
-
-    // HIDES ARROWS FOR NUMBER INPUT FEILD ON ALL BROWSERS
-    -moz-appearance: textfield;
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
 `;
 
 export interface Props {
-    defaultValue: string;
-    handleSearchSubmit: (event: React.FormEvent<HTMLFormElement>, value: string) => void;
+	newsletterYears: string[];
+	handleSearchSubmit: (
+		value: string
+	) => void;
 }
 
 const SearchBar: React.FC<Props> = ({
-    defaultValue,
+    newsletterYears,
     handleSearchSubmit
 }) => {
-
-    const [currentYearValue, setCurrentYearValue] = useState<string>(defaultValue);
     
     return (
-        <SEARCHBAR onSubmit={(event) => handleSearchSubmit(event, currentYearValue)}>
-            <fieldset>
-                <label htmlFor="year">Year:</label>
-                <YEARINPUT 
-                    type="string" 
-                    id="year" 
-                    name="year" 
-                    defaultValue={defaultValue}
-                    onChange={e => setCurrentYearValue(e.target.value)}
-                />
-            </fieldset>
-            <button type="submit">Search</button>
-        </SEARCHBAR>
-    );
+		<SEARCHBAR>
+			<fieldset>
+				<label htmlFor="year">Year:</label>
+				<YEARINPUT
+					id="year"
+					name="year"
+					defaultValue={newsletterYears[0]}
+					onChange={(e) => handleSearchSubmit(e.target.value)}
+				>
+					{
+                        newsletterYears.map(year => (
+                            <option key={year}>{year}</option>
+                        ))
+                    }
+				</YEARINPUT>
+			</fieldset>
+		</SEARCHBAR>
+	);
 };
 
 export default SearchBar;

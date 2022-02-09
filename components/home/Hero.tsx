@@ -51,17 +51,24 @@ export interface HeroProps {}
 
 const Hero: React.FC<HeroProps> = () => {
     return (
-        <HeroWrapper>
-            <StyledImage
-                src={"https://res.cloudinary.com/spencercv7-dev/image/upload/v1632858041/VenablePark/2k-rotated-sean_zlsg8z.webp"}
-                alt="Crashing waves on a shore."
-                sizes="100%"
-                layout="fill"
-            />
-            <Socials />
-            <HomeH1><span>Venable Park Investment</span><span>Counsel Inc.</span></HomeH1>
-        </HeroWrapper>
-    );
+		<HeroWrapper>
+			<StyledImage
+				src={
+					"https://res.cloudinary.com/spencercv7-dev/image/upload/v1632858041/VenablePark/2k-rotated-sean_zlsg8z.webp"
+				}
+				alt="Crashing waves on a shore."
+				sizes="100%"
+				layout="fill"
+				placeholder="blur"
+				blurDataURL={"https://res.cloudinary.com/spencercv7-dev/image/upload/v1632858041/VenablePark/2k-rotated-sean_zlsg8z.webp"}
+			/>
+			<Socials />
+			<HomeH1>
+				<span>Venable Park Investment</span>
+				<span>Counsel Inc.</span>
+			</HomeH1>
+		</HeroWrapper>
+	);
 };
 
 export default Hero;

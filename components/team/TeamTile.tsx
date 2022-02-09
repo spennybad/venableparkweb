@@ -8,13 +8,19 @@ import HeadshotWrapper from "./HeadshotWrapper";
 import NameTag from "./NameTag";
 
 const TEAMTILE = styled.li`
-    list-style: none;
-    width: 100%;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 2rem;
-    cursor: pointer;
+	list-style: none;
+	width: 100%;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 2rem;
+	cursor: pointer;
+    padding: 1rem;
+    transition: all .2s;
+
+	&:hover {
+		box-shadow: ${(props) => props.theme.boxShadow.boxShadowLight};
+	}
 `;
 
 export interface Props {
