@@ -1,4 +1,4 @@
-import { Newsletter } from "../types/Newsletter";
+import { Newsletter, PDF } from "../types/Newsletter";
 import { AboutPagePDFS } from "../types/AboutPDFS";
 
 const sanityClient = require('@sanity/client');
@@ -79,33 +79,45 @@ const floorDate = (date: string): string => {
     return `${Number(date)}-01-01`
 }
 
-export async function getAboutPDFS(): Promise<{
-	aboutPagePDFS: AboutPagePDFS;
-}> {
-	let aboutPagePDFS = await client.fetch(`
+export async function getPerformanceBenchmarkPDF(): Promise<PDF> {
+	let aboutPagePDF = await client.fetch(`
         *[_type == "about"] {
-            "performance_benchmark_pdf": performance_benchmarks_pdf.asset -> url,
-            "philosophy_methods_pdf": philosophy_methods_pdf.asset -> url,
-            "results_pdf": results_pdf.asset -> url,
+            "file": performance_benchmarks_pdf.asset -> url
         }
     `);
 
-	return aboutPagePDFS[0];
+	return aboutPagePDF[0];
 }
 
-export async function getFeesPDF(): Promise<{
-	feesPDF: string;
-}> {
+export async function getPhilosophyMethodsPDF(): Promise<PDF> {
+	let aboutPagePDF = await client.fetch(`
+        *[_type == "about"] {
+            "file": philosophy_methods_pdf.asset -> url
+        }
+    `);
+
+	return aboutPagePDF[0];
+}
+
+export async function getResultsPDF(): Promise<PDF> {
+	let aboutPagePDF = await client.fetch(`
+        *[_type == "about"] {
+            "file": results_pdf.asset -> url,
+        }
+    `);
+
+	return aboutPagePDF[0];
+}
+
+export async function getFeesPDF(): Promise<PDF> {
 	let feesPDF = await client.fetch(`
         *[_type == "fees"] {
-            "fees_pdf": fees_pdf.asset -> url
+            "file": fees_pdf.asset -> url
         }
     `);
 
-	return feesPDF[0].fees_pdf;
+	return feesPDF[0];
 }
-
-
 
 export async function getTestimonials(): Promise<{}> {
     return await client.fetch(`

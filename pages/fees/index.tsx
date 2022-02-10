@@ -110,6 +110,8 @@ const feeText: string[] = [
 
 const Home: React.FC<Props> = ({ feesPDF }) => {
 
+	console.log(feesPDF)
+
     return (
 		<DefaultLayout>
 			<FEESWRAPPER>
@@ -155,7 +157,7 @@ const Home: React.FC<Props> = ({ feesPDF }) => {
 						))}
 						<li>
                             Our Relationship Disclosure Information can be viewed&nbsp;
-                            <a href={feesPDF} target="_blank" rel="noreferrer">
+                            <a href="/pdf/fees" target="_blank" rel="noreferrer">
                                 here
                             </a>
 						    .
