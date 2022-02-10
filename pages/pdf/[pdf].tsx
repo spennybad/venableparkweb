@@ -1,10 +1,17 @@
 // UTILS
 import React, { useEffect } from "react";
-import { getNewsletters, getNewsletterFromID } from "../../../api/sanity";
+import { 
+	getNewsletters, 
+	getNewsletterFromID, 
+	getPerformanceBenchmarkPDF, 
+	getResultsPDF, 
+	getPhilosophyMethodsPDF,
+	getFeesPDF
+} from "../../api/sanity";
 import styled from "styled-components";
 
 // TYPES
-import { Newsletter } from "../../../types/Newsletter";
+import { Newsletter } from "../../types/Newsletter";
 
 import { Worker, Viewer, SpecialZoomLevel } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
@@ -14,16 +21,33 @@ const PDFWRAPPER = styled.div`
 	height: 100vh;
 `
 
+const generalPDFS = [
+	"fees",
+	"performance-and-benchmarks",
+	"philosophy-and-methods",
+	"results"
+];
+
 export const getStaticPaths = async () => {
 	const newsletters = await getNewsletters();
 
-	const paths = newsletters.map((newsletter: Newsletter) => {
+	let paths = newsletters.map((newsletter: Newsletter) => {
 		return {
 			params: {
 				pdf: newsletter.id,
 			},
 		};
 	});
+
+	paths = paths.concat(
+		generalPDFS.map(pdf => {
+			return {
+				params: {
+					pdf: pdf
+				},
+			}
+		})
+	);
 
 	return {
 		paths,
@@ -32,8 +56,29 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({params}: any) => {
-	const res: Newsletter[] = await getNewsletterFromID(params.pdf);
-	const url = res[0] ? res[0].file : "";
+	let res: any = {};
+
+	if (generalPDFS.includes(params.pdf)) {
+		
+		switch (params.pdf) {
+			case "fees":
+				res = await getFeesPDF();
+				break;
+			case "performance-and-benchmarks":
+				res = await getPerformanceBenchmarkPDF();
+				break;
+			case "philosophy-and-methods":
+				res = await getPhilosophyMethodsPDF();
+				break;
+			case "results":
+				res = await getResultsPDF();
+				break;
+		}
+	} else {
+	    res = (await getNewsletterFromID(params.pdf))[0];
+	}
+
+	const url = res ? res.file : "";
 
 	return {
 		props: {

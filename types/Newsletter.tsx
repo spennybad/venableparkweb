@@ -1,6 +1,9 @@
-export interface Newsletter {
-  date_published: string,
-  file: string,
-  title: string,
-  id: string
+export interface PDF {
+	file: string;
+};
+
+export interface Newsletter extends PDF {
+	date_published: string;
+	title: string;
+	id: string;
 }
