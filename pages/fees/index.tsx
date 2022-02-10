@@ -7,6 +7,7 @@ import { getFeesPDF } from "../../api/sanity";
 // COMPS
 import { H1 } from "../../styles/typography";
 import DefaultLayout from "../../components/layout/DefaultLayout";
+import Link from "next/link";
 
 const FEESWRAPPER = styled.div`
     position: relative;
@@ -110,8 +111,6 @@ const feeText: string[] = [
 
 const Home: React.FC<Props> = ({ feesPDF }) => {
 
-	console.log(feesPDF)
-
     return (
 		<DefaultLayout>
 			<FEESWRAPPER>
@@ -156,12 +155,13 @@ const Home: React.FC<Props> = ({ feesPDF }) => {
 							</li>
 						))}
 						<li>
-                            Our Relationship Disclosure Information can be viewed&nbsp;
-                            <a href="/pdf/fees" target="_blank" rel="noreferrer">
-                                here
-                            </a>
-						    .
-                        </li>
+							Our Relationship Disclosure Information can be
+							viewed&nbsp;
+							<Link href="/pdf/fees" passHref>
+								<a target="_blank">here</a>
+							</Link>
+							.
+						</li>
 					</FEETEXT>
 				</FEESCONTENT>
 			</FEESWRAPPER>

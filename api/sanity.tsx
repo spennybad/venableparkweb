@@ -1,5 +1,4 @@
 import { Newsletter, PDF } from "../types/Newsletter";
-import { AboutPagePDFS } from "../types/AboutPDFS";
 
 const sanityClient = require('@sanity/client');
 

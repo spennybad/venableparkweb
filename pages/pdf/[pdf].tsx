@@ -31,7 +31,7 @@ const generalPDFS = [
 export const getStaticPaths = async () => {
 	const newsletters = await getNewsletters();
 
-	const paths = newsletters.map((newsletter: Newsletter) => {
+	let paths = newsletters.map((newsletter: Newsletter) => {
 		return {
 			params: {
 				pdf: newsletter.id,
@@ -39,7 +39,7 @@ export const getStaticPaths = async () => {
 		};
 	});
 
-	paths.concat(
+	paths = paths.concat(
 		generalPDFS.map(pdf => {
 			return {
 				params: {
@@ -56,29 +56,29 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({params}: any) => {
-	let res: any;
+	let res: any = {};
 
 	if (generalPDFS.includes(params.pdf)) {
 		
 		switch (params.pdf) {
 			case "fees":
-				res = getFeesPDF();
+				res = await getFeesPDF();
+				break;
 			case "performance-and-benchmarks":
+				res = await getPerformanceBenchmarkPDF();
 				break;
 			case "philosophy-and-methods":
+				res = await getPhilosophyMethodsPDF();
 				break;
 			case "results":
-				break;
-			default:
+				res = await getResultsPDF();
 				break;
 		}
-
-
 	} else {
-	    res = await getNewsletterFromID(params.pdf);
+	    res = (await getNewsletterFromID(params.pdf))[0];
 	}
 
-	const url = res[0] ? res[0].file : "";
+	const url = res ? res.file : "";
 
 	return {
 		props: {

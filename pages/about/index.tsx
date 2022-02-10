@@ -1,16 +1,11 @@
 // UTILS
 import styled from "styled-components";
-import media from "../../utils/MediaQueries";
-import { getAboutPDFS } from "../../api/sanity";
-
-// TYPES
-import { AboutPagePDFS } from "../../types/AboutPDFS";
 
 // COMPS
 import DefaultLayout from "../../components/layout/DefaultLayout";
 import { H1, H2 } from "../../styles/typography";
-import LineBreak from "../../components/comps/LineBreak";
 import Image from "next/image";
+import Link from "next/link";
 
 const ABOUTPAGEWRAPPER = styled.div`
     position: relative;
@@ -73,23 +68,7 @@ const EMOTIONALCHART = styled.a`
     justify-self: center;
 `
 
-export async function getStaticProps() {
-	const aboutPDFS = await getAboutPDFS();
-
-	return {
-		props: {
-			aboutPDFS,
-		},
-		revalidate: 1,
-	};
-}
-
-export interface Props {
-	aboutPDFS: AboutPagePDFS;
-}
-
-const Home: React.FC<Props> = ({ aboutPDFS }) => {
-	const {performance_benchmark_pdf, philosophy_methods_pdf, results_pdf} = aboutPDFS;
+const Home: React.FC = () => {
 
 	return (
 		<DefaultLayout>
@@ -120,13 +99,12 @@ const Home: React.FC<Props> = ({ aboutPDFS }) => {
 								<br />
 								You can read more about our philosophy and
 								method&nbsp;
-								<a
-									href={philosophy_methods_pdf}
-									target="_blank"
-									rel="noreferrer"
+								<Link
+									href="/pdf/philosophy-and-methods"
+									passHref
 								>
-									here
-								</a>
+									<a target="_blank">here</a>
+								</Link>
 								.
 							</p>
 						</ABOUTTILETEXT>
@@ -141,25 +119,25 @@ const Home: React.FC<Props> = ({ aboutPDFS }) => {
 								(before fees) for a 60% fixed income, 40%
 								equity, $1,000,000+ portfolio, is updated
 								annually and charted&nbsp;
-								<a
-									href={results_pdf}
-									target="_blank"
-									rel="noreferrer"
+								<Link
+									href="/pdf/results"
+									passHref
 								>
-									here
-								</a>
+									<a target="_blank">here</a>
+								</Link>
 								.
 								<br />
 								<br />
 								Read more about portfolio performance and
 								benchmarks&nbsp;
-								<a
-									href={performance_benchmark_pdf}
-									target="_blank"
-									rel="noreferrer"
+								<Link
+									href="/pdf/performance-and-benchmarks"
+									passHref
 								>
-									here
-								</a>
+									<a target="_blank">
+										here
+									</a>
+								</Link>
 								.
 							</p>
 						</ABOUTTILETEXT>
