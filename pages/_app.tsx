@@ -10,40 +10,37 @@ import Footer from "../components/layout/footer";
 
 import { pageview } from "../utils/Analytics";
 
-
 const SITEWRAPPER = styled.div`
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
 `;
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
 
-	const router = useRouter();
-	
-	useEffect(() => {
-		  const handleRouteChange = (url: URL) => {
-			pageview(url);
-		};
+  useEffect(() => {
+    const handleRouteChange = (url: URL) => {
+      pageview(url);
+    };
 
-		router.events.on("routeChangeComplete", handleRouteChange);
+    router.events.on("routeChangeComplete", handleRouteChange);
 
-		return () => {
-			router.events.off("routeChangeComplete", handleRouteChange);
-		};
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
-	}, [router.events])
-
-    return (
-		<>
-			<ThemeProvider theme={theme}>
-				<GlobalStyle />
-				<Nav />
-				<SITEWRAPPER>
-					<Component {...pageProps} />
-				</SITEWRAPPER>
-				<Footer />
-			</ThemeProvider>
-		</>
-	);
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Nav />
+        <SITEWRAPPER>
+          <Component {...pageProps} />
+        </SITEWRAPPER>
+        <Footer />
+      </ThemeProvider>
+    </>
+  );
 }
