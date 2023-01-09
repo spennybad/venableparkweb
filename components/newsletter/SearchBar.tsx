@@ -42,9 +42,7 @@ const SEARCHBAR = styled.form`
 `;
 
 
-const YEARINPUT = styled.select`
-
-`;
+const YEARINPUT = styled.select``;
 
 export interface Props {
 	newsletterYears: string[];
