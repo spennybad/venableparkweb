@@ -43,6 +43,7 @@ export const getStaticPaths = async () => {
 				pdf: newsletter.id,
 			},
 		}] : previousValues
+
 	}, []);
 
 	paths = paths.concat(
