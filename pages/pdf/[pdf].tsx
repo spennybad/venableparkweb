@@ -1,10 +1,10 @@
 // UTILS
 import React, { useEffect } from "react";
-import { 
-	getNewsletters, 
-	getNewsletterFromID, 
-	getPerformanceBenchmarkPDF, 
-	getResultsPDF, 
+import {
+	getNewsletters,
+	getNewsletterFromID,
+	getPerformanceBenchmarkPDF,
+	getResultsPDF,
 	getPhilosophyMethodsPDF,
 	getFeesPDF
 } from "../../api/sanity";
@@ -28,16 +28,22 @@ const generalPDFS = [
 	"results"
 ];
 
+type PDFParm = {
+	params: {
+		pdf: string;
+	}
+}
+
 export const getStaticPaths = async () => {
 	const newsletters = await getNewsletters();
 
-	let paths = newsletters.map((newsletter: Newsletter) => {
-		return {
+	let paths = newsletters.reduce<PDFParm[]>((previousValues: PDFParm[], newsletter: Newsletter) => {
+		return newsletter.file ? [...previousValues, {
 			params: {
 				pdf: newsletter.id,
 			},
-		};
-	});
+		}] : previousValues
+	}, []);
 
 	paths = paths.concat(
 		generalPDFS.map(pdf => {
@@ -55,11 +61,11 @@ export const getStaticPaths = async () => {
 	};
 };
 
-export const getStaticProps = async ({params}: any) => {
+export const getStaticProps = async ({ params }: any) => {
 	let res: any = {};
 
 	if (generalPDFS.includes(params.pdf)) {
-		
+
 		switch (params.pdf) {
 			case "fees":
 				res = await getFeesPDF();
@@ -75,15 +81,15 @@ export const getStaticProps = async ({params}: any) => {
 				break;
 		}
 	} else {
-	    res = (await getNewsletterFromID(params.pdf))[0];
+		res = (await getNewsletterFromID(params.pdf))[0];
 	}
 
 	const url = res ? res.file : "";
 
 	return {
-		props: {
+		props: url ? {
 			url
-		}
+		} : null
 	};
 };
 
