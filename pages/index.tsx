@@ -22,7 +22,7 @@ const MISSIONSTATMENT = styled.p`
 
 export async function getStaticProps() {
     const testimonials = await getTestimonials();
-    
+
     return {
         props: {
             testimonials,
@@ -34,6 +34,7 @@ export async function getStaticProps() {
 export interface Props {
     testimonials: Array<Testimonial>
 }
+
 
 const Home: React.FC<Props> = ({ testimonials }) => {
     return (
