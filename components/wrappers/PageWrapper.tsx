@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
@@ -9,7 +9,7 @@ const Section = styled.section`
 `
 
 export interface PageWrapperProps {
-
+    children: ReactNode;
 }
  
 const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {

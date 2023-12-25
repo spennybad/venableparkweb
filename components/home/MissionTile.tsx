@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const MISSIONTILE = styled.li`
@@ -6,8 +7,7 @@ const MISSIONTILE = styled.li`
     aspect-ratio: 16 / 6;
     width: 100%;
     list-style: none;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     display: grid;
     place-items: center;
     padding: 0rem 2rem;
@@ -34,7 +34,7 @@ const MISSIONTILE = styled.li`
 `
 
 type Props = {
-
+    children: ReactNode;
 }
  
 const MissionTile: React.FC<Props> = ({children}) => {

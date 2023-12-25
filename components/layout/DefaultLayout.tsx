@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import media from "../../utils/MediaQueries";
+import { ReactNode } from "react";
 
 const DEFAULTLAYOUT = styled.div`
     display: grid;
@@ -27,7 +28,7 @@ const CONTENTWRAPPER = styled.div`
 `;
 
 export interface Props {
-
+    children: ReactNode;
 }
 
 const DefaultLayout: React.FC<Props> = ({ children }) => {
