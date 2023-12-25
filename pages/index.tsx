@@ -1,4 +1,4 @@
-// UTILS
+// UTILS 
 import React, { Fragment } from "react";
 import { getTestimonials } from "../api/sanity";
 import styled from "styled-components";
