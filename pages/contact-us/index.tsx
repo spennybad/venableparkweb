@@ -17,7 +17,6 @@ const CONTACTPAGEWRAPPER = styled.div`
 
 const CONTACTCONTENT = styled.div`
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
 
     & > :last-child {
         ${media.width_900`
@@ -51,8 +50,6 @@ const Contact: React.FC<Props> = () => {
                 <H2>Contact Us</H2>
                 <CONTACTCONTENT>
                     <MailForm />
-                    <DIVIDER />
-                    <Map />
                 </CONTACTCONTENT>
             </CONTACTPAGEWRAPPER>
         </DefaultLayout>
