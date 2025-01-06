@@ -97,7 +97,7 @@ const Team: React.FC<TeamProps> = ({ employeesData }) => {
             <DefaultLayout>
                 <TEAMWRAPPER>
                     <div>
-                        <H2>Our Principals:</H2>
+                        <H2>Our Team:</H2>
                         <TEAMLIST>
                             {principles.map((employeeData) => (
                                 <TeamTile
@@ -109,7 +109,7 @@ const Team: React.FC<TeamProps> = ({ employeesData }) => {
                         </TEAMLIST>
                     </div>
                     <div>
-                        <H2>Our Team:</H2>
+                        <H2></H2>
                         <TEAMLIST>
                             {employees.map((employeeData) => (
                                 <TeamTile
