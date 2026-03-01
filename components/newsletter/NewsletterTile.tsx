@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 // TYPES
 import { Newsletter } from "../../types/Newsletter";

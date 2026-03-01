@@ -10,7 +10,7 @@ import { Employee } from "../../types/Employee";
 import HeadshotWrapper from "./HeadshotWrapper";
 import NameTag from "./NameTag";
 import ExitButton from "../comps/ExitButton";
-import Image from "next/image";
+
 
 const MODAL = styled.div`
     position: absolute;
@@ -106,7 +106,7 @@ const Modal: React.FC<Props> = ({ handleTileClick, currentModal }) => {
                     </DESCRIPTION>
        
                     <EMAIL href={"mailto:" + currentModal.email}>
-                        <Image 
+                        <img 
                             src="/images/svgs/mail.svg"
                             alt="Mail"
                             height="30"

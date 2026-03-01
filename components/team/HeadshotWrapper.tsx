@@ -1,6 +1,6 @@
 // UTILS
 import styled from 'styled-components';
-import Image from 'next/image';
+// Removed Next.js Image import
 
 // TYPES
 import { Employee } from '../../types/Employee';
@@ -32,11 +32,10 @@ const HeadshotWrapper: React.FC<Props> = ({ employeeData, dimension }) => {
     return (
         <HEADSHOTWRAPPER dimension={ dimension }>
             {employeeData.photo ? (
-                <Image
+                <img
                     src={`${employeeData.photo}?h=350`}
                     alt={employeeData.name}
-                    layout="fill"
-                    objectFit="cover"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
             ) : (
                 <PLACEHOLDER />

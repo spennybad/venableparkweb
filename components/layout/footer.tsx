@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Image from "next/image";
+// Removed Next.js Image import
 import media from "../../utils/MediaQueries";
 
 const FOOTER = styled.footer`
@@ -72,10 +72,10 @@ const Footer: React.FC = () => {
          Barrie, ON 
       </MAILINGADDRESS>
       <LOGOWRAPPER>
-        <Image
+        <img
           src="/images/logo/logo_solid.svg"
           alt="footer logo"
-          layout="fill"
+          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
         />
       </LOGOWRAPPER>
       <CONTACTNUMBERS>

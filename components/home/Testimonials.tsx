@@ -1,6 +1,6 @@
 // UTILS
 import styled from "styled-components";
-import Image from "next/image";
+
 
 // COMPONENTS
 import { H2 } from "../../styles/typography";

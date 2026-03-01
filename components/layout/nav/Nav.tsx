@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Image from "next/image";
+
 import useWindowDimensions from "../../../hooks/WindowDimensions";
 import media from "../../../utils/MediaQueries";
-import Link from "next/link"
+import { Link } from "react-router-dom"
 
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
@@ -61,7 +61,7 @@ const Nav: React.FC<Props> = () => {
                 passHref
             >
                 <LOGOWRAPPER>
-                    <Image src="/images/logo/logo_solid.svg" alt="logo" layout="fill" />
+                    <img src="/images/logo/logo_solid.svg" alt="logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </LOGOWRAPPER>
             </Link>
             { 

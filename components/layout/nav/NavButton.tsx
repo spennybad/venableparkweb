@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { BUTTON } from "../../../styles/button.js";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const LI = styled.li<{ buttonType: string }>`
     ${({ buttonType }) =>

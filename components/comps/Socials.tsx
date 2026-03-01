@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Image from "next/image";
+
 
 export const SOCIALS = styled.ul`
 	position: absolute;
@@ -43,7 +43,7 @@ const Socials: React.FC<Props> = () => {
         <SOCIALS>
             <li>
                 <a href={"https://twitter.com/kdaniellepark"} target="_blank" rel="noreferrer">
-                    <Image
+                    <img
                         src={"/images/svgs/twitter-with-circle.svg"}
                         alt="Twitter Logo"
                         height="40"
@@ -56,7 +56,7 @@ const Socials: React.FC<Props> = () => {
             </li>
             <li>
                 <a href={"https://twitter.com/CoryLVenable"} target="_blank" rel="noreferrer">
-                    <Image
+                    <img
                         src={"/images/svgs/twitter-with-circle.svg"}
                         alt="Twitter Logo"
                         height="40"
